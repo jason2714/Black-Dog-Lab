@@ -51,7 +51,7 @@ class FileController {
     }
 
     public void write(String wrtData) throws IOException {
-        FileOutputStream outputStream = context.openFileOutput(file_name, context.MODE_PRIVATE);
+        FileOutputStream outputStream = context.openFileOutput(file_name, Context.MODE_PRIVATE);
         outputStream.write(wrtData.getBytes());
         outputStream.close();
     }

@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArtProject">
+
         <activity android:name="com.jason.blackdoglab.MainPage" />
         <activity android:name="com.jason.blackdoglab.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
