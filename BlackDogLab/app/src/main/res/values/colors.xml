@@ -11,5 +11,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tabBac">#f5f5dc</color>
-    <color name="dialog_box_npc">#535353</color>
+    <color name="dialog_box_npc">#C4C4C4</color>
+    <color name="dialog_box">#B3151D2E</color>
+    <color name="dialog_name_npc">#E5E5E5</color>
+    <color name="text_dialog_name">#000000</color>
 </resources>

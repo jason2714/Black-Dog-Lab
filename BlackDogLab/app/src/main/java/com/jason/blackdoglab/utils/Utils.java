@@ -3,11 +3,17 @@ package com.jason.blackdoglab.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import com.jason.blackdoglab.MainPage;
 
 public class Utils {
 
-    public static synchronized void hideNavigationBar(Activity activity){
+    private static final String LOG_TAG = "test";
+
+    public static void hideNavigationBar(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View decorView = activity.getWindow().getDecorView();
             decorView.setSystemUiVisibility(
@@ -22,5 +28,13 @@ public class Utils {
                 }
             });
         }
+    }
+
+    public static void showToast(Context context, String massage) {
+        Toast.makeText(context, massage, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void setLog(String massage) {
+        Log.d(LOG_TAG, massage);
     }
 }

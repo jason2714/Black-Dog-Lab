@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="set_dialog" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <!--        背景-->
+        <item name="android:windowBackground">@color/dialog_box</item>
+        <!--        預設就是true-->
+        <item name="android:windowIsFloating">true</item>
+        <!--        背景是否變暗-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--        變暗多少 0~1-->
+        <item name="android:backgroundDimAmount">0.3</item>
+        <!--        <item name="android:windowIsTranslucent">true</item>-->
+        <!--        <item name="android:windowFullscreen">true</item>-->
+        <!--        <item name="android:windowNoTitle">true</item>-->
+        <!--        整個frame(include text)-->
+        <!--        <item name="android:windowFrame">@color/colorBackgroundTranslucent</item>-->
+        <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    </style>
+    <style name="TextColor">
+        <!--        text color-->
+        <item name="android:textColor">@color/black</item>
+        <!--        hint color-->
+        <item name="android:textColorHint">@color/dialog_box_npc</item>
+        <!--        editText color-->
+        <item name="android:editTextColor">@color/black</item>
+    </style>
+
+    <style name="TextColor.DialogNameNPC">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_dialog_name_npc</item>
+        <item name="layout_constraintLeft_toLeftOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+    
+    <style name="TextColor.DialogBox">
+
+    </style>
+</resources>
