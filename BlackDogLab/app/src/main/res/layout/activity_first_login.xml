@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/bg_first_login"
+    tools:context=".FirstLoginActivity">
+
+    <RelativeLayout
+        android:layout_width="210dp"
+        android:layout_height="270dp"
+        android:layout_marginVertical="20dp">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="150dp"
+        android:layout_marginVertical="20dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginHorizontal="40dp">
+
+            <ImageView
+                android:id="@+id/img_character1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/img_character2"
+                android:src="@drawable/icon_select_character1"/>
+
+            <ImageView
+                android:id="@+id/img_character2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/img_character1"
+                app:layout_constraintEnd_toStartOf="@id/img_character3"
+                android:src="@drawable/icon_select_character2"/>
+
+            <ImageView
+                android:id="@+id/img_character3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_character2"
+                android:src="@drawable/icon_select_character3"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:id="@+id/img_character4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/img_character5"
+                android:src="@drawable/icon_select_character4"/>
+
+            <ImageView
+                android:id="@+id/img_character5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/img_character4"
+                app:layout_constraintEnd_toStartOf="@id/img_character6"
+                android:src="@drawable/icon_select_character5"/>
+
+            <ImageView
+                android:id="@+id/img_character6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_character5"
+                app:layout_constraintEnd_toStartOf="@id/img_character7"
+                android:src="@drawable/icon_select_character6"/>
+            <ImageView
+                android:id="@+id/img_character7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_character6"
+                android:src="@drawable/icon_select_character7"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/SubmitButton"
+        android:text="成為實習研究員"/>
+</LinearLayout>

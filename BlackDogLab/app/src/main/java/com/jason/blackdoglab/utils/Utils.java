@@ -30,10 +30,6 @@ public class Utils {
         }
     }
 
-    public static void showToast(Context context, String massage) {
-        Toast.makeText(context, massage, Toast.LENGTH_SHORT).show();
-    }
-
     public static void setLog(String massage) {
         Log.d(LOG_TAG, massage);
     }

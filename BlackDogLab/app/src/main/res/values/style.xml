@@ -16,6 +16,8 @@
         <!--        <item name="android:windowFrame">@color/colorBackgroundTranslucent</item>-->
         <!--        <item name="android:textColor">@color/colorWhite</item>-->
     </style>
+
+
     <style name="TextColor">
         <!--        text color-->
         <item name="android:textColor">@color/black</item>
@@ -38,4 +40,16 @@
     <style name="TextColor.DialogBox">
 
     </style>
+
+    <style name="SubmitButton">
+        <item name="background">@color/submit_button</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+
 </resources>

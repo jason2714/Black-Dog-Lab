@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainFragment"
-    android:background="@drawable/bg_mainpage_lab">
+    android:background="@drawable/bg_main_lab">
 
     <!-- TODO: Update blank fragment layout -->
 

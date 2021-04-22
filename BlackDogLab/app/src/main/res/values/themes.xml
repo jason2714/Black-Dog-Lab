@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ArtProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.BlackDogLab" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/good</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+         Secondary brand color.
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
@@ -21,5 +21,27 @@
         <item name="android:windowNoTitle">true</item>
         <!--        是否讓system保留navigation bar的空間-->
         <item name="android:fitsSystemWindows">false</item>
+    </style>
+    <style name="Theme.BlackDogLab.Default">
+        <item name="colorPrimary">@color/submit_button</item>
+        <item name="triangle_color">@color/grey2</item>
+    </style>
+    <style name="Theme.BlackDogLab.Brown">
+        <item name="colorPrimary">@color/brown1</item>
+        <item name="triangle_color">@color/brown1</item>
+        <item name="main_right_triangle">@drawable/main_right_triangle_brown</item>
+        <item name="main_left_triangle">@drawable/main_left_triangle_brown</item>
+    </style>
+    <style name="Theme.BlackDogLab.Green">
+        <item name="colorPrimary">@color/green1</item>
+        <item name="triangle_color">@color/green1</item>
+        <item name="main_right_triangle">@drawable/main_right_triangle_green</item>
+        <item name="main_left_triangle">@drawable/main_left_triangle_green</item>
+    </style>
+    <style name="Theme.BlackDogLab.Blue">
+        <item name="colorPrimary">@color/blue1</item>
+        <item name="triangle_color">@color/blue1</item>
+        <item name="main_right_triangle">@drawable/main_right_triangle_blue</item>
+        <item name="main_left_triangle">@drawable/main_left_triangle_blue</item>
     </style>
 </resources>
