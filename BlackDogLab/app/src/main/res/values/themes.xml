@@ -23,8 +23,8 @@
         <item name="android:fitsSystemWindows">false</item>
     </style>
     <style name="Theme.BlackDogLab.Default">
-        <item name="colorPrimary">@color/submit_button</item>
-        <item name="triangle_color">@color/grey2</item>
+        <item name="colorPrimary">@color/grey1</item>
+        <item name="triangle_color">@color/grey1</item>
     </style>
     <style name="Theme.BlackDogLab.Brown">
         <item name="colorPrimary">@color/brown1</item>

@@ -2,6 +2,7 @@ package com.jason.blackdoglab.utils;
 
 import android.app.Activity;
 import android.os.Process;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +32,27 @@ public class ActivityUtils{
             activityList.remove(activity);
     }
 
-    // traverse所有Activity並finish
-    public void exitSystem() {
+    // 移除Activity
+    public void cleanActivity(Activity currentActivity) {
+//        不能在內直接remove null activity,因為for in 不能再回圈內更改
+        for (Activity activity : activityList) {
+            if (activity != null){
+                if(activity != currentActivity)
+                    activity.finish();
+            }
+        }
+    }
+
+    public void printActivity(){
         for (Activity activity : activityList) {
             if (activity != null)
-                activity.finish();
+                Utils.setLog(activity.getComponentName().getClassName());
         }
+    }
+
+    // traverse所有Activity並finish
+    public void exitSystem() {
+        cleanActivity(null);
         //
         android.os.Process.killProcess(Process.myPid());
         System.exit(0);

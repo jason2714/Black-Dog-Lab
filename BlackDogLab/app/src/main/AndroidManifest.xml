@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlackDogLab.Default">
-        <activity android:name=".DailyLoginActivity"></activity>
+        <activity android:name=".DailyLoginActivity"/>
         <activity android:name=".FirstLoginActivity" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".DialogActivity" />
-        <activity android:name=".MainPage" />
+        <activity android:name=".MainPage"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

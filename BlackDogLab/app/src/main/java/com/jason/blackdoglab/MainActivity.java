@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-//        intent = new Intent(MainActivity.this, FirstLoginActivity.class);
+        intent = new Intent(MainActivity.this, FirstLoginActivity.class);
         startActivity(intent);
     }
 

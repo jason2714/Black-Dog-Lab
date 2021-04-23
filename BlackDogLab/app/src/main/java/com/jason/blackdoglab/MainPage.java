@@ -1,19 +1,11 @@
 package com.jason.blackdoglab;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -68,6 +60,7 @@ public class MainPage extends BaseActivity {
 
     @Override
     protected void initListener() {
+
         mViewPager.setAdapter(new PageAdapter(this));
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 mTabLayout, mViewPager, (tab, position) -> {
@@ -87,11 +80,13 @@ public class MainPage extends BaseActivity {
                     break;
                 case 3:
 //                    tab.setText("User");
-                    tab.setIcon(R.drawable.icon_main);
+                    tab.setIcon(R.drawable.icon_right_triangle);
+                    break;
+                default:
+                    tab.setIcon(R.drawable.icon_right_triangle);
                     break;
             }
-        }
-        );
+        });
         tabLayoutMediator.attach();
         mTabLayout.setElevation(15);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -125,10 +120,15 @@ public class MainPage extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //inflater fail 的原因是activity開太多 刪掉一些就好了
+        ActivityUtils.getInstance().cleanActivity(this);
+        ActivityUtils.getInstance().printActivity();
         //TODO get theme color
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Utils.setLog("4");
+        ActivityUtils.getInstance().printActivity();
         // 監聽返回键，點兩次退出process
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -144,7 +144,7 @@ public class MainPage extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgbt_left:
 
                 break;

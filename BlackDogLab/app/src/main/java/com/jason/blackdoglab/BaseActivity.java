@@ -1,7 +1,9 @@
 package com.jason.blackdoglab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -23,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.hideNavigationBar(this);
+        //setTheme一定要在setTheme前 不然會一堆奇怪得inflater error
         setTheme(getThemeID());
         setContentView(getLayoutViewID());
         ActivityUtils.getInstance().addActivity(this);

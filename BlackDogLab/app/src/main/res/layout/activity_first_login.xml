@@ -1,111 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_first_login"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/bg_first_login"
     tools:context=".FirstLoginActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="210dp"
-        android:layout_height="270dp"
-        android:layout_marginVertical="20dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="請問該如何稱呼您"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            style="@style/BasicInfoEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_basic_info"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生日"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp">
+
+            <EditText
+                android:id="@+id/et_year"
+                style="@style/BasicInfoEditText"
+                android:layout_width="0dp"
+                android:background="@drawable/bg_basic_info"
+                android:inputType="date"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tv_year"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_year"
+                style="@style/BasicInfoEditTextLabel"
+                android:text="年"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/et_year"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/et_month"
+                    style="@style/BasicInfoEditText"
+                    android:layout_width="0dp"
+                    android:background="@drawable/bg_basic_info"
+                    android:inputType="date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/tv_month"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_month"
+                    style="@style/BasicInfoEditTextLabel"
+                    android:text="月"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/et_month"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/et_date"
+                    style="@style/BasicInfoEditText"
+                    android:layout_width="0dp"
+                    android:background="@drawable/bg_basic_info"
+                    android:inputType="date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/tv_date"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    style="@style/BasicInfoEditTextLabel"
+                    android:text="日"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/et_date"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="請選擇最喜歡的玩家樣貌"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="340dp"
         android:layout_height="150dp"
-        android:layout_marginVertical="20dp"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginHorizontal="40dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginHorizontal="40dp">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/img_character1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character1"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/img_character2"
-                android:src="@drawable/icon_select_character1"/>
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/img_character2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character2"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toEndOf="@id/img_character1"
                 app:layout_constraintEnd_toStartOf="@id/img_character3"
-                android:src="@drawable/icon_select_character2"/>
+                app:layout_constraintStart_toEndOf="@id/img_character1" />
 
             <ImageView
                 android:id="@+id/img_character3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character3"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_character2"
-                android:src="@drawable/icon_select_character3"/>
+                app:layout_constraintStart_toEndOf="@+id/img_character2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+
             <ImageView
                 android:id="@+id/img_character4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character4"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/img_character5"
-                android:src="@drawable/icon_select_character4"/>
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/img_character5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character5"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toEndOf="@id/img_character4"
                 app:layout_constraintEnd_toStartOf="@id/img_character6"
-                android:src="@drawable/icon_select_character5"/>
+                app:layout_constraintStart_toEndOf="@id/img_character4" />
 
             <ImageView
                 android:id="@+id/img_character6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character6"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_character5"
                 app:layout_constraintEnd_toStartOf="@id/img_character7"
-                android:src="@drawable/icon_select_character6"/>
+                app:layout_constraintStart_toEndOf="@id/img_character5" />
+
             <ImageView
                 android:id="@+id/img_character7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/icon_select_character7"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_character6"
-                android:src="@drawable/icon_select_character7"/>
+                app:layout_constraintStart_toEndOf="@+id/img_character6" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_submit"
-        style="@style/SubmitButton"
-        android:text="成為實習研究員"/>
+        android:id="@+id/btn_register"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_basic_info"
+        android:text="成為實習研究員"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 </LinearLayout>

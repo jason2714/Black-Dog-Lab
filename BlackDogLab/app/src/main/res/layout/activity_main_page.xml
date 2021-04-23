@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainPage">
+
     <ImageButton
         android:id="@+id/imgbt_right"
         android:layout_width="30dp"
@@ -15,6 +16,7 @@
         android:layout_marginHorizontal="15dp"
         android:translationZ="10dp"
         android:background="?attr/main_right_triangle"/>
+
     <ImageButton
         android:id="@+id/imgbt_left"
         android:layout_width="30dp"
@@ -49,16 +51,20 @@
 <!--        <com.google.android.material.tabs.TabItem-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/icon_record_video" />-->
+<!--            android:icon="@drawable/icon_main" />-->
 
 <!--        <com.google.android.material.tabs.TabItem-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/icon_recording" />-->
+<!--            android:icon="@drawable/icon_calender" />-->
 
 <!--        <com.google.android.material.tabs.TabItem-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/icon_shoot_photo" />-->
+<!--            android:icon="@drawable/icon_note" />-->
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/icon_select_character2" />-->
     </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
