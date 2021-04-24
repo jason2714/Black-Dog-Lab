@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +56,7 @@ public class CalendarFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        DatePicker mDpCalendar = getActivity().findViewById(R.id.dp_calender);
     }
 
     @Override

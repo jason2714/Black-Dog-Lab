@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.Utils;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class FirstLoginActivity extends BaseActivity {
 
@@ -19,11 +24,14 @@ public class FirstLoginActivity extends BaseActivity {
     private final int[] charactersID = {R.id.img_character1, R.id.img_character2, R.id.img_character3,
             R.id.img_character4, R.id.img_character5, R.id.img_character6, R.id.img_character7};
     private ImageView[] mImgCharacters;
+    private EditText mEtYear, mEtMonth, mEtDate;
+    private EditText mEtName;
     private int characterSelected = -1;
 
     @Override
     protected void initView() {
         mBtnRegister = findViewById(R.id.btn_register);
+        mEtName = findViewById(R.id.et_name);
         mImgCharacters = new ImageView[charactersID.length];
         for (int idx = 0; idx < charactersID.length; idx++)
             mImgCharacters[idx] = findViewById(charactersID[idx]);
@@ -34,16 +42,14 @@ public class FirstLoginActivity extends BaseActivity {
         mBtnRegister.setOnClickListener(this);
         for (ImageView character : mImgCharacters)
             character.setOnClickListener(this);
+        mEtYear = findViewById(R.id.et_year);
+        mEtMonth = findViewById(R.id.et_month);
+        mEtDate = findViewById(R.id.et_date);
     }
 
     @Override
     protected int getLayoutViewID() {
         return R.layout.activity_first_login;
-    }
-
-    @Override
-    protected int getThemeID() {
-        return R.style.Theme_BlackDogLab_Default;
     }
 
     @Override
@@ -59,9 +65,12 @@ public class FirstLoginActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_register:
 //                TODO check register success
-                Utils.setLog("start Activity");
-                Intent intent = new Intent(FirstLoginActivity.this, DailyLoginActivity.class);
-                startActivity(intent);
+                if (checkInformation()) {
+                    Intent intent = new Intent(FirstLoginActivity.this, DailyLoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    showToast("資料填寫不齊全");
+                }
                 break;
             case R.id.img_character1:
                 newCharacterSelected = 0;
@@ -88,16 +97,17 @@ public class FirstLoginActivity extends BaseActivity {
                 break;
         }
         if (newCharacterSelected != -1 && newCharacterSelected != characterSelected) {
-            if(characterSelected != -1){
+            if (characterSelected != -1) {
                 mImgCharacters[characterSelected].setBackgroundResource(0);
-                mImgCharacters[characterSelected].setPadding(0,0,0,0);
+                mImgCharacters[characterSelected].setPadding(0, 0, 0, 0);
             }
-            mImgCharacters[newCharacterSelected].setPadding(10,10,10,10);
+            mImgCharacters[newCharacterSelected].setPadding(10, 10, 10, 10);
             mImgCharacters[newCharacterSelected].setBackground(getDrawable(R.drawable.bg_select_circle));
             characterSelected = newCharacterSelected;
         }
     }
 
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // 監聽返回键，點兩次退出process
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -110,5 +120,34 @@ public class FirstLoginActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private boolean checkInformation() {
+        Utils.setLog("start DailyActivity");
+        if (mEtName.getText().toString().isEmpty() ||
+                mEtYear.getText().toString().isEmpty() ||
+                mEtMonth.getText().toString().isEmpty() ||
+                mEtDate.getText().toString().isEmpty() ||
+                characterSelected == -1)
+            return false;
+        StringBuffer stringBuffer = new StringBuffer();
+        String BirthDate = mEtYear.getText().toString() + '-' +
+                mEtMonth.getText().toString() + '-' +
+                mEtDate.getText().toString();
+        stringBuffer.append(mEtName.getText().toString())
+                .append(fc_basicInfo.getSplitChar())
+                .append(BirthDate)
+                .append(fc_basicInfo.getSplitChar())
+                .append(characterSelected)
+                .append('\n');
+
+        try {
+            fc_basicInfo.write(stringBuffer.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Utils.setLog(e.getMessage());
+            return false;
+        }
+        return true;
     }
 }

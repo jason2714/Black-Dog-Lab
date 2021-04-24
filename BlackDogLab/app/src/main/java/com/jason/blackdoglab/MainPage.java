@@ -2,10 +2,16 @@ package com.jason.blackdoglab;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
+import android.graphics.Outline;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewOutlineProvider;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -37,7 +43,10 @@ public class MainPage extends BaseActivity {
     private ViewPager2 mViewPager;
     private TabLayout mTabLayout;
     private ImageButton mImgBtLeft, mImgBtRight;
-    private int mThemeColor = R.style.Theme_BlackDogLab_Blue;
+    private ImageButton mImgBtTabTriangle;
+    private int themeColor = R.style.Theme_BlackDogLab_Blue;
+    private String playerName;
+    private boolean isTabTriangleShow;
 
 
     @Override
@@ -46,8 +55,8 @@ public class MainPage extends BaseActivity {
     }
 
     @Override
-    protected int getThemeID() {
-        return mThemeColor;
+    protected int setThemeColor() {
+        return themeColor;
     }
 
     @Override
@@ -56,11 +65,14 @@ public class MainPage extends BaseActivity {
         mTabLayout = findViewById(R.id.tab_layout);
         mImgBtLeft = findViewById(R.id.imgbt_left);
         mImgBtRight = findViewById(R.id.imgbt_right);
+        mImgBtTabTriangle = findViewById(R.id.imgbt_tab_triangle);
+        mImgBtTabTriangle.animate().alpha(0);
+        isTabTriangleShow = false;
     }
 
     @Override
     protected void initListener() {
-
+        mImgBtTabTriangle.setOnClickListener(this);
         mViewPager.setAdapter(new PageAdapter(this));
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 mTabLayout, mViewPager, (tab, position) -> {
@@ -80,7 +92,9 @@ public class MainPage extends BaseActivity {
                     break;
                 case 3:
 //                    tab.setText("User");
-                    tab.setIcon(R.drawable.icon_right_triangle);
+                    tab.setIcon(R.drawable.icon_select_character1);
+                    //keep icon colorful
+                    tab.getIcon().setTintMode(PorterDuff.Mode.DST);
                     break;
                 default:
                     tab.setIcon(R.drawable.icon_right_triangle);
@@ -88,14 +102,17 @@ public class MainPage extends BaseActivity {
             }
         });
         tabLayoutMediator.attach();
-        mTabLayout.setElevation(15);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if(!isTabTriangleShow){
+                    mTabLayout.animate().translationY(120).setStartDelay(500).setDuration(500);
+                    mImgBtTabTriangle.animate().alpha(1).setStartDelay(1000);
+                }
                 //from current position
 //                mTabLayout.animate().translationYBy(10);
                 //from initial position
-//                mTabLayout.animate().translationY(10);
+//                  mTabLayout.animate().translationY(10);
                 //to that position
 //                mTabLayout.animate().y(10);
 //                mTabLayout.animate().setStartDelay(500).translationY(10);
@@ -126,6 +143,7 @@ public class MainPage extends BaseActivity {
         //TODO get theme color
     }
 
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Utils.setLog("4");
         ActivityUtils.getInstance().printActivity();
@@ -141,6 +159,15 @@ public class MainPage extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    @Override
+    protected void initBasicInfo(){
+        super.initBasicInfo();
+        String intent_TAG = "mood_color";
+        Intent intent = getIntent();
+        themeColor = intent.getIntExtra(intent_TAG,0);
+        //TODO file theme
+//        fc_basicInfo.readFile()
+    }
 
     @Override
     public void onClick(View v) {
@@ -149,6 +176,11 @@ public class MainPage extends BaseActivity {
 
                 break;
             case R.id.imgbt_right:
+                break;
+            case  R.id.imgbt_tab_triangle:
+                mTabLayout.animate().translationY(0).setStartDelay(100);
+                mImgBtTabTriangle.animate().alpha(0);
+                isTabTriangleShow = false;
                 break;
             default:
                 break;

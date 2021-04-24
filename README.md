@@ -7,3 +7,5 @@ animate.alpha(0)
 文字消失特效 淡化
 ObjectAnimator 可用
 https://wiki.jikexueyuan.com/project/android-animation/7.html
+tablayout custom
+https://www.jianshu.com/p/e778a01c83d3

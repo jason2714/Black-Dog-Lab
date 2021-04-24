@@ -36,11 +36,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected int getThemeID() {
-        return R.style.Theme_BlackDogLab_Default;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -60,23 +55,22 @@ public class MainActivity extends BaseActivity {
         mVvBeginAnimation.setOnPreparedListener(mp -> {
 //                mVvBeginAnimation.start();
         });
-        FileController fileController = new FileController(this, "Login Date");
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String currentDate = df.format(Calendar.getInstance().getTime());
-            if (!fileController.fileExist()) {
+            if (!fc_loginDate.fileExist()) {
                 Log.d("test", currentDate);
-                fileController.write(currentDate);
+                fc_loginDate.write(currentDate);
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
                 //TODO
-                String lastDate = fileController.readLine();
+                String lastDate = fc_loginDate.readLine();
                 if (currentDate.equals(lastDate)) {
                     Log.d("test", "same date");
                     intent = new Intent(MainActivity.this, MainPage.class);
                 } else {
                     Log.d("test", "new date");
-                    fileController.write(currentDate);
+                    fc_loginDate.write(currentDate);
                     intent = new Intent(MainActivity.this, DailyLoginActivity.class);
                 }
             }

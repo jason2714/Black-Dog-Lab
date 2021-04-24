@@ -16,6 +16,7 @@
         android:layout_marginTop="60dp">
 
         <TextView
+            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="哈囉~XXX"
@@ -166,6 +167,7 @@
         </LinearLayout>
 
         <EditText
+            android:id="@+id/et_daily_mood"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginVertical="30dp"

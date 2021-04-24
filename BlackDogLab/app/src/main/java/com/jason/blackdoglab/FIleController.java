@@ -18,6 +18,8 @@ class FileController {
     private final String abs_file_name;
     private FileInputStream inputStream;
     private FileOutputStream outputStream;
+    private final static String SPLIT_REGEX = "[$]";
+    private final static Character SPLIT_CHAR = '$';
 
     FileController(Context context, String file_name) {
         this.context = context;
@@ -26,13 +28,13 @@ class FileController {
         this.abs_file_name = file_dir + "/" + file_name;
     }
 
-    public String[] readFile() throws IOException {
-        String[] data = null;
+    public String readFile() throws IOException {
+        String data = null;
         FileInputStream inputStream = context.openFileInput(file_name);
         byte[] byteData = new byte[inputStream.available()];
         Log.d("test", inputStream.available() + "");
         inputStream.read(byteData);
-        data = new String(byteData, encoding).split("[$]");
+        data = new String(byteData, encoding);
 
         inputStream.close();
         return data;
@@ -50,6 +52,10 @@ class FileController {
         return data;
     }
 
+    public String[] readLineSplit() throws IOException {
+        return readLine().split(SPLIT_REGEX);
+    }
+
     public void write(String wrtData) throws IOException {
         FileOutputStream outputStream = context.openFileOutput(file_name, Context.MODE_PRIVATE);
         outputStream.write(wrtData.getBytes());
@@ -59,6 +65,10 @@ class FileController {
     public boolean fileExist() {
         //must be absolute path
         return new File(abs_file_name).exists();
+    }
+
+    public Character getSplitChar(){
+        return SPLIT_CHAR;
     }
 
 }
