@@ -3,7 +3,7 @@
 
     <style name="set_dialog" parent="@style/Theme.AppCompat.Dialog.Alert">
         <!--        背景-->
-        <item name="android:windowBackground">@color/dialog_box</item>
+        <item name="android:windowBackground">@color/grey2</item>
         <!--        預設就是true-->
         <item name="android:windowIsFloating">true</item>
         <!--        背景是否變暗-->
@@ -15,7 +15,7 @@
         <!--        <item name="android:windowNoTitle">true</item>-->
         <!--        整個frame(include text)-->
         <!--        <item name="android:windowFrame">@color/colorBackgroundTranslucent</item>-->
-        <!--        <item name="android:textColor">@color/colorWhite</item>-->
+<!--        <item name="android:textColor">@color/white</item>-->
     </style>
 
 
@@ -45,6 +45,8 @@
         <item name="android:textSize">16sp</item>
         <item name="singleLine">true</item>
         <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
     </style>
 
     <style name="BasicInfoEditTextLabel">

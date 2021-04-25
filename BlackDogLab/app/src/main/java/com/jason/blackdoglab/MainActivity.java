@@ -38,6 +38,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        String testStr = "a$b$c$\nd$e$f$\nhi\njason$\nlin\n";
+//        for(String str : testStr.split("\\$\n")){
+//            Utils.setLog(str);
+//        }
+
 
 //        FileController fileController = new FileController(this, getString(R.string.file_name));
 //
@@ -64,7 +69,7 @@ public class MainActivity extends BaseActivity {
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
                 //TODO
-                String lastDate = fc_loginDate.readLine();
+                String lastDate = fc_loginDate.readFile();
                 if (currentDate.equals(lastDate)) {
                     Log.d("test", "same date");
                     intent = new Intent(MainActivity.this, MainPage.class);
@@ -79,7 +84,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-        intent = new Intent(MainActivity.this, FirstLoginActivity.class);
+        intent = new Intent(MainActivity.this, MainPage.class);
         startActivity(intent);
     }
 
@@ -89,5 +94,10 @@ public class MainActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void initBasicInfo(){
+        fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
     }
 }

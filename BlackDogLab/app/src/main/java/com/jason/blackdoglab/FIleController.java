@@ -3,6 +3,8 @@ package com.jason.blackdoglab;
 import android.content.Context;
 import android.util.Log;
 
+import com.jason.blackdoglab.utils.Utils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,46 +20,73 @@ class FileController {
     private final String abs_file_name;
     private FileInputStream inputStream;
     private FileOutputStream outputStream;
-    private final static String SPLIT_REGEX = "[$]";
-    private final static Character SPLIT_CHAR = '$';
+    private final static String WORD_SPLIT_REGEX = "\\$";
+    private final static String LINE_SPLIT_REGEX = "\\$\n";
+    private final static Character WORD_SPLIT_CHAR = '$';
+    private final static String LINE_SPLIT_CHAR = "$\n";
+    private int lineIdx;
 
     FileController(Context context, String file_name) {
         this.context = context;
         this.file_name = file_name;
         this.file_dir = context.getFilesDir().getPath();
         this.abs_file_name = file_dir + "/" + file_name;
+        this.lineIdx = 0;
     }
 
     public String readFile() throws IOException {
         String data = null;
-        FileInputStream inputStream = context.openFileInput(file_name);
+        inputStream = context.openFileInput(file_name);
         byte[] byteData = new byte[inputStream.available()];
-        Log.d("test", inputStream.available() + "");
+//        Utils.setLog("file size : " + inputStream.available());
         inputStream.read(byteData);
         data = new String(byteData, encoding);
 
         inputStream.close();
         return data;
+    }
+
+    public String[] readFileSplit() throws IOException {
+        return readFile().split(LINE_SPLIT_REGEX);
     }
 
     public String readLine() throws IOException {
-        String data = null;
-        FileInputStream inputStream = context.openFileInput(file_name);
-        byte[] byteData = new byte[inputStream.available()];
-        Log.d("test", "file size : " + inputStream.available());
-        inputStream.read(byteData);
-        data = new String(byteData, encoding);
+        String[] fileData = readFile().split(LINE_SPLIT_REGEX);
+        String lineData = null;
+        if (this.lineIdx < fileData.length)
+            lineData =  fileData[lineIdx];
+        else{
+            this.lineIdx = 0;
+            Utils.setLog("End Of File");
+        }
+        this.lineIdx++;
+        return lineData;
+    }
 
-        inputStream.close();
-        return data;
+    public String readLine(int lineIdx) throws IOException {
+        String[] fileData = readFile().split(LINE_SPLIT_REGEX);
+        String lineData = null;
+        if (lineIdx < fileData.length)
+            lineData =  fileData[lineIdx];
+        else
+            Utils.setLog("Line Index Error");
+        return lineData;
     }
 
     public String[] readLineSplit() throws IOException {
-        return readLine().split(SPLIT_REGEX);
+        return readLine().split(WORD_SPLIT_REGEX);
     }
 
     public void write(String wrtData) throws IOException {
-        FileOutputStream outputStream = context.openFileOutput(file_name, Context.MODE_PRIVATE);
+        outputStream = context.openFileOutput(file_name, Context.MODE_PRIVATE);
+        outputStream.write(wrtData.getBytes());
+        outputStream.close();
+    }
+
+    public void append(String wrtData) throws IOException {
+        String fileData = readFile();
+        wrtData = fileData + wrtData;
+        outputStream = context.openFileOutput(file_name, Context.MODE_PRIVATE);
         outputStream.write(wrtData.getBytes());
         outputStream.close();
     }
@@ -67,8 +96,20 @@ class FileController {
         return new File(abs_file_name).exists();
     }
 
-    public Character getSplitChar(){
-        return SPLIT_CHAR;
+    public static Character getWordSplitChar() {
+        return WORD_SPLIT_CHAR;
+    }
+
+    public static String getLineSplitChar() {
+        return LINE_SPLIT_CHAR;
+    }
+
+    public static String getWordSplitRegex() {
+        return WORD_SPLIT_REGEX;
+    }
+
+    public static String getLineSplitRegex() {
+        return LINE_SPLIT_REGEX;
     }
 
 }

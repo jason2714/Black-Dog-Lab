@@ -43,4 +43,14 @@ public class DialogUtils{
         if(!alertDialog.isShowing())
             alertDialog.show();
     }
+
+    public static void showDialogExceptActionBar(androidx.appcompat.app.AlertDialog alertDialog) {
+        alertDialog.getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+//TODO COLOR
+//        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        if(!alertDialog.isShowing())
+            alertDialog.show();
+    }
 }

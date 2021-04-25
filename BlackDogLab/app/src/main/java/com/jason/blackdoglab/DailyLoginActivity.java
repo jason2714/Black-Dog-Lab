@@ -27,7 +27,7 @@ public class DailyLoginActivity extends BaseActivity {
     private EditText mEtDailyMood;
     private TextView mTvWelcome;
     private int moodSelected = -1;
-    private String playerName,oldData;
+    private String playerName;
 
     @Override
     protected void initView() {
@@ -35,9 +35,9 @@ public class DailyLoginActivity extends BaseActivity {
         mImgMoods = new ImageView[moodsID.length];
         mEtDailyMood = findViewById(R.id.et_daily_mood);
         mTvWelcome = findViewById(R.id.tv_welcome);
+        mTvWelcome.setText("哈囉~" + playerName);
         for (int idx = 0; idx < moodsID.length; idx++)
             mImgMoods[idx] = findViewById(moodsID[idx]);
-
     }
 
     @Override
@@ -55,20 +55,11 @@ public class DailyLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            oldData = fc_dailyMood.readFile();
-            playerName = fc_basicInfo.readLineSplit()[0];
-            mTvWelcome.setText("哈囉~" + playerName);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Utils.setLog(e.getMessage());
-            ActivityUtils.getInstance().exitSystem();
-        }
     }
 
     @Override
     public void onClick(View v) {
+
         int newMoodSelected = -1;
         switch (v.getId()) {
             case R.id.btn_login:
@@ -76,21 +67,6 @@ public class DailyLoginActivity extends BaseActivity {
                 Utils.setLog("start MainPageActivity");
                 if (checkInformation()) {
                     Intent intent = new Intent(DailyLoginActivity.this, MainPage.class);
-                    String intent_TAG = "mood_color";
-                    switch (moodSelected){
-                        case 0: case 1:
-                            intent.putExtra(intent_TAG,R.style.Theme_BlackDogLab_Blue);
-                            break;
-                        case 2:
-                            intent.putExtra(intent_TAG,R.style.Theme_BlackDogLab_Green);
-                            break;
-                        case 3: case 4:
-                            intent.putExtra(intent_TAG,R.style.Theme_BlackDogLab_Brown);
-                            break;
-                        default:
-                            intent.putExtra(intent_TAG,R.style.Theme_BlackDogLab_Default);
-                            break;
-                    }
                     startActivity(intent);
                 } else {
                     showToast("記得記錄心情文字歐~");
@@ -129,20 +105,38 @@ public class DailyLoginActivity extends BaseActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = df.format(Calendar.getInstance().getTime());
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(oldData)
-                .append(currentDate)
-                .append(fc_basicInfo.getSplitChar())
+        stringBuffer.append(currentDate)
+                .append(FileController.getWordSplitChar())
                 .append(moodSelected)
-                .append(fc_basicInfo.getSplitChar())
+                .append(FileController.getWordSplitChar())
                 .append(mEtDailyMood.getText().toString())
-                .append('\n');
+                .append(FileController.getLineSplitChar());
         try {
-            fc_dailyMood.write(stringBuffer.toString());
+//            for(int i = 0; i< 5; i++){
+//                String data = fc_dailyMood.readLine();
+//                if(data != null)
+//                    Utils.setLog(data);
+//            }
+            if(fc_dailyMood.fileExist())
+                fc_dailyMood.append(stringBuffer.toString());
+            else
+                fc_dailyMood.write(stringBuffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
             Utils.setLog(e.getMessage());
             return false;
         }
         return true;
+    }
+
+    protected void initBasicInfo(){
+        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        try {
+            playerName = fc_basicInfo.readLineSplit()[0];
+        } catch (IOException e) {
+            e.printStackTrace();
+            Utils.setLog(e.getMessage());
+        }
     }
 }

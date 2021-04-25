@@ -18,6 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.Utils;
 
+import java.io.IOException;
+
 public class MainPage extends BaseActivity {
 
 //    public class TabPagerAdapter extends FragmentPagerAdapter {
@@ -161,10 +163,35 @@ public class MainPage extends BaseActivity {
     }
     @Override
     protected void initBasicInfo(){
-        super.initBasicInfo();
-        String intent_TAG = "mood_color";
-        Intent intent = getIntent();
-        themeColor = intent.getIntExtra(intent_TAG,0);
+        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
+        try {
+            String[] splitFileData = fc_dailyMood.readFileSplit();
+            for(String lineData : splitFileData){
+                String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
+                if(lineDataArray[0].equals(fc_loginDate.readFile())){
+                    Utils.setLog("Mood Type = " + lineDataArray[1]);
+                    switch (Integer.valueOf(lineDataArray[1])){
+                        case 0: case 1:
+                            themeColor = R.style.Theme_BlackDogLab_Blue;
+                            break;
+                        case 2:
+                            themeColor = R.style.Theme_BlackDogLab_Green;
+                            break;
+                        case 3: case 4:
+                            themeColor = R.style.Theme_BlackDogLab_Brown;
+                            break;
+                        default:
+                            themeColor = R.style.Theme_BlackDogLab_Default;
+                            break;
+                    }
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+            Utils.setLog(e.getMessage());
+        }
         //TODO file theme
 //        fc_basicInfo.readFile()
     }
@@ -178,7 +205,7 @@ public class MainPage extends BaseActivity {
             case R.id.imgbt_right:
                 break;
             case  R.id.imgbt_tab_triangle:
-                mTabLayout.animate().translationY(0).setStartDelay(100);
+                mTabLayout.animate().translationY(0);
                 mImgBtTabTriangle.animate().alpha(0);
                 isTabTriangleShow = false;
                 break;

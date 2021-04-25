@@ -22,7 +22,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected abstract int getLayoutViewID();
 
     private final int theme_default = R.style.Theme_BlackDogLab_Default;
-    protected FileController fc_basicInfo,fc_dailyMood,fc_loginDate;
+    protected FileController fc_basicInfo, fc_dailyMood, fc_loginDate;
+
     protected int setThemeColor() {
         return theme_default;
     }
@@ -64,10 +65,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         Toast.makeText(this, massage, Toast.LENGTH_SHORT).show();
     }
 
-    protected void initBasicInfo(){
-        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
-        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
-        fc_loginDate = new FileController(this, getResources().getString(R.string.daily_mood));
-    }
+    protected void initBasicInfo() {}
 
 }

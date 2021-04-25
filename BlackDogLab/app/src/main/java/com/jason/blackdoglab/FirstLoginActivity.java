@@ -1,16 +1,23 @@
 package com.jason.blackdoglab;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.jason.blackdoglab.utils.ActivityUtils;
+import com.jason.blackdoglab.utils.DialogUtils;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
@@ -27,10 +34,14 @@ public class FirstLoginActivity extends BaseActivity {
     private EditText mEtYear, mEtMonth, mEtDate;
     private EditText mEtName;
     private int characterSelected = -1;
+    private DatePicker datePicker;
 
     @Override
     protected void initView() {
         mBtnRegister = findViewById(R.id.btn_register);
+        mEtYear = findViewById(R.id.et_year);
+        mEtMonth = findViewById(R.id.et_month);
+        mEtDate = findViewById(R.id.et_date);
         mEtName = findViewById(R.id.et_name);
         mImgCharacters = new ImageView[charactersID.length];
         for (int idx = 0; idx < charactersID.length; idx++)
@@ -42,9 +53,9 @@ public class FirstLoginActivity extends BaseActivity {
         mBtnRegister.setOnClickListener(this);
         for (ImageView character : mImgCharacters)
             character.setOnClickListener(this);
-        mEtYear = findViewById(R.id.et_year);
-        mEtMonth = findViewById(R.id.et_month);
-        mEtDate = findViewById(R.id.et_date);
+        mEtYear.setOnClickListener(this);
+        mEtMonth.setOnClickListener(this);
+        mEtDate.setOnClickListener(this);
     }
 
     @Override
@@ -93,6 +104,23 @@ public class FirstLoginActivity extends BaseActivity {
             case R.id.img_character7:
                 newCharacterSelected = 6;
                 break;
+            case R.id.et_year: case R.id.et_month: case R.id.et_date:
+
+                LayoutInflater inflater = LayoutInflater.from(FirstLoginActivity.this);
+                View layoutPicker = inflater.inflate(R.layout.view_date_picker, null);
+                datePicker = layoutPicker.findViewById(R.id.dp_birth_date);
+                android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(FirstLoginActivity.this)
+                        .setTitle("請選生日")
+                        .setView(datePicker)
+                        .setPositiveButton("確認", (dialog, which) -> {
+                            mEtYear.setText(String.valueOf(datePicker.getYear()));
+                            mEtMonth.setText(String.valueOf(datePicker.getMonth() + 1));
+                            mEtDate.setText(String.valueOf(datePicker.getDayOfMonth()));
+                        })
+                        .setNegativeButton("取消", null)
+                        .create();
+                DialogUtils.showDialogExceptActionBar(alertDialog);
+                break;
             default:
                 break;
         }
@@ -135,11 +163,11 @@ public class FirstLoginActivity extends BaseActivity {
                 mEtMonth.getText().toString() + '-' +
                 mEtDate.getText().toString();
         stringBuffer.append(mEtName.getText().toString())
-                .append(fc_basicInfo.getSplitChar())
+                .append(FileController.getWordSplitChar())
                 .append(BirthDate)
-                .append(fc_basicInfo.getSplitChar())
+                .append(FileController.getWordSplitChar())
                 .append(characterSelected)
-                .append('\n');
+                .append(FileController.getLineSplitChar());
 
         try {
             fc_basicInfo.write(stringBuffer.toString());
@@ -150,4 +178,8 @@ public class FirstLoginActivity extends BaseActivity {
         }
         return true;
     }
+
+    protected void initBasicInfo(){
+        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+     }
 }
