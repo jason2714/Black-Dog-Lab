@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape
+                    android:shape="ring"
+                    android:useLevel="false"
+                    android:innerRadius="67dp"
+                    android:thickness="20dp">
+                    <!--                    size是screen大小-->
+                    <size android:height="150dp"
+                        android:width="150dp"/>
+                    <!--                    size無用-->
+                    <gradient
+                        android:startColor="@color/green2"
+                        android:endColor="@color/transparent"
+                        android:type="radial"
+                        android:gradientRadius="87dp"
+                        />
+                    <!--                    100%p = (innerRadius + thickness)*2dp-->
+                    <!--                    set gradientRadius = innerRadius + thickness-->
+                </shape>
+            </item>
+            <item>
+                <shape
+                    android:shape="ring"
+                    android:useLevel="false"
+                    android:thickness="2dp"
+                    android:innerRadius="65dp">
+                    <solid android:color="@color/green2"/>
+                </shape>
+            </item>
+            <!--            thickness/2 == padding-->
+            <item android:bottom="10dp" android:drawable="@drawable/icon_select_character1" android:left="10dp" android:right="10dp" android:top="10dp">
+                <size android:width="@dimen/user_page_portrait" android:height="@dimen/user_page_portrait" />
+            </item>
+
+        </layer-list>
+    </item>
+
+</selector>

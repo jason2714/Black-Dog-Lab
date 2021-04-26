@@ -11,23 +11,22 @@
 
     <ImageButton
         android:id="@+id/imgbt_right"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/main_page_triangle"
+        android:layout_height="@dimen/main_page_triangle"
         android:layout_marginHorizontal="15dp"
-        android:background="?attr/main_right_triangle"
-        android:elevation="10dp"
-        android:outlineProvider="bounds"
+        android:background="@drawable/bg_main_right_triangle"
+        android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imgbt_left"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/main_page_triangle"
+        android:layout_height="@dimen/main_page_triangle"
         android:layout_marginHorizontal="15dp"
-        android:background="?attr/main_left_triangle"
-        android:elevation="10dp"
+        android:background="@drawable/bg_main_left_triangle"
+        android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

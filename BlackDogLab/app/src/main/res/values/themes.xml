@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/good</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-         Secondary brand color.
+        Secondary brand color.
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
@@ -22,10 +22,12 @@
         <!--        是否讓system保留navigation bar的空間-->
         <item name="android:fitsSystemWindows">false</item>
     </style>
+
     <style name="Theme.BlackDogLab.Default">
         <item name="colorPrimary">@color/grey1</item>
         <item name="triangle_color">@color/grey1</item>
     </style>
+
     <style name="Theme.BlackDogLab.Brown">
         <item name="colorPrimary">@color/brown1</item>
         <item name="triangle_color">@color/brown1</item>
@@ -35,6 +37,7 @@
         <item name="main_tab_triangle">@drawable/main_tab_triangle_brown</item>
         <item name="main_character">@drawable/icon_select_character1</item>
     </style>
+
     <style name="Theme.BlackDogLab.Green">
         <item name="colorPrimary">@color/green1</item>
         <item name="triangle_color">@color/green1</item>
@@ -44,6 +47,7 @@
         <item name="main_tab_triangle">@drawable/main_tab_triangle_green</item>
         <item name="main_character">@drawable/icon_select_character1</item>
     </style>
+
     <style name="Theme.BlackDogLab.Blue">
         <item name="colorPrimary">@color/blue1</item>
         <item name="triangle_color">@color/blue1</item>

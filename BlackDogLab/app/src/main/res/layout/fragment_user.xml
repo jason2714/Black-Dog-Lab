@@ -1,33 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_user"
     tools:context=".UserFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
+        android:background="@drawable/bg_user">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_user_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/user_page_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_user_left_portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/user_page_guideline_portrait" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_user_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/user_page_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_user_top"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/user_page_guideline_portrait" />
+
+        <!--        padding equals to thickness in background-->
+        <ImageView
+            android:id="@+id/img_portrait"
+            android:layout_width="@dimen/user_page_portrait"
+            android:layout_height="@dimen/user_page_portrait"
+            android:background="@drawable/bg_user_portrait"
+            android:padding="8dp"
             android:src="@drawable/icon_select_character1"
-            app:civ_border="false"/>
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:src="@drawable/icon_select_character1"
-            app:civ_border="true"
-            app:civ_border_color="@color/green2"
-            app:civ_shadow="true"
-            app:civ_shadow_gravity="center"
-            app:civ_shadow_radius="10dp" />
-    </LinearLayout>
+            app:layout_constraintLeft_toRightOf="@id/gdl_user_left_portrait"
+            app:layout_constraintTop_toBottomOf="@id/gdl_user_top" />
+
+        <LinearLayout
+            android:id="@+id/ll_basic_point"
+            android:layout_width="0dp"
+            android:layout_height="290dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_user_box"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintEnd_toStartOf="@id/gdl_user_right"
+            app:layout_constraintStart_toEndOf="@id/gdl_user_left"
+            app:layout_constraintTop_toBottomOf="@id/img_portrait">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="horizontal">
+                <!--                TODO-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <!--                    TODO-->
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/ll_setting"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_user_box"
+            android:elevation="5dp"
+            android:padding="17dp"
+            app:layout_constraintEnd_toStartOf="@id/gdl_user_right"
+            app:layout_constraintStart_toEndOf="@id/gdl_user_left"
+            app:layout_constraintTop_toBottomOf="@id/ll_basic_point">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:letterSpacing="0.2"
+                android:text="訊息推播"
+                android:textColor="@color/brown1"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@id/tgbtn_message_broadcast"
+                android:text="關閉"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/tgbtn_message_broadcast"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginHorizontal="10dp"
+                android:layout_toStartOf="@id/tv_open"
+                app:switchMinWidth="80dp"
+                android:checked="true"
+                android:showText="false"
+                app:showText="false"
+                app:track="@drawable/bg_track_meaasge_broadcast"
+                android:thumb="@drawable/bg_thumb_switch"
+                app:useMaterialThemeColors="false" />
+
+            <TextView
+                android:id="@+id/tv_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:text="開啟"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_sound_volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:letterSpacing="0.2"
+                android:text="音樂音量"
+                android:textColor="@color/brown1"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@id/sb_sound_volume"
+                android:text="小"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/sb_sound_volume"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@id/tv_big"
+                android:progressTint="@color/grey2"
+                android:progressBackgroundTint="@color/grey2"
+                android:progressBackgroundTintMode="src_over"
+                android:max="100"
+                android:progress="50"
+                android:thumb="@drawable/bg_thumb_seekbar"/>
+
+            <TextView
+                android:id="@+id/tv_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="25dp"
+                android:text="大"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

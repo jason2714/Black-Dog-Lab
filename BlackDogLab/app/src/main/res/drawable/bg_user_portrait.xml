@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape
+                    android:shape="ring"
+                    android:useLevel="false"
+                    android:innerRadius="72dp"
+                    android:thickness="10dp">
+<!--                    size是screen大小-->
+                    <size android:height="150dp"
+                        android:width="150dp"/>
+<!--                    size無用-->
+<!--                    偏移量 0.5為中心-->
+<!--                    android:centerX="0.51"-->
+<!--                    android:centerY="0.51"-->
+                    <gradient
+                        android:startColor="@color/black"
+                        android:endColor="@color/transparent"
+                        android:type="radial"
+                        android:gradientRadius="82dp"
+                        />
+<!--                    innerRadius = (drawable.size - padding*2)/2-->
+<!--                    thickness = padding-->
+<!--                    100%p = (innerRadius + thickness)*2dp-->
+<!--                    set gradientRadius = innerRadius + thickness-->
+                </shape>
+            </item>
+<!--            <item android:bottom="8dp"-->
+<!--                android:drawable="@drawable/icon_select_character1"-->
+<!--                android:left="8dp"-->
+<!--                android:right="8dp"-->
+<!--                android:top="8dp"/>-->
+
+        </layer-list>
+    </item>
+
+</selector>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="user_page_guideline">40dp</dimen>
+    <dimen name="user_page_guideline_portrait">20dp</dimen>
+    <dimen name="user_page_portrait">160dp</dimen>
+    <dimen name="main_page_triangle">40dp</dimen>
+</resources>

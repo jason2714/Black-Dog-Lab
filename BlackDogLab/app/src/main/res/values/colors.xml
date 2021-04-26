@@ -27,6 +27,7 @@
     <color name="brown5">#FFF6DA</color>
     <color name="green1">#3E633D</color>
     <color name="green2">#6A9168</color>
+    <color name="green2_trans">#006A9168</color>
     <color name="green3">#99C296</color>
     <color name="green4">#D3F3D1</color>
     <color name="green5">#F1FAE5</color>
@@ -35,4 +36,5 @@
     <color name="grey3">#83878B</color>
     <color name="grey4">#CBC3C3</color>
     <color name="grey5">#FBFBFB</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
