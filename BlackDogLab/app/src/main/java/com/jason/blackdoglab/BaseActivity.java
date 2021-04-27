@@ -51,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // 点击手机上的返回键，返回上一层
+        // 點返回鍵
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             // 移除Activity
             ActivityUtils.getInstance().removeActivity(this);

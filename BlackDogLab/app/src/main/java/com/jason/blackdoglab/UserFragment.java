@@ -1,12 +1,25 @@
 package com.jason.blackdoglab;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import com.jason.blackdoglab.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,9 +36,19 @@ public class UserFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Player player;
+    private ImageView mImgPortrait;
+    private TextView mTvUserName, mTvUserIdentity;
+    private SeekBar mSbSoundVolume;
+    private AudioManager audioManager;
+    private VolumeReceiver volumeReceiver;
 
     public UserFragment() {
-        // Required empty public constructor
+        player = new Player();
+    }
+
+    public UserFragment(Player player) {
+        this.player = player;
     }
 
     /**
@@ -56,9 +79,68 @@ public class UserFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //initial view
+        //        Utils.setLog(getActivity().getComponentName().getClassName());
+        Utils.setLog(player.getPlayerName());
+        mImgPortrait = view.findViewById(R.id.img_portrait);
+        mTvUserName = view.findViewById(R.id.tv_user_name);
+        mTvUserIdentity = view.findViewById(R.id.tv_user_identity);
+        mSbSoundVolume = view.findViewById(R.id.sb_sound_volume);
+        audioManager = ((AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE));
+        Utils.setLog(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) + "");
+        Utils.setLog(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) + "");
+        mSbSoundVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+        mImgPortrait.setImageResource(player.getCharacterDrawable());
+        mTvUserName.setText(player.getPlayerName());
+        //initial listener
+        mSbSoundVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int volume, boolean fromUser) {
+                Utils.setLog(volume + "/15");
+                //系統音量和媒體音量同時更新
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        //註冊broadcast receiver
+        volumeReceiver = new VolumeReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.media.VOLUME_CHANGED_ACTION");
+        getActivity().registerReceiver(volumeReceiver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(volumeReceiver);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user, container, false);
+    }
+
+    private class VolumeReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {
+                int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                mSbSoundVolume.setProgress(currentVolume);
+            }
+        }
     }
 }

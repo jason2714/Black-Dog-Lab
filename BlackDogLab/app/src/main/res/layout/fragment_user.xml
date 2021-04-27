@@ -39,6 +39,12 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="@dimen/user_page_guideline_portrait" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_user_portrait_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="200dp" />
         <!--        padding equals to thickness in background-->
         <ImageView
             android:id="@+id/img_portrait"
@@ -49,6 +55,31 @@
             android:src="@drawable/icon_select_character1"
             app:layout_constraintLeft_toRightOf="@id/gdl_user_left_portrait"
             app:layout_constraintTop_toBottomOf="@id/gdl_user_top" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="懶死君"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            app:layout_constraintBottom_toTopOf="@id/ll_basic_point"
+            app:layout_constraintStart_toEndOf="@id/gdl_user_portrait_label"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_identity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="實習研究員"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toEndOf="@id/gdl_user_portrait_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
 
         <LinearLayout
             android:id="@+id/ll_basic_point"
@@ -126,12 +157,12 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginHorizontal="10dp"
                 android:layout_toStartOf="@id/tv_open"
-                app:switchMinWidth="80dp"
                 android:checked="true"
                 android:showText="false"
-                app:showText="false"
-                app:track="@drawable/bg_track_meaasge_broadcast"
                 android:thumb="@drawable/bg_thumb_switch"
+                app:showText="false"
+                app:switchMinWidth="80dp"
+                app:track="@drawable/bg_track_meaasge_broadcast"
                 app:useMaterialThemeColors="false" />
 
             <TextView
@@ -174,12 +205,12 @@
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_toStartOf="@id/tv_big"
-                android:progressTint="@color/grey2"
+                android:layout_marginHorizontal="5dp"
+                android:max="15"
                 android:progressBackgroundTint="@color/grey2"
                 android:progressBackgroundTintMode="src_over"
-                android:max="100"
-                android:progress="50"
-                android:thumb="@drawable/bg_thumb_seekbar"/>
+                android:progressTint="@color/grey2"
+                android:thumb="@drawable/bg_thumb_seekbar" />
 
             <TextView
                 android:id="@+id/tv_big"
@@ -187,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="20dp"
                 android:text="大"
                 android:textColor="@color/black"
                 android:textSize="14sp" />

@@ -3,18 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CalendarFragment"
     android:background="@drawable/bg_calender">
 
-    <DatePicker
-        android:id="@+id/dp_calender"
+<!--    <DatePicker-->
+<!--        android:id="@+id/dp_calender"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="400dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:background="@color/white"-->
+<!--        android:datePickerMode="spinner"-->
+<!--        android:spinnersShown="false"-->
+<!--        />-->
+<!--    <com.applandeo.materialcalendarview.CalendarView-->
+<!--        android:id="@+id/cv_calendar"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="400dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        />-->
+    <com.jason.blackdoglab.CalendarView
+        android:id="@+id/cv_calendar"
         android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:datePickerMode="spinner"
-        android:spinnersShown="false"
-        />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
     <!-- TODO: Update blank fragment layout -->
 
 </FrameLayout>

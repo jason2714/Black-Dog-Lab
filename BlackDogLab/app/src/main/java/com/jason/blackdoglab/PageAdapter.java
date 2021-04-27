@@ -5,10 +5,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.jason.blackdoglab.utils.Utils;
+
 class PageAdapter extends FragmentStateAdapter {
 
+
+    private Player player;
     public PageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+    }
+
+    public PageAdapter(@NonNull FragmentActivity fragmentActivity,Player player) {
+        super(fragmentActivity);
+        this.player = player;
     }
 
     @NonNull
@@ -22,7 +31,7 @@ class PageAdapter extends FragmentStateAdapter {
             case 2:
                 return new NoteFragment();
             case 3:
-                return new UserFragment();
+                return new UserFragment(player);
             default:
                 return null;
         }

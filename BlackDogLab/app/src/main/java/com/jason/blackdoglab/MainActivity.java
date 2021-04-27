@@ -15,6 +15,7 @@ import com.jason.blackdoglab.utils.Utils;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends BaseActivity {
 
@@ -84,7 +85,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-        intent = new Intent(MainActivity.this, MainPage.class);
+//        intent = new Intent(MainActivity.this, DailyLoginActivity.class);
         startActivity(intent);
     }
 

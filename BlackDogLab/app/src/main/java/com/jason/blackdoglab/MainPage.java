@@ -46,9 +46,9 @@ public class MainPage extends BaseActivity {
     private TabLayout mTabLayout;
     private ImageButton mImgBtLeft, mImgBtRight;
     private ImageButton mImgBtTabTriangle;
-    private int themeColor = R.style.Theme_BlackDogLab_Blue;
-    private String playerName;
+    private int themeColor;
     private boolean isTabTriangleShow;
+    private Player player;
 
 
     @Override
@@ -75,7 +75,7 @@ public class MainPage extends BaseActivity {
     @Override
     protected void initListener() {
         mImgBtTabTriangle.setOnClickListener(this);
-        mViewPager.setAdapter(new PageAdapter(this));
+        mViewPager.setAdapter(new PageAdapter(this,player));
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 mTabLayout, mViewPager, (tab, position) -> {
             tab.setId(position);
@@ -147,7 +147,6 @@ public class MainPage extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Utils.setLog("4");
         ActivityUtils.getInstance().printActivity();
         // 監聽返回键，點兩次退出process
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -161,18 +160,20 @@ public class MainPage extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
     @Override
     protected void initBasicInfo(){
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
         try {
+            //set basic theme color
             String[] splitFileData = fc_dailyMood.readFileSplit();
             for(String lineData : splitFileData){
                 String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
                 if(lineDataArray[0].equals(fc_loginDate.readFile())){
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
-                    switch (Integer.valueOf(lineDataArray[1])){
+                    switch (Integer.parseInt(lineDataArray[1])){
                         case 0: case 1:
                             themeColor = R.style.Theme_BlackDogLab_Blue;
                             break;
@@ -184,16 +185,28 @@ public class MainPage extends BaseActivity {
                             break;
                         default:
                             themeColor = R.style.Theme_BlackDogLab_Default;
+                            Utils.setLog("Not Set Today's Mood Yet");
                             break;
                     }
                 }
             }
+            Utils.setLog("Set Theme Success");
         }catch (IOException e){
             e.printStackTrace();
             Utils.setLog(e.getMessage());
         }
-        //TODO file theme
-//        fc_basicInfo.readFile()
+        try {
+            String[] playerBasicInfo = fc_basicInfo.readLineSplit();
+            if(playerBasicInfo.length == 3){
+                player = new Player(playerBasicInfo[0],playerBasicInfo[1],Integer.parseInt(playerBasicInfo[2]));
+                Utils.setLog("Get Player Info Success");
+            }else
+                Utils.setLog("Player Basic Info Format Wrong");
+
+        }catch (IOException e){
+            e.printStackTrace();
+            Utils.setLog(e.getMessage());
+        }
     }
 
     @Override

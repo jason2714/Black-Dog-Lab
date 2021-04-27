@@ -105,7 +105,6 @@ public class FirstLoginActivity extends BaseActivity {
                 newCharacterSelected = 6;
                 break;
             case R.id.et_year: case R.id.et_month: case R.id.et_date:
-
                 LayoutInflater inflater = LayoutInflater.from(FirstLoginActivity.this);
                 View layoutPicker = inflater.inflate(R.layout.view_date_picker, null);
                 datePicker = layoutPicker.findViewById(R.id.dp_birth_date);
