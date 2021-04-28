@@ -12,7 +12,7 @@
         android:background="@drawable/bg_calendar_month_selector">
 
         <ImageView
-            android:id="@+id/img_calendar_left"
+            android:id="@+id/btn_calendar_left"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
@@ -25,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/img_calendar_left"
-            android:layout_toStartOf="@id/img_calendar_right"
+            android:layout_toEndOf="@id/btn_calendar_left"
+            android:layout_toStartOf="@id/btn_calendar_right"
             android:gravity="center"
             android:orientation="horizontal">
             <!-- date title -->
@@ -54,7 +54,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/img_calendar_right"
+            android:id="@+id/btn_calendar_right"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"

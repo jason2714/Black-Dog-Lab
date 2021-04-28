@@ -1,21 +1,18 @@
 package com.jason.blackdoglab;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.VideoView;
 
-import com.jason.blackdoglab.utils.Utils;
+import com.jason.blackdoglab.loginpage.DailyLoginActivity;
+import com.jason.blackdoglab.loginpage.FirstLoginActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends BaseActivity {
 

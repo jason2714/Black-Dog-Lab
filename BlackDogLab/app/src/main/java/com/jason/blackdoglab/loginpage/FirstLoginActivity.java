@@ -1,11 +1,5 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.loginpage;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -16,13 +10,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.jason.blackdoglab.BaseActivity;
+import com.jason.blackdoglab.FileController;
+import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.DialogUtils;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class FirstLoginActivity extends BaseActivity {
 
@@ -30,11 +25,16 @@ public class FirstLoginActivity extends BaseActivity {
     private long exitTime = 0;
     private final int[] charactersID = {R.id.img_character1, R.id.img_character2, R.id.img_character3,
             R.id.img_character4, R.id.img_character5, R.id.img_character6, R.id.img_character7};
+    private final int[] characterDrawables = {R.drawable.icon_select_character1, R.drawable.icon_select_character2,
+            R.drawable.icon_select_character3, R.drawable.icon_select_character4,
+            R.drawable.icon_select_character5, R.drawable.icon_select_character6,
+            R.drawable.icon_select_character7};
     private ImageView[] mImgCharacters;
     private EditText mEtYear, mEtMonth, mEtDate;
     private EditText mEtName;
     private int characterSelected = -1;
     private DatePicker datePicker;
+    private ImageView mBgFirstLogin;
 
     @Override
     protected void initView() {
@@ -43,9 +43,14 @@ public class FirstLoginActivity extends BaseActivity {
         mEtMonth = findViewById(R.id.et_month);
         mEtDate = findViewById(R.id.et_date);
         mEtName = findViewById(R.id.et_name);
+        mBgFirstLogin = findViewById(R.id.bg_first_login);
         mImgCharacters = new ImageView[charactersID.length];
-        for (int idx = 0; idx < charactersID.length; idx++)
+        //init drawable
+        for (int idx = 0; idx < charactersID.length; idx++) {
             mImgCharacters[idx] = findViewById(charactersID[idx]);
+            setImageDrawableFit(mImgCharacters[idx], characterDrawables[idx]);
+        }
+        setImageDrawableFit(mBgFirstLogin, R.drawable.bg_first_login);
     }
 
     @Override
@@ -104,7 +109,9 @@ public class FirstLoginActivity extends BaseActivity {
             case R.id.img_character7:
                 newCharacterSelected = 6;
                 break;
-            case R.id.et_year: case R.id.et_month: case R.id.et_date:
+            case R.id.et_year:
+            case R.id.et_month:
+            case R.id.et_date:
                 LayoutInflater inflater = LayoutInflater.from(FirstLoginActivity.this);
                 View layoutPicker = inflater.inflate(R.layout.view_date_picker, null);
                 datePicker = layoutPicker.findViewById(R.id.dp_birth_date);
@@ -178,7 +185,7 @@ public class FirstLoginActivity extends BaseActivity {
         return true;
     }
 
-    protected void initBasicInfo(){
+    protected void initBasicInfo() {
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
-     }
+    }
 }

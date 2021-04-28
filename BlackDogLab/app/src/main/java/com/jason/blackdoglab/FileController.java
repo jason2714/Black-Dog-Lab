@@ -26,7 +26,7 @@ public class FileController {
     private final static String LINE_SPLIT_CHAR = "$\n";
     private int lineIdx;
 
-    FileController(Context context, String file_name) {
+    public FileController(Context context, String file_name) {
         this.context = context;
         this.file_name = file_name;
         this.file_dir = context.getFilesDir().getPath();

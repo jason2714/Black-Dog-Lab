@@ -3,6 +3,7 @@ package com.jason.blackdoglab.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CalendarView extends LinearLayout {
+public class CalendarView extends LinearLayout implements View.OnClickListener{
     // calendar components
     LinearLayout header;
     ImageView btnPrev;
@@ -25,20 +26,26 @@ public class CalendarView extends LinearLayout {
     TextView tvDisplayYear;
     TextView tvDisplayMonth;
     GridView gridView;
+    Calendar calendarDisplay;
 
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initControl(context, attrs);
+        calendarDisplay = Calendar.getInstance();
+        //updateCalendar here will make UI thread overoveroverload
     }
 
     private void assignUiElements() {
         // layout is inflated, assign local variables to components
         header = findViewById(R.id.calendar_header);
-        btnPrev = findViewById(R.id.img_calendar_left);
-        btnNext = findViewById(R.id.img_calendar_right);
+        btnPrev = findViewById(R.id.btn_calendar_left);
+        btnNext = findViewById(R.id.btn_calendar_right);
         tvDisplayYear = findViewById(R.id.date_display_year);
         tvDisplayMonth = findViewById(R.id.date_display_month);
         gridView = findViewById(R.id.calendar_grid);
+
+        btnPrev.setOnClickListener(this);
+        btnNext.setOnClickListener(this);
     }
 
     /**
@@ -50,60 +57,46 @@ public class CalendarView extends LinearLayout {
         assignUiElements();
     }
 
-    //    public void updateCalendar(HashSet<Date> events) {
-//        ArrayList<Date> cells = new ArrayList<>();
-//        Calendar currentDate = Calendar.getInstance();
-//        Calendar calendar = (Calendar) currentDate.clone();
-//        // determine the cell for current month's beginning
-//        calendar.set(Calendar.DAY_OF_MONTH, 1);
-//        int monthBeginningCell = calendar.get(Calendar.DAY_OF_WEEK) - 2;
-//
-//        // move calendar backwards to the beginning of the week
-//        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
-//
-//        // fill cells
-//        int DAYS_COUNT = 7;
-//        while (cells.size() < DAYS_COUNT) {
-//            cells.add(calendar.getTime());
-//            calendar.add(Calendar.DAY_OF_MONTH, 1);
-//        }
-//
-//        // update grid
-//        gridView.setAdapter(new CalendarAdapter(getContext(), cells, events));
-//
-//        // update title
-//        SimpleDateFormat sdf = new SimpleDateFormat("EEEE,d MMM,yyyy");
-//        String[] dateToday = sdf.format(currentDate.getTime()).split(",");
-//        txtDateDay.setText(dateToday[0]);
-//        txtDisplayDate.setText(dateToday[1]);
-//        txtDateYear.setText(dateToday[2]);
-//    }
     public void updateCalendar() {
         ArrayList<Date> cells = new ArrayList<>();
-        Calendar currentDate = Calendar.getInstance();
-        Calendar calendar = (Calendar) currentDate.clone();
-        calendar.set(Calendar.MONTH,2);
+        Calendar calendarInit = (Calendar) calendarDisplay.clone();
         // determine the cell for current month's beginning
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int monthBeginningCell = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        Utils.setLog(monthBeginningCell+"");
+        calendarInit.set(Calendar.DAY_OF_MONTH, 1);
+        // -1->start at Sunday,-2->start at Monday
+        int monthBeginningCell = calendarInit.get(Calendar.DAY_OF_WEEK) - 1;
         // move calendar backwards to the beginning of the week
-        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
+        calendarInit.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
 
         // fill cells
         int DAYS_COUNT = 42;
         while (cells.size() < DAYS_COUNT) {
-            cells.add(calendar.getTime());
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            cells.add(calendarInit.getTime());
+            calendarInit.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         // update grid
-        gridView.setAdapter(new CalendarAdapter(getContext(), cells));
+        gridView.setAdapter(new CalendarAdapter(getContext(), cells, calendarDisplay));
 
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM");
-        String[] dateToday = sdf.format(currentDate.getTime()).split(",");
+        String[] dateToday = sdf.format(calendarDisplay.getTime()).split(",");
         tvDisplayYear.setText(dateToday[0] + "年");
         tvDisplayMonth.setText(dateToday[1] + "月");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_calendar_left:
+                calendarDisplay.add(Calendar.MONTH,-1);
+                updateCalendar();
+                break;
+            case R.id.btn_calendar_right:
+                calendarDisplay.add(Calendar.MONTH,1);
+                updateCalendar();
+                break;
+            default:
+                break;
+        }
     }
 }

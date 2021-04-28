@@ -38,11 +38,8 @@ class PageAdapter extends FragmentStateAdapter {
             case 0:
                 return new MainFragment();
             case 1:
-                return new CalendarFragment();
+                return new CalendarFragment(dailyMoodsSet);
             case 2:
-                for(DailyMoods dailyMoods : dailyMoodsSet){
-                    Utils.setLog(dailyMoods.toString());
-                }
                 return new NoteFragment();
             case 3:
                 return new UserFragment(player);

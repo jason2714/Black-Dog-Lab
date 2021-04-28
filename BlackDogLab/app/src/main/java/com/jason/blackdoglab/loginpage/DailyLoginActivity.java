@@ -1,8 +1,5 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.loginpage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +8,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jason.blackdoglab.utils.ActivityUtils;
+import com.jason.blackdoglab.BaseActivity;
+import com.jason.blackdoglab.FileController;
+import com.jason.blackdoglab.MainPage;
+import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
@@ -23,11 +23,14 @@ public class DailyLoginActivity extends BaseActivity {
     private Button mBtnLogin;
     private final int[] moodsID = {R.id.img_mood1, R.id.img_mood2,
             R.id.img_mood3, R.id.img_mood4, R.id.img_mood5};
+    private final int[] moodDrawables = {R.drawable.icon_select_mood1, R.drawable.icon_select_mood2,
+            R.drawable.icon_select_mood3, R.drawable.icon_select_mood4, R.drawable.icon_select_mood5};
     private ImageView[] mImgMoods;
     private EditText mEtDailyMood;
     private TextView mTvWelcome;
     private int moodSelected = -1;
     private String playerName;
+    private ImageView mBgDailyLogin;
 
     @Override
     protected void initView() {
@@ -35,9 +38,13 @@ public class DailyLoginActivity extends BaseActivity {
         mImgMoods = new ImageView[moodsID.length];
         mEtDailyMood = findViewById(R.id.et_daily_mood);
         mTvWelcome = findViewById(R.id.tv_welcome);
+        mBgDailyLogin = findViewById(R.id.bg_daily_login);
         mTvWelcome.setText("哈囉~" + playerName);
-        for (int idx = 0; idx < moodsID.length; idx++)
+        for (int idx = 0; idx < moodsID.length; idx++) {
             mImgMoods[idx] = findViewById(moodsID[idx]);
+            setImageDrawableFit(mImgMoods[idx], moodDrawables[idx]);
+        }
+        setImageDrawableFit(mBgDailyLogin, R.drawable.bg_first_login);
     }
 
     @Override
@@ -117,7 +124,7 @@ public class DailyLoginActivity extends BaseActivity {
 //                if(data != null)
 //                    Utils.setLog(data);
 //            }
-            if(fc_dailyMood.fileExist())
+            if (fc_dailyMood.fileExist())
                 fc_dailyMood.append(stringBuffer.toString());
             else
                 fc_dailyMood.write(stringBuffer.toString());
@@ -129,7 +136,7 @@ public class DailyLoginActivity extends BaseActivity {
         return true;
     }
 
-    protected void initBasicInfo(){
+    protected void initBasicInfo() {
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         try {

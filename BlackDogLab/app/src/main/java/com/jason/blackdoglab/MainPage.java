@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Outline;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -140,6 +141,8 @@ public class MainPage extends BaseActivity {
                 Utils.setLog(tab.getId() + " reselect");
             }
         });
+        //TODO solve this problem
+        //add this function will make UI thread overload
         mViewPager.setOffscreenPageLimit(3);
     }
 
@@ -147,10 +150,11 @@ public class MainPage extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //inflater fail 的原因是activity開太多 刪掉一些就好了
+        //是因為out of memory 調整圖片大小也可解決
         ActivityUtils.getInstance().cleanActivity(this);
         ActivityUtils.getInstance().printActivity();
-        //TODO get theme color
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
     private LayoutInflater inflater;
     private HashSet<Date> eventDays;
     private Context context;
+    private Calendar calendarDisplay;
 
     public CalendarAdapter(Context context, ArrayList<Date> days)
     {
@@ -35,6 +37,14 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         super(context, R.layout.custom_calendar_day, days);
         this.context = context;
         this.eventDays = eventDays;
+        inflater = LayoutInflater.from(context);
+    }
+
+    public CalendarAdapter(Context context, ArrayList<Date> days, Calendar calendarDisplay)
+    {
+        super(context, R.layout.custom_calendar_day, days);
+        this.context = context;
+        this.calendarDisplay = calendarDisplay;
         inflater = LayoutInflater.from(context);
     }
 
@@ -61,18 +71,21 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         TextView mTvCalendarDate = view.findViewById(R.id.tv_calendar_date);
         mTvCalendarDate.setTypeface(null, Typeface.NORMAL);
         mTvCalendarDate.setTextColor(context.getResources().getColor(R.color.brown3));
-        if (month != calendarToday.get(Calendar.MONTH) || year != calendarToday.get(Calendar.YEAR)) {
+        if (month != calendarDisplay.get(Calendar.MONTH) || year != calendarDisplay.get(Calendar.YEAR)) {
             // if this day is outside current month, grey it out
 //            mTvCalendarDate.setTextColor(Color.parseColor("#E0E0E0"));
             mTvCalendarDate.setTextColor(context.getResources().getColor(R.color.grey4));
-        } else if (day == calendarToday.get(Calendar.DATE)) {
+        } else if (year == calendarToday.get(Calendar.YEAR) &&
+                month == calendarToday.get(Calendar.MONTH) &&
+                day == calendarToday.get(Calendar.DATE)) {
             // if it is today, set it to blue/bold
             mTvCalendarDate.setTextColor(Color.WHITE);
             view.setBackgroundResource(R.color.brown3);
         }
 
         // set text
-        mTvCalendarDate.setText(String.valueOf(calendar.get(Calendar.DATE)));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        mTvCalendarDate.setText(sdf.format(calendar.getTime()));
 
         return view;
     }

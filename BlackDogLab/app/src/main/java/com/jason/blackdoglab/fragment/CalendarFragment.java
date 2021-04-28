@@ -11,8 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.jason.blackdoglab.DailyMoods;
 import com.jason.blackdoglab.R;
+import com.jason.blackdoglab.utils.Utils;
 import com.jason.blackdoglab.view.CalendarView;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -31,9 +38,17 @@ public class CalendarFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private ImageView mBgMainCalendar;
+    private Set<DailyMoods> dailyMoodsSet;
+    private CalendarView cvCalendar;
+    private Calendar calendarDisplay;
 
     public CalendarFragment() {
         // Required empty public constructor
+        dailyMoodsSet = new HashSet<DailyMoods>();
+    }
+
+    public CalendarFragment(Set<DailyMoods> dailyMoodsSet) {
+        this.dailyMoodsSet = dailyMoodsSet;
     }
 
     /**
@@ -61,15 +76,12 @@ public class CalendarFragment extends BaseFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     protected void initView(View view) {
-        CalendarView cvCalendar = view.findViewById(R.id.cv_calendar);
+        cvCalendar = view.findViewById(R.id.cv_calendar);
         mBgMainCalendar = view.findViewById(R.id.bg_main_calendar);
-
-        cvCalendar.updateCalendar();
     }
 
     @Override
@@ -89,6 +101,10 @@ public class CalendarFragment extends BaseFragment {
         //initial view
 
         //initial listener
+        cvCalendar.updateCalendar();
+        for (DailyMoods dailyMoods : dailyMoodsSet) {
+            Utils.setLog(dailyMoods.toString());
+        }
     }
 
     @Override

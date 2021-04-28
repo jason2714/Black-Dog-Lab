@@ -24,8 +24,8 @@
         android:layout_width="@dimen/main_page_triangle"
         android:layout_height="@dimen/main_page_triangle"
         android:layout_marginHorizontal="15dp"
-        android:background="@drawable/bg_main_left_triangle"
         android:translationZ="10dp"
+        android:background="@drawable/bg_main_left_triangle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
