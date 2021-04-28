@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_user"
-    tools:context=".UserFragment">
+    tools:context=".fragment.UserFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_user">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bg_main_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gdl_user_left"
@@ -60,11 +63,11 @@
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
             android:text="懶死君"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:letterSpacing="0.1"
             app:layout_constraintBottom_toTopOf="@id/ll_basic_point"
             app:layout_constraintStart_toEndOf="@id/gdl_user_portrait_label"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,13 +76,13 @@
             android:id="@+id/tv_user_identity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:letterSpacing="0.1"
             android:text="實習研究員"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:letterSpacing="0.1"
-            android:layout_marginTop="10dp"
             app:layout_constraintStart_toEndOf="@id/gdl_user_portrait_label"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <LinearLayout
             android:id="@+id/ll_basic_point"
@@ -204,8 +207,8 @@
                 android:layout_width="130dp"
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
-                android:layout_toStartOf="@id/tv_big"
                 android:layout_marginHorizontal="5dp"
+                android:layout_toStartOf="@id/tv_big"
                 android:max="15"
                 android:progressBackgroundTint="@color/grey2"
                 android:progressBackgroundTintMode="src_over"

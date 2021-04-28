@@ -1,4 +1,4 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jason.blackdoglab.CalendarAdapter;
+import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.text.SimpleDateFormat;

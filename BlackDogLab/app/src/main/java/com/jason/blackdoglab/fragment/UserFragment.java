@@ -1,6 +1,5 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.fragment;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.jason.blackdoglab.Player;
+import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
 /**
@@ -26,7 +27,7 @@ import com.jason.blackdoglab.utils.Utils;
  * Use the {@link UserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserFragment extends Fragment {
+public class UserFragment extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +38,7 @@ public class UserFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Player player;
-    private ImageView mImgPortrait;
+    private ImageView mImgPortrait,mBgMainUser;
     private TextView mTvUserName, mTvUserIdentity;
     private SeekBar mSbSoundVolume;
     private AudioManager audioManager;
@@ -79,21 +80,34 @@ public class UserFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //initial view
-        //        Utils.setLog(getActivity().getComponentName().getClassName());
-        Utils.setLog(player.getPlayerName());
+    protected void initView(View view) {
         mImgPortrait = view.findViewById(R.id.img_portrait);
         mTvUserName = view.findViewById(R.id.tv_user_name);
         mTvUserIdentity = view.findViewById(R.id.tv_user_identity);
         mSbSoundVolume = view.findViewById(R.id.sb_sound_volume);
         audioManager = ((AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE));
+        mBgMainUser = view.findViewById(R.id.bg_main_user);
+
         Utils.setLog(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) + "");
         Utils.setLog(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) + "");
         mSbSoundVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
         mImgPortrait.setImageResource(player.getCharacterDrawable());
         mTvUserName.setText(player.getPlayerName());
+    }
+
+    @Override
+    protected ImageView getBgImgView() {
+        return mBgMainUser;
+    }
+
+    @Override
+    protected int getBgDrawableID() {
+        return R.drawable.bg_user;
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
         //initial listener
         mSbSoundVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -118,6 +132,13 @@ public class UserFragment extends Fragment {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.media.VOLUME_CHANGED_ACTION");
         getActivity().registerReceiver(volumeReceiver, filter);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //initial view
+
     }
 
     @Override

@@ -1,23 +1,28 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
+import android.widget.ImageView;
 
+import com.jason.blackdoglab.R;
+import com.jason.blackdoglab.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CalendarFragment#newInstance} factory method to
+ * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarFragment extends Fragment {
+public class MainFragment extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,8 +32,9 @@ public class CalendarFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView mBgMainLab;
 
-    public CalendarFragment() {
+    public MainFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +44,11 @@ public class CalendarFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CalendarFragment.
+     * @return A new instance of fragment MainFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CalendarFragment newInstance(String param1, String param2) {
-        CalendarFragment fragment = new CalendarFragment();
+    public static MainFragment newInstance(String param1, String param2) {
+        MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,7 +63,22 @@ public class CalendarFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
 
+    @Override
+    protected void initView(View view) {
+        mBgMainLab = view.findViewById(R.id.bg_main_lab);
+
+    }
+
+    @Override
+    protected ImageView getBgImgView() {
+        return mBgMainLab;
+    }
+
+    @Override
+    protected int getBgDrawableID() {
+        return R.drawable.bg_main_lab;
     }
 
     @Override
@@ -65,8 +86,6 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //TODO initial view here
         //initial view
-        CalendarView cvCalendar = view.findViewById(R.id.cv_calendar);
-        cvCalendar.updateCalendar();
         //initial listener
     }
 
@@ -74,6 +93,7 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
+
 }

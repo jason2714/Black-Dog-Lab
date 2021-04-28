@@ -1,4 +1,4 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.fragment;
 
 import android.os.Bundle;
 
@@ -9,15 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.jason.blackdoglab.utils.Utils;
+import com.jason.blackdoglab.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NoteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NoteFragment extends Fragment {
+public class NoteFragment extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +28,7 @@ public class NoteFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView mBgMainNote;
 
     public NoteFragment() {
         // Required empty public constructor
@@ -57,6 +59,21 @@ public class NoteFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    protected void initView(View view) {
+        mBgMainNote = view.findViewById(R.id.bg_main_note);
+    }
+
+    @Override
+    protected ImageView getBgImgView() {
+        return mBgMainNote;
+    }
+
+    @Override
+    protected int getBgDrawableID() {
+        return R.drawable.bg_note;
     }
 
     @Override

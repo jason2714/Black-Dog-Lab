@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-class FileController {
+public class FileController {
 
     private final Context context;
     private static final String encoding = "UTF-8";

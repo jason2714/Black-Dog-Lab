@@ -1,8 +1,11 @@
 package com.jason.blackdoglab;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -19,6 +22,8 @@ import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainPage extends BaseActivity {
 
@@ -49,6 +54,7 @@ public class MainPage extends BaseActivity {
     private int themeColor;
     private boolean isTabTriangleShow;
     private Player player;
+    private Set<DailyMoods> dailyMoodsSet;
 
 
     @Override
@@ -75,7 +81,7 @@ public class MainPage extends BaseActivity {
     @Override
     protected void initListener() {
         mImgBtTabTriangle.setOnClickListener(this);
-        mViewPager.setAdapter(new PageAdapter(this,player));
+        mViewPager.setAdapter(new PageAdapter(this, player, dailyMoodsSet));
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 mTabLayout, mViewPager, (tab, position) -> {
             tab.setId(position);
@@ -107,7 +113,7 @@ public class MainPage extends BaseActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(!isTabTriangleShow){
+                if (!isTabTriangleShow) {
                     mTabLayout.animate().translationY(120).setStartDelay(500).setDuration(500);
                     mImgBtTabTriangle.animate().alpha(1).setStartDelay(1000);
                 }
@@ -134,6 +140,7 @@ public class MainPage extends BaseActivity {
                 Utils.setLog(tab.getId() + " reselect");
             }
         });
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -162,25 +169,29 @@ public class MainPage extends BaseActivity {
     }
 
     @Override
-    protected void initBasicInfo(){
+    protected void initBasicInfo() {
+        dailyMoodsSet = new HashSet<DailyMoods>();
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
         try {
             //set basic theme color
             String[] splitFileData = fc_dailyMood.readFileSplit();
-            for(String lineData : splitFileData){
+            for (String lineData : splitFileData) {
                 String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
-                if(lineDataArray[0].equals(fc_loginDate.readFile())){
+                dailyMoodsSet.add(new DailyMoods(lineDataArray[0], Integer.parseInt(lineDataArray[1]), lineDataArray[2]));
+                if (lineDataArray[0].equals(fc_loginDate.readFile())) {
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
-                    switch (Integer.parseInt(lineDataArray[1])){
-                        case 0: case 1:
+                    switch (Integer.parseInt(lineDataArray[1])) {
+                        case 0:
+                        case 1:
                             themeColor = R.style.Theme_BlackDogLab_Blue;
                             break;
                         case 2:
                             themeColor = R.style.Theme_BlackDogLab_Green;
                             break;
-                        case 3: case 4:
+                        case 3:
+                        case 4:
                             themeColor = R.style.Theme_BlackDogLab_Brown;
                             break;
                         default:
@@ -191,19 +202,19 @@ public class MainPage extends BaseActivity {
                 }
             }
             Utils.setLog("Set Theme Success");
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             Utils.setLog(e.getMessage());
         }
         try {
             String[] playerBasicInfo = fc_basicInfo.readLineSplit();
-            if(playerBasicInfo.length == 3){
-                player = new Player(playerBasicInfo[0],playerBasicInfo[1],Integer.parseInt(playerBasicInfo[2]));
+            if (playerBasicInfo.length == 3) {
+                player = new Player(playerBasicInfo[0], playerBasicInfo[1], Integer.parseInt(playerBasicInfo[2]));
                 Utils.setLog("Get Player Info Success");
-            }else
+            } else
                 Utils.setLog("Player Basic Info Format Wrong");
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             Utils.setLog(e.getMessage());
         }
@@ -217,7 +228,7 @@ public class MainPage extends BaseActivity {
                 break;
             case R.id.imgbt_right:
                 break;
-            case  R.id.imgbt_tab_triangle:
+            case R.id.imgbt_tab_triangle:
                 mTabLayout.animate().translationY(0);
                 mImgBtTabTriangle.animate().alpha(0);
                 isTabTriangleShow = false;
@@ -226,4 +237,5 @@ public class MainPage extends BaseActivity {
                 break;
         }
     }
+
 }
