@@ -6,16 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".fragment.CalendarFragment">
 
-    <ImageView
-        android:id="@+id/bg_main_calendar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bg_main_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.jason.blackdoglab.view.CalendarView
         android:id="@+id/cv_calendar"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"/>
     <!-- TODO: Update blank fragment layout -->
 
 </FrameLayout>

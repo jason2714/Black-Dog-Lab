@@ -4,6 +4,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,7 +52,6 @@ public class MainPage extends BaseActivity {
     private long exitTime = 0;
     private ViewPager2 mViewPager;
     private TabLayout mTabLayout;
-    private ImageButton mImgBtLeft, mImgBtRight;
     private ImageButton mImgBtTabTriangle;
     private int themeColor;
     private boolean isTabTriangleShow;
@@ -73,8 +73,6 @@ public class MainPage extends BaseActivity {
     protected void initView() {
         mViewPager = findViewById(R.id.view_pager);
         mTabLayout = findViewById(R.id.tab_layout);
-        mImgBtLeft = findViewById(R.id.imgbt_left);
-        mImgBtRight = findViewById(R.id.imgbt_right);
         mImgBtTabTriangle = findViewById(R.id.imgbt_tab_triangle);
         mImgBtTabTriangle.animate().alpha(0);
         isTabTriangleShow = false;
@@ -116,7 +114,7 @@ public class MainPage extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (!isTabTriangleShow) {
-                    mTabLayout.animate().translationY(120).setStartDelay(500).setDuration(500);
+                    mTabLayout.animate().translationY(Utils.convertDpToPixel(MainPage.this,55)).setStartDelay(500).setDuration(500);
                     mImgBtTabTriangle.animate().alpha(1).setStartDelay(1000);
                 }
                 //from current position
@@ -240,8 +238,7 @@ public class MainPage extends BaseActivity {
         }
     }
 
-    public ViewPager2 getViewPager()
-    {
+    public ViewPager2 getViewPager() {
         return mViewPager;
     }
 

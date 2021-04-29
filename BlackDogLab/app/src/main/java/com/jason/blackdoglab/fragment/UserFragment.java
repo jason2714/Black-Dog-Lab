@@ -102,7 +102,7 @@ public class UserFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return R.drawable.bg_user;
+        return Utils.getAttrID(getContext(),R.attr.bg_user,Utils.RESOURCE_ID);
     }
 
     @Override

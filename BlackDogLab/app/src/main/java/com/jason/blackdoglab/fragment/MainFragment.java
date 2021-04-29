@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class MainFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private ImageView mBgMainLab;
+    private ImageButton mImgBtLeft, mImgBtRight;
 
     public MainFragment() {
         // Required empty public constructor
@@ -78,6 +80,8 @@ public class MainFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         mBgMainLab = view.findViewById(R.id.bg_main_lab);
+        mImgBtLeft = view.findViewById(R.id.imgbt_left);
+        mImgBtRight = view.findViewById(R.id.imgbt_right);
         //or set this in onResume
         setListenerToRootView(view);
     }
@@ -94,7 +98,7 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return R.drawable.bg_main_lab;
+        return Utils.getAttrID(getContext(),R.attr.bg_main_lab,Utils.RESOURCE_ID);
     }
 
     @Override
@@ -118,7 +122,7 @@ public class MainFragment extends BaseFragment {
             public void onGlobalLayout() {
                 ((MainPage) getActivity()).getViewPager().setOffscreenPageLimit(3);
                 //only listen once
-//                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
     }

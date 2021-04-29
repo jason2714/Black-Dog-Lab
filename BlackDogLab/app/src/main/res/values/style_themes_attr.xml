@@ -27,4 +27,14 @@
     <attr name="main_tab_triangle" format="reference"/>
     <attr name="main_tab_color" format="color"/>
     <attr name="main_character" format="reference"/>
+    <attr name="calendar_color" format="color"/>
+    <attr name="calendar_text_color" format="color"/>
+    <attr name="user_block_color" format="reference"/>
+    <attr name="bg_user" format="reference"/>
+    <attr name="bg_main_lab" format="reference"/>
+    <attr name="bg_main_street" format="reference"/>
+    <attr name="bg_main_park" format="reference"/>
+    <attr name="bg_note" format="reference"/>
+    <attr name="bg_calendar" format="reference"/>
+
 </resources>

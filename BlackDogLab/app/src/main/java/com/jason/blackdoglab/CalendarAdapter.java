@@ -2,6 +2,7 @@ package com.jason.blackdoglab;
 
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,8 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
     private HashSet<DailyMoods> dailyMoodsSetDisplay;
     private Context context;
     private Calendar calendarDisplay;
-    private int[] moodDotDrawables = {R.drawable.dot_mood1, R.drawable.dot_mood2,
-            R.drawable.dot_mood3, R.drawable.dot_mood4, R.drawable.dot_mood5};
+    private int[] dateMoodBgColors = {R.color.blue2, R.color.blue4,
+            R.color.green3, R.color.brown4, R.color.brown2};
 
     public CalendarAdapter(Context context, ArrayList<Date> days) {
         super(context, R.layout.custom_calendar_day, days);
@@ -66,32 +67,35 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         // clear styling
         TextView mTvCalendarDate = view.findViewById(R.id.tv_calendar_date);
         mTvCalendarDate.setTypeface(null, Typeface.NORMAL);
-        mTvCalendarDate.setTextColor(context.getResources().getColor(R.color.brown3));
+        mTvCalendarDate.setTextColor(Utils.getAttrID(context, R.attr.colorPrimary, Utils.DATA));
 
-        for (DailyMoods dailyMoods : dailyMoodsSetDisplay) {
-            if (dailyMoods.getDate().equals(dateStr)) {
-                ImageView mMoodDot = view.findViewById(R.id.mood_dot);
-                mMoodDot.setImageDrawable(view.getResources().getDrawable(moodDotDrawables[dailyMoods.getMood()]));
-                Utils.setLog("same");
-//            mMoodDot.filt
-            }
-        }
         if (month != calendarDisplay.get(Calendar.MONTH) || year != calendarDisplay.get(Calendar.YEAR)) {
             // if this day is outside current month, grey it out
-//            mTvCalendarDate.setTextColor(Color.parseColor("#E0E0E0"));
             mTvCalendarDate.setTextColor(context.getResources().getColor(R.color.grey4));
         } else if (year == calendarToday.get(Calendar.YEAR) &&
-                month == calendarToday.get(Calendar.MONTH) &&
-                day == calendarToday.get(Calendar.DATE)) {
-            // if it is today, set it to blue/bold
-            mTvCalendarDate.setTextColor(Color.WHITE);
-            view.setBackgroundResource(R.color.brown2);
+                month == calendarToday.get(Calendar.MONTH)) {
+            for (DailyMoods dailyMoods : dailyMoodsSetDisplay) {
+                if (dailyMoods.getDate().equals(dateStr)) {
+                    view.setBackgroundResource(dateMoodBgColors[dailyMoods.getMood()]);
+                    mTvCalendarDate.setTextColor(context.getResources().getColor(R.color.white));
+                }
+            }
         }
+//        else if (year == calendarToday.get(Calendar.YEAR) &&
+//                month == calendarToday.get(Calendar.MONTH) &&
+//                day == calendarToday.get(Calendar.DATE)) {
+//            // if it is today, set it to blue/bold
+//            mTvCalendarDate.setTextColor(Color.WHITE);
+//            view.setBackgroundColor(Utils.getAttrID(context,R.attr.calendar_color,Utils.DATA));
+//        }
 
         // set text
         SimpleDateFormat sdf = new SimpleDateFormat("dd");
         mTvCalendarDate.setText(sdf.format(calendar.getTime()));
 
+        view.setOnClickListener(v -> {
+
+        });
         return view;
     }
 }

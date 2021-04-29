@@ -69,6 +69,16 @@ public class DailyLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        try {
+//            fc_dailyMood.append("2021-04-05$0$happy$\n");
+//            fc_dailyMood.append("2021-04-06$1$happy$\n");
+//            fc_dailyMood.append("2021-04-07$2$happy$\n");
+//            fc_dailyMood.append("2021-04-08$3$happy$\n");
+//            fc_dailyMood.append("2021-04-09$4$happy$\n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     @Override

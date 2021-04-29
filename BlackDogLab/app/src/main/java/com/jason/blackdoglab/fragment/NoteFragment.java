@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jason.blackdoglab.R;
+import com.jason.blackdoglab.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +32,7 @@ public class NoteFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private ImageView mBgMainNote;
+    private LinearLayout mLlNote;
 
     public NoteFragment() {
         // Required empty public constructor
@@ -64,6 +68,12 @@ public class NoteFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         mBgMainNote = view.findViewById(R.id.bg_main_note);
+        mLlNote = view.findViewById(R.id.ll_note);
+        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",true);
+        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
+        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
+        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
+        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
     }
 
     @Override
@@ -89,5 +99,49 @@ public class NoteFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_note, container, false);
+    }
+
+    private void addTextBox(String title, String content,boolean isFirstBox) {
+        //container
+        LinearLayout ctLinearLayout = new LinearLayout(getContext());
+        ctLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        ctLinearLayout.setBackgroundResource(R.drawable.bg_note_box);
+        LinearLayout.LayoutParams ctLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT); // or set height to any fixed value you want
+        int containerMP = (int) Utils.convertDpToPixel(getContext(), 20);
+        if(isFirstBox)
+            ctLayoutParams.setMargins(containerMP, containerMP, containerMP, containerMP);
+        else
+            ctLayoutParams.setMargins(containerMP, 0, containerMP, containerMP);
+        ctLinearLayout.setLayoutParams(ctLayoutParams);
+        ctLinearLayout.setElevation((int) Utils.convertDpToPixel(getContext(), 10));
+        ctLinearLayout.setPadding(containerMP, containerMP, containerMP, containerMP);
+
+        //title
+        int titleMarginBottom = (int) Utils.convertDpToPixel(getContext(), 10);
+        TextView titleText = new TextView(getContext());
+        titleText.setTextColor(getResources().getColor(Utils.getAttrID(getContext(), R.attr.colorPrimary, Utils.RESOURCE_ID)));
+        LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        titleLayoutParams.setMargins(0, 0, 0, titleMarginBottom);
+        titleText.setLayoutParams(titleLayoutParams);
+        titleText.setTextSize(20);
+        titleText.setLetterSpacing(0.1f);
+        titleText.setText(title);
+
+        //text
+        TextView contentText = new TextView(getContext());
+        contentText.setTextColor(getResources().getColor(R.color.black));
+        LinearLayout.LayoutParams contentLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        contentText.setLayoutParams(contentLayoutParams);
+        contentText.setTextSize(16);
+        contentText.setLetterSpacing(0.1f);
+        contentText.setText(content);
+        //set in container
+        ctLinearLayout.addView(titleText);
+        ctLinearLayout.addView(contentText);
+        //set in wrapper
+        mLlNote.addView(ctLinearLayout);
     }
 }

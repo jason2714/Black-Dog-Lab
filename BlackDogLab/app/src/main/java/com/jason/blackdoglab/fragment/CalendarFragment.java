@@ -91,7 +91,7 @@ public class CalendarFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return R.drawable.bg_calender;
+        return Utils.getAttrID(getContext(),R.attr.bg_calendar,Utils.RESOURCE_ID);
     }
 
     @Override

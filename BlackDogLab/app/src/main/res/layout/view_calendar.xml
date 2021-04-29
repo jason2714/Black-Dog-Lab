@@ -38,8 +38,8 @@
                 android:textAppearance="@android:style/TextAppearance.Holo.Medium"
                 android:textColor="@color/grey2"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:letterSpacing="0.2"/>
             <!-- date title -->
             <TextView
                 android:id="@+id/date_display_month"
@@ -49,7 +49,7 @@
                 android:textAppearance="@android:style/TextAppearance.Large"
                 android:textColor="@color/grey2"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:letterSpacing="0.2"/>
 
         </LinearLayout>
 
@@ -68,7 +68,7 @@
     <LinearLayout
         android:id="@+id/calendar_header"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/bg_calendar_title"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -144,7 +144,7 @@
         android:id="@+id/calendar_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/brown3"
+        android:background="?attr/calendar_color"
         android:numColumns="7"
         android:paddingStart="1dp"
         android:paddingBottom="1dp"
