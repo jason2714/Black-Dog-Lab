@@ -38,7 +38,7 @@ public class CalendarFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private ImageView mBgMainCalendar;
-    private Set<DailyMoods> dailyMoodsSet;
+    private HashSet<DailyMoods> dailyMoodsSet;
     private CalendarView cvCalendar;
     private Calendar calendarDisplay;
 
@@ -47,7 +47,7 @@ public class CalendarFragment extends BaseFragment {
         dailyMoodsSet = new HashSet<DailyMoods>();
     }
 
-    public CalendarFragment(Set<DailyMoods> dailyMoodsSet) {
+    public CalendarFragment(HashSet<DailyMoods> dailyMoodsSet) {
         this.dailyMoodsSet = dailyMoodsSet;
     }
 
@@ -101,7 +101,9 @@ public class CalendarFragment extends BaseFragment {
         //initial view
 
         //initial listener
+        cvCalendar.setDailyMoods(dailyMoodsSet);
         cvCalendar.updateCalendar();
+        Utils.setLog("daily mood old");
         for (DailyMoods dailyMoods : dailyMoodsSet) {
             Utils.setLog(dailyMoods.toString());
         }

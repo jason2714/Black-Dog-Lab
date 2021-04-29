@@ -13,6 +13,7 @@ import com.jason.blackdoglab.fragment.NoteFragment;
 import com.jason.blackdoglab.fragment.UserFragment;
 import com.jason.blackdoglab.utils.Utils;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -20,12 +21,12 @@ class PageAdapter extends FragmentStateAdapter {
 
 
     private Player player;
-    private Set<DailyMoods> dailyMoodsSet;
+    private HashSet<DailyMoods> dailyMoodsSet;
     public PageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
-    public PageAdapter(@NonNull FragmentActivity fragmentActivity,Player player,Set<DailyMoods> dailyMoodsSet) {
+    public PageAdapter(@NonNull FragmentActivity fragmentActivity,Player player,HashSet<DailyMoods> dailyMoodsSet) {
         super(fragmentActivity);
         this.player = player;
         this.dailyMoodsSet = dailyMoodsSet;

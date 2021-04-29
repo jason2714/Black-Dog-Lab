@@ -30,7 +30,10 @@ public abstract class BaseFragment extends Fragment {
     private int deviceDensityDpi;
 
     private void initBackground(ImageView imgView, int drawableID) {
-        imgView.post(() -> imgView.setImageBitmap(decodeBitmap(drawableID, imgView.getWidth(), imgView.getHeight())));
+        imgView.post(() -> {
+            Utils.setLog(this.getClass().getSimpleName());
+            imgView.setImageBitmap(decodeBitmap(drawableID, imgView.getWidth(), imgView.getHeight()));
+        });
     }
 
     @Override

@@ -45,6 +45,13 @@ public class DailyLoginActivity extends BaseActivity {
             setImageDrawableFit(mImgMoods[idx], moodDrawables[idx]);
         }
         setImageDrawableFit(mBgDailyLogin, R.drawable.bg_first_login);
+        //for test
+//        try {
+//            fc_dailyMood.append("2021-05-09$0$hey$\n");
+//            fc_dailyMood.append("2021-06-15$0$far$\n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

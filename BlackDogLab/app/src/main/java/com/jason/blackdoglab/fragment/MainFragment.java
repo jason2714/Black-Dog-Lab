@@ -4,16 +4,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.annotation.FontRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.HandlerThread;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.jason.blackdoglab.MainPage;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
@@ -66,9 +71,20 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void initView(View view) {
         mBgMainLab = view.findViewById(R.id.bg_main_lab);
+        //or set this in onResume
+        setListenerToRootView(view);
+    }
 
+    @Override
+    protected void initListener() {
+        super.initListener();
     }
 
     @Override
@@ -95,5 +111,17 @@ public class MainFragment extends BaseFragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
+
+    private void setListenerToRootView(View rootView) {
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ((MainPage) getActivity()).getViewPager().setOffscreenPageLimit(3);
+                //only listen once
+//                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+    }
+
 
 }

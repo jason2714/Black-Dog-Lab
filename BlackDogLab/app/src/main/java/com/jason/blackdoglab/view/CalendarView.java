@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jason.blackdoglab.CalendarAdapter;
+import com.jason.blackdoglab.DailyMoods;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
@@ -17,8 +18,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-public class CalendarView extends LinearLayout implements View.OnClickListener{
+public class CalendarView extends LinearLayout implements View.OnClickListener {
     // calendar components
     LinearLayout header;
     ImageView btnPrev;
@@ -27,6 +30,7 @@ public class CalendarView extends LinearLayout implements View.OnClickListener{
     TextView tvDisplayMonth;
     GridView gridView;
     Calendar calendarDisplay;
+    private HashSet<DailyMoods> dailyMoodsSet;
 
     public CalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,8 +61,13 @@ public class CalendarView extends LinearLayout implements View.OnClickListener{
         assignUiElements();
     }
 
+    public void setDailyMoods(HashSet<DailyMoods> dailyMoodsSet) {
+        this.dailyMoodsSet = dailyMoodsSet;
+    }
+
     public void updateCalendar() {
         ArrayList<Date> cells = new ArrayList<>();
+        HashSet<DailyMoods> dailyMoodsSetDisplay = (HashSet) dailyMoodsSet.clone();
         Calendar calendarInit = (Calendar) calendarDisplay.clone();
         // determine the cell for current month's beginning
         calendarInit.set(Calendar.DAY_OF_MONTH, 1);
@@ -73,26 +82,27 @@ public class CalendarView extends LinearLayout implements View.OnClickListener{
             cells.add(calendarInit.getTime());
             calendarInit.add(Calendar.DAY_OF_MONTH, 1);
         }
+        dailyMoodsSetDisplay.retainAll(cells);
 
         // update grid
-        gridView.setAdapter(new CalendarAdapter(getContext(), cells, calendarDisplay));
+        gridView.setAdapter(new CalendarAdapter(getContext(), cells, calendarDisplay, dailyMoodsSetDisplay));
 
         // update title
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM");
-        String[] dateToday = sdf.format(calendarDisplay.getTime()).split(",");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String[] dateToday = sdf.format(calendarDisplay.getTime()).split("-");
         tvDisplayYear.setText(dateToday[0] + "年");
         tvDisplayMonth.setText(dateToday[1] + "月");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_calendar_left:
-                calendarDisplay.add(Calendar.MONTH,-1);
+                calendarDisplay.add(Calendar.MONTH, -1);
                 updateCalendar();
                 break;
             case R.id.btn_calendar_right:
-                calendarDisplay.add(Calendar.MONTH,1);
+                calendarDisplay.add(Calendar.MONTH, 1);
                 updateCalendar();
                 break;
             default:

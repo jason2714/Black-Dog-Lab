@@ -1,6 +1,7 @@
 package com.jason.blackdoglab;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -55,7 +56,7 @@ public class MainPage extends BaseActivity {
     private int themeColor;
     private boolean isTabTriangleShow;
     private Player player;
-    private Set<DailyMoods> dailyMoodsSet;
+    private HashSet<DailyMoods> dailyMoodsSet;
 
 
     @Override
@@ -141,9 +142,6 @@ public class MainPage extends BaseActivity {
                 Utils.setLog(tab.getId() + " reselect");
             }
         });
-        //TODO solve this problem
-        //add this function will make UI thread overload
-        mViewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -240,6 +238,11 @@ public class MainPage extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    public ViewPager2 getViewPager()
+    {
+        return mViewPager;
     }
 
 }
