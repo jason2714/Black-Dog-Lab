@@ -61,14 +61,14 @@ public class MainActivity extends BaseActivity {
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String currentDate = df.format(Calendar.getInstance().getTime());
-            if (!fc_loginDate.fileExist()) {
+            if (!fc_loginDate.fileExist() || !fc_basicInfo.fileExist()) {
                 Log.d("test", currentDate);
                 fc_loginDate.write(currentDate);
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
                 //TODO
                 String lastDate = fc_loginDate.readFile();
-                if (currentDate.equals(lastDate)) {
+                if (currentDate.equals(lastDate) && fc_dailyMood.fileExist()) {
                     Log.d("test", "same date");
                     intent = new Intent(MainActivity.this, MainPage.class);
                 } else {
@@ -97,5 +97,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initBasicInfo(){
         fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
+        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
     }
 }
