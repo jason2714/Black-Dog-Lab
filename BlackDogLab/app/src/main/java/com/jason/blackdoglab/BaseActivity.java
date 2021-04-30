@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,11 +36,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private int ctWidth, ctHeight;
     private float deviceDensity;
     private int deviceDensityDpi;
+    protected Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.hideNavigationBar(this);
+        mHandler = new Handler(getMainLooper());
         initBasicInfo();
         //setTheme一定要在setTheme前 不然會一堆奇怪得inflater error
         setTheme(this.setThemeColor());

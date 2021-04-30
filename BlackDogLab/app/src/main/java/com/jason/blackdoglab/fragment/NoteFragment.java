@@ -4,17 +4,25 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jason.blackdoglab.FileController;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +41,8 @@ public class NoteFragment extends BaseFragment {
     private String mParam2;
     private ImageView mBgMainNote;
     private LinearLayout mLlNote;
+    private AppCompatSpinner mSpnNote;
+    private FileController[] fcNote;
 
     public NoteFragment() {
         // Required empty public constructor
@@ -69,11 +79,56 @@ public class NoteFragment extends BaseFragment {
     protected void initView(View view) {
         mBgMainNote = view.findViewById(R.id.bg_main_note);
         mLlNote = view.findViewById(R.id.ll_note);
-        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",true);
-        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
-        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
-        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
-        addTextBox("陪伴者也需要人陪伴","哈囉ㄚㄚㄚㄚㄚㄚㄚㄚㄚㄚ",false);
+        mSpnNote = view.findViewById(R.id.spn_note);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.note_types_array, R.layout.textview_spinner);
+        adapter.setDropDownViewResource(R.layout.textview_spinner_item);
+        mSpnNote.setAdapter(adapter);
+        int horizonOffset = (getResources().getDimensionPixelSize(R.dimen.note_spinner_width) -
+                getResources().getDimensionPixelSize(R.dimen.note_spinner_dropdown_width)) / 2;
+        mSpnNote.setDropDownVerticalOffset(getResources().getDimensionPixelSize(R.dimen.note_spinner_height));
+        mSpnNote.setDropDownHorizontalOffset(horizonOffset);
+        mSpnNote.setDropDownWidth(getResources().getDimensionPixelSize(R.dimen.note_spinner_dropdown_width));
+        fcNote = new FileController[]{new FileController(getContext(), "Basic Symptoms"),
+                new FileController(getContext(), "Common Myths"),
+                new FileController(getContext(), "Accompany Mentality"),
+                new FileController(getContext(), "Danger Dealing")};
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        mSpnNote.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                new Thread(() -> {
+                    if (!fcNote[position].fileExist()) {
+                        Utils.setLog("File Note " + position + " Not Exist");
+                        try {
+                            fcNote[position].write("");
+                            Utils.setLog("Create File Note " + position + " Success");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Utils.setLog(e.getMessage());
+                        }
+                    } else {
+                        try {
+                            mHandler.post(() -> mLlNote.removeAllViews());
+                            loadNoteArticle(fcNote[position].readFileSplit());
+                            Utils.setLog("Load File Note " + position + " Success");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Utils.setLog(e.getMessage());
+                        }
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -92,6 +147,12 @@ public class NoteFragment extends BaseFragment {
         //TODO initial view here
         //initial view
         //initial listener
+//        try {
+//            for (int i = 0; i < 4; i++)
+//                fcNote[i].write("陪伴者也需要人陪伴" + i + "$陪伴者也非常需要其他人的陪伴，這樣狀態不好的時候才有人能夠抒發情緒或是協助自己。$\n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -101,7 +162,7 @@ public class NoteFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_note, container, false);
     }
 
-    private void addTextBox(String title, String content,boolean isFirstBox) {
+    private void addArticle(String title, String content, boolean isFirstBox) {
         //container
         LinearLayout ctLinearLayout = new LinearLayout(getContext());
         ctLinearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -109,7 +170,7 @@ public class NoteFragment extends BaseFragment {
         LinearLayout.LayoutParams ctLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT); // or set height to any fixed value you want
         int containerMP = (int) Utils.convertDpToPixel(getContext(), 20);
-        if(isFirstBox)
+        if (isFirstBox)
             ctLayoutParams.setMargins(containerMP, containerMP, containerMP, containerMP);
         else
             ctLayoutParams.setMargins(containerMP, 0, containerMP, containerMP);
@@ -142,6 +203,17 @@ public class NoteFragment extends BaseFragment {
         ctLinearLayout.addView(titleText);
         ctLinearLayout.addView(contentText);
         //set in wrapper
-        mLlNote.addView(ctLinearLayout);
+        mHandler.post(() -> mLlNote.addView(ctLinearLayout));
+    }
+
+    private void loadNoteArticle(String[] noteArticles) {
+        boolean isFirst = true;
+        for (String article : noteArticles) {
+            String[] articleArray = article.split(FileController.getWordSplitRegex());
+            String title = articleArray[0];
+            String content = articleArray[1];
+            addArticle(title, content, isFirst);
+            isFirst = false;
+        }
     }
 }

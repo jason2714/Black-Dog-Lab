@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ public abstract class BaseFragment extends Fragment {
     private int ctWidth, ctHeight;
     private float deviceDensity;
     private int deviceDensityDpi;
+    protected Handler mHandler;
 
     private void initBackground(ImageView imgView, int drawableID) {
         imgView.post(() -> {
@@ -40,6 +43,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mHandler = new Handler(Looper.getMainLooper());
         initView(view);
         //initial density
         deviceDensity = getResources().getDisplayMetrics().density;

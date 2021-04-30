@@ -45,31 +45,37 @@
             app:layout_constraintGuide_percent="0.92" />
 
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             app:layout_constraintBottom_toTopOf="@id/gdl_note_top"
-            app:layout_constraintStart_toEndOf="@id/gdl_note_left"
-            app:layout_constraintEnd_toStartOf="@id/gdl_note_right">
+            app:layout_constraintEnd_toStartOf="@id/gdl_note_right"
+            app:layout_constraintStart_toEndOf="@id/gdl_note_left">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:text="研究筆記"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:letterSpacing="0.2"
                 android:layout_marginStart="15dp"
-                android:layout_marginVertical="12dp"/>
+                android:letterSpacing="0.2"
+                android:text="研究筆記"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spn_note"
+                android:layout_width="@dimen/note_spinner_width"
+                android:layout_height="@dimen/note_spinner_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/bg_spinner"/>
+
         </RelativeLayout>
+
         <ScrollView
             android:layout_width="350dp"
             android:layout_height="580dp"

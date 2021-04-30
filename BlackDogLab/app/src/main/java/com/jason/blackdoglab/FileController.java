@@ -56,7 +56,7 @@ public class FileController {
         if (this.lineIdx < fileData.length)
             lineData =  fileData[lineIdx];
         else{
-            this.lineIdx = 0;
+            this.lineIdx = -1;
             Utils.setLog("End Of File");
         }
         this.lineIdx++;

@@ -83,7 +83,9 @@ public class MainFragment extends BaseFragment {
         mImgBtLeft = view.findViewById(R.id.imgbt_left);
         mImgBtRight = view.findViewById(R.id.imgbt_right);
         //or set this in onResume
-        setListenerToRootView(view);
+        new Thread(() ->
+                setListenerToRootView(view)
+        ).start();
     }
 
     @Override
