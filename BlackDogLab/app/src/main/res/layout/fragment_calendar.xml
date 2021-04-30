@@ -20,7 +20,7 @@
 
     <com.jason.blackdoglab.view.CalendarView
         android:id="@+id/cv_calendar"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/calendar_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
     <!-- TODO: Update blank fragment layout -->

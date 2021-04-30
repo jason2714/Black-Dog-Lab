@@ -115,7 +115,6 @@ public class NoteFragment extends BaseFragment {
                         try {
                             mHandler.post(() -> mLlNote.removeAllViews());
                             loadNoteArticle(fcNote[position].readFileSplit());
-                            Utils.setLog("Load File Note " + position + " Success");
                         } catch (IOException e) {
                             e.printStackTrace();
                             Utils.setLog(e.getMessage());
@@ -207,6 +206,10 @@ public class NoteFragment extends BaseFragment {
     }
 
     private void loadNoteArticle(String[] noteArticles) {
+        if (noteArticles[0].equals("")){
+            Utils.setLog("File Is Empty");
+            return;
+        }
         boolean isFirst = true;
         for (String article : noteArticles) {
             String[] articleArray = article.split(FileController.getWordSplitRegex());
@@ -215,5 +218,6 @@ public class NoteFragment extends BaseFragment {
             addArticle(title, content, isFirst);
             isFirst = false;
         }
+        Utils.setLog("Load File Note Success");
     }
 }

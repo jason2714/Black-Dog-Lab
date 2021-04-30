@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jason.blackdoglab.utils.Utils;
@@ -72,8 +73,8 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         if (month != calendarDisplay.get(Calendar.MONTH) || year != calendarDisplay.get(Calendar.YEAR)) {
             // if this day is outside current month, grey it out
             mTvCalendarDate.setTextColor(context.getResources().getColor(R.color.grey4));
-        } else if (year == calendarToday.get(Calendar.YEAR) &&
-                month == calendarToday.get(Calendar.MONTH)) {
+        } else if (year == calendarDisplay.get(Calendar.YEAR) &&
+                month == calendarDisplay.get(Calendar.MONTH)) {
             for (DailyMoods dailyMoods : dailyMoodsSetDisplay) {
                 if (dailyMoods.getDate().equals(dateStr)) {
                     view.setBackgroundResource(dateMoodBgColors[dailyMoods.getMood()]);
@@ -94,7 +95,9 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         mTvCalendarDate.setText(sdf.format(calendar.getTime()));
 
         view.setOnClickListener(v -> {
-
+            Utils.setLog(v.getHeight() + " " + v.getWidth());
+            Utils.setLog(v.getX() + " " + v.getY());
+            Utils.setLog(((LinearLayout)v.getParent().getParent()).getWidth() + "");
         });
         return view;
     }
