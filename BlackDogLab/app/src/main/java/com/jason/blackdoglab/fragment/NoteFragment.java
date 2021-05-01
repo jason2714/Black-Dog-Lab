@@ -220,4 +220,9 @@ public class NoteFragment extends BaseFragment {
         }
         Utils.setLog("Load File Note Success");
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

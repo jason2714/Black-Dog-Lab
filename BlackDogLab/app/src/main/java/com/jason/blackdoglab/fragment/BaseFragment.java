@@ -18,7 +18,7 @@ import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener {
     protected abstract void initView(View view);
 
     protected abstract ImageView getBgImgView();

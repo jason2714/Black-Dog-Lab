@@ -130,4 +130,8 @@ public class MainFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

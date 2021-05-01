@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 
@@ -15,9 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.jason.blackdoglab.FileController;
 import com.jason.blackdoglab.Player;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
@@ -38,11 +41,20 @@ public class UserFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private Player player;
-    private ImageView mImgPortrait,mBgMainUser;
+    private ImageView mImgPortrait, mBgMainUser;
     private TextView mTvUserName, mTvUserIdentity;
+    private ImageView[] mImgPoints;
     private SeekBar mSbSoundVolume;
     private AudioManager audioManager;
     private VolumeReceiver volumeReceiver;
+    private int[] dotDrawables = {R.drawable.icon_point_accompany, R.drawable.icon_point_energy, R.drawable.icon_point_exp};
+    private int[] imgPointDrawables = {R.drawable.icon_accompany, R.drawable.icon_energy, R.drawable.icon_exp};
+    private LinearLayout[] mLlPoints;
+    private int pointPos = -1;
+    private String[] pointTextArray;
+    private int[] pointTextColorIDs = {R.color.brown1, R.color.blue1, R.color.green1};
+    private String[] fcName = {"Accompany","Energy","EXP"};
+    private LinearLayout mLlPointLog;
 
     public UserFragment() {
         player = new Player();
@@ -87,11 +99,21 @@ public class UserFragment extends BaseFragment {
         mSbSoundVolume = view.findViewById(R.id.sb_sound_volume);
         audioManager = ((AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE));
         mBgMainUser = view.findViewById(R.id.bg_main_user);
-
+        //initial point info
+        mImgPoints = new ImageView[]{view.findViewById(R.id.img_accompany),
+                view.findViewById(R.id.img_energy), view.findViewById(R.id.img_exp)};
+        mLlPoints = new LinearLayout[]{view.findViewById(R.id.ll_accompany),
+                view.findViewById(R.id.ll_energy), view.findViewById(R.id.ll_exp)};
+        for (int i = 0; i < mImgPoints.length; i++)
+            setImageDrawableFit(mImgPoints[i], imgPointDrawables[i]);
+        pointTextArray = getResources().getStringArray(R.array.user_points_array);
+        //point log
+        mLlPointLog = view.findViewById(R.id.ll_point_log);
+        //set sound broadcast receiver
         Utils.setLog(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) + "");
         Utils.setLog(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) + "");
         mSbSoundVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
-        mImgPortrait.setImageResource(player.getCharacterDrawable());
+        setImageDrawableFit(mImgPortrait, player.getCharacterDrawable());
         mTvUserName.setText(player.getPlayerName());
     }
 
@@ -102,13 +124,16 @@ public class UserFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return Utils.getAttrID(getContext(),R.attr.bg_user,Utils.RESOURCE_ID);
+        return Utils.getAttrID(getContext(), R.attr.bg_user, Utils.RESOURCE_ID);
     }
 
     @Override
     protected void initListener() {
         super.initListener();
         //initial listener
+        for (ImageView imageView : mImgPoints) {
+            imageView.setOnClickListener(this);
+        }
         mSbSoundVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int volume, boolean fromUser) {
@@ -138,7 +163,7 @@ public class UserFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //initial view
-
+        updatePoint(0);
     }
 
     @Override
@@ -163,5 +188,57 @@ public class UserFragment extends BaseFragment {
                 mSbSoundVolume.setProgress(currentVolume);
             }
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int newPointPos = -1;
+        switch (v.getId()) {
+            case R.id.img_accompany:
+                newPointPos = 0;
+                break;
+            case R.id.img_energy:
+                newPointPos = 1;
+                break;
+            case R.id.img_exp:
+                newPointPos = 2;
+                break;
+            default:
+                break;
+        }
+        updatePoint(newPointPos);
+    }
+
+    private void updatePoint(int newPointPos) {
+        if (newPointPos == -1 || newPointPos == pointPos)
+            return;
+        //dot
+        ImageView dot = new ImageView(getContext());
+        int dotSize = getResources().getDimensionPixelOffset(R.dimen.user_point_dot_size);
+        int dotMarginVertical = getResources().getDimensionPixelOffset(R.dimen.user_dot_margin_vertical);
+        LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(dotSize, dotSize);
+        dotParams.setMargins(0, dotMarginVertical, 0, dotMarginVertical);
+        setImageDrawableFit(dot, dotDrawables[newPointPos]);
+        //text
+        TextView pointText = new TextView(getContext());
+        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        pointText.setTextSize(16);
+        pointText.setTextColor(getResources().getColor(pointTextColorIDs[newPointPos]));
+        pointText.setText(pointTextArray[newPointPos]);
+        //add to LinearLayout
+        mLlPoints[newPointPos].addView(dot, 1, dotParams);
+        mLlPoints[newPointPos].addView(pointText, 2, textParams);
+
+        Utils.setLog("old pos = " + pointPos + ",new pos = " + newPointPos);
+        //set file point data
+        FileController fileController = new FileController(getContext(),fcName[newPointPos]);
+        if(fileController.fileExist()){
+//TODO get file point data
+        }
+        //remove old dot&text
+        if (pointPos != -1)
+            mLlPoints[pointPos].removeViews(1, 2);
+        pointPos = newPointPos;
     }
 }
