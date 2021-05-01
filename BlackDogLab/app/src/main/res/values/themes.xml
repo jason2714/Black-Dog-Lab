@@ -34,6 +34,7 @@
         <item name="main_right_triangle">@drawable/main_right_triangle_brown</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_brown</item>
         <item name="main_tab_color">@color/brown5</item>
+        <item name="main_tab_border_color">@color/brown2</item>
         <item name="main_tab_triangle">@drawable/main_tab_triangle_brown</item>
         <item name="main_character">@drawable/icon_select_character1</item>
         <item name="calendar_color">@color/brown2</item>
@@ -43,6 +44,7 @@
         <item name="bg_main_lab">@drawable/bg_main_lab_brown</item>
         <item name="bg_main_park">@drawable/bg_main_park_brown</item>
         <item name="bg_main_street">@drawable/bg_main_street_brown</item>
+        <item name="bg_note">@drawable/bg_note_brown</item>
     </style>
 
     <style name="Theme.BlackDogLab.Green">
@@ -51,6 +53,7 @@
         <item name="main_right_triangle">@drawable/main_right_triangle_green</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_green</item>
         <item name="main_tab_color">@color/green5</item>
+        <item name="main_tab_border_color">@color/green2</item>
         <item name="main_tab_triangle">@drawable/main_tab_triangle_green</item>
         <item name="main_character">@drawable/icon_select_character1</item>
         <item name="calendar_color">@color/green2</item>
@@ -60,6 +63,7 @@
         <item name="bg_main_lab">@drawable/bg_main_lab_green</item>
         <item name="bg_main_park">@drawable/bg_main_park_green</item>
         <item name="bg_main_street">@drawable/bg_main_street_green</item>
+        <item name="bg_note">@drawable/bg_note_green</item>
     </style>
 
     <style name="Theme.BlackDogLab.Blue">
@@ -68,6 +72,7 @@
         <item name="main_right_triangle">@drawable/main_right_triangle_blue</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_blue</item>
         <item name="main_tab_color">@color/blue5</item>
+        <item name="main_tab_border_color">@color/blue2</item>
         <item name="main_tab_triangle">@drawable/main_tab_triangle_blue</item>
         <item name="main_character">@drawable/icon_select_character1</item>
         <item name="calendar_color">@color/blue2</item>
@@ -77,5 +82,6 @@
         <item name="bg_main_lab">@drawable/bg_main_lab_blue</item>
         <item name="bg_main_park">@drawable/bg_main_park_blue</item>
         <item name="bg_main_street">@drawable/bg_main_street_blue</item>
+        <item name="bg_note">@drawable/bg_note_blue</item>
     </style>
 </resources>

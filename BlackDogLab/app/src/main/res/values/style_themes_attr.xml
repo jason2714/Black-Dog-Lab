@@ -26,6 +26,7 @@
     <attr name="main_left_triangle" format="reference"/>
     <attr name="main_tab_triangle" format="reference"/>
     <attr name="main_tab_color" format="color"/>
+    <attr name="main_tab_border_color" format="color"/>
     <attr name="main_character" format="reference"/>
     <attr name="calendar_color" format="color"/>
     <attr name="calendar_text_color" format="color"/>

@@ -116,6 +116,7 @@ public class MainPage extends BaseActivity {
                 if (!isTabTriangleShow) {
                     mTabLayout.animate().translationY(Utils.convertDpToPixel(MainPage.this,55)).setStartDelay(500).setDuration(500);
                     mImgBtTabTriangle.animate().alpha(1).setStartDelay(1000);
+                    mTabLayout.setBackgroundResource(R.drawable.bg_tab_down);
                 }
                 //from current position
 //                mTabLayout.animate().translationYBy(10);
@@ -231,6 +232,7 @@ public class MainPage extends BaseActivity {
             case R.id.imgbt_tab_triangle:
                 mTabLayout.animate().translationY(0);
                 mImgBtTabTriangle.animate().alpha(0);
+                mTabLayout.setBackgroundResource(R.drawable.bg_tab);
                 isTabTriangleShow = false;
                 break;
             default:

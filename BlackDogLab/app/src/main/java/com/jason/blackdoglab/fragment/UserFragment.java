@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
 
@@ -24,6 +25,8 @@ import com.jason.blackdoglab.FileController;
 import com.jason.blackdoglab.Player;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +56,7 @@ public class UserFragment extends BaseFragment {
     private int pointPos = -1;
     private String[] pointTextArray;
     private int[] pointTextColorIDs = {R.color.brown1, R.color.blue1, R.color.green1};
-    private String[] fcName = {"Accompany","Energy","EXP"};
+    private String[] fcName = {"Accompany", "Energy", "EXP"};
     private LinearLayout mLlPointLog;
 
     public UserFragment() {
@@ -163,7 +166,7 @@ public class UserFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //initial view
-        updatePoint(0);
+        new Thread(() -> updatePoint(0)).start();
     }
 
     @Override
@@ -210,35 +213,64 @@ public class UserFragment extends BaseFragment {
     }
 
     private void updatePoint(int newPointPos) {
+        Utils.setLog(newPointPos + "-" + pointPos);
         if (newPointPos == -1 || newPointPos == pointPos)
             return;
+        Utils.setLog("------------------------------------------------");
         //dot
         ImageView dot = new ImageView(getContext());
         int dotSize = getResources().getDimensionPixelOffset(R.dimen.user_point_dot_size);
         int dotMarginVertical = getResources().getDimensionPixelOffset(R.dimen.user_dot_margin_vertical);
         LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(dotSize, dotSize);
         dotParams.setMargins(0, dotMarginVertical, 0, dotMarginVertical);
-        setImageDrawableFit(dot, dotDrawables[newPointPos]);
         //text
         TextView pointText = new TextView(getContext());
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         pointText.setTextSize(16);
+        pointText.setLetterSpacing(0.15f);
+        pointText.setTypeface(pointText.getTypeface(), Typeface.BOLD);
         pointText.setTextColor(getResources().getColor(pointTextColorIDs[newPointPos]));
         pointText.setText(pointTextArray[newPointPos]);
         //add to LinearLayout
-        mLlPoints[newPointPos].addView(dot, 1, dotParams);
-        mLlPoints[newPointPos].addView(pointText, 2, textParams);
-
+        mHandler.post(() -> {
+            mLlPoints[newPointPos].addView(dot, 1, dotParams);
+            mLlPoints[newPointPos].addView(pointText, 2, textParams);
+            setImageDrawableFit(dot, dotDrawables[newPointPos]);
+        });
         Utils.setLog("old pos = " + pointPos + ",new pos = " + newPointPos);
         //set file point data
-        FileController fileController = new FileController(getContext(),fcName[newPointPos]);
-        if(fileController.fileExist()){
-//TODO get file point data
+        FileController fileController = new FileController(getContext(), fcName[newPointPos]);
+        if (fileController.fileExist()) {
+            try {
+                loadFileLog(fileController.readFileSplit());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Utils.setLog(e.getMessage());
+            }
+        } else {
+            try {
+                fileController.write("");
+                Utils.setLog("Create File Success");
+            } catch (IOException e) {
+                e.printStackTrace();
+                Utils.setLog(e.getMessage());
+            }
         }
         //remove old dot&text
         if (pointPos != -1)
             mLlPoints[pointPos].removeViews(1, 2);
         pointPos = newPointPos;
     }
+
+    private void loadFileLog(String[] fileLogs) {
+        if (fileLogs[0].equals("")) {
+            Utils.setLog("User File Is Empty");
+            return;
+        } else {
+            for (String log : fileLogs) {
+            }
+        }
+    }
+
 }

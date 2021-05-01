@@ -3,7 +3,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape
-            android:innerRadius="15dp"
+            android:innerRadius="12dp"
             android:shape="ring"
             android:thickness="5dp"
             android:useLevel="false">
@@ -14,7 +14,7 @@
             <!--                    android:centerY="0.51"-->
             <gradient
                 android:endColor="@color/transparent"
-                android:gradientRadius="20dp"
+                android:gradientRadius="17dp"
                 android:startColor="@color/black"
                 android:type="radial" />
             <!--                    innerRadius = (drawable.size - padding*2)/2-->

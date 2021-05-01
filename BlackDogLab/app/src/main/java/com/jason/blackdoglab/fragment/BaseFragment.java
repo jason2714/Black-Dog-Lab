@@ -37,6 +37,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         imgView.post(() -> {
             Utils.setLog(this.getClass().getSimpleName());
             imgView.setImageBitmap(decodeBitmap(drawableID, imgView.getWidth(), imgView.getHeight()));
+            imgView.setScaleType(ImageView.ScaleType.FIT_XY);
         });
     }
 
@@ -60,13 +61,13 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableID, options);
         float realWidth = options.outWidth;
         float realHeight = options.outHeight;
-        Utils.setLog("Real Image Width：" + realWidth + ",Height:" + realHeight);
-        Utils.setLog("view Width：" + ctWidth + ",Height:" + ctHeight);
+//        Utils.setLog("Real Image Width：" + realWidth + ",Height:" + realHeight);
+//        Utils.setLog("view Width：" + ctWidth + ",Height:" + ctHeight);
         // Calculate scale
         float scale = deviceDensity;
         if (realHeight > ctHeight)
             scale *= (realHeight / ctHeight);
-        Utils.setLog("scale : " + (int) scale);
+//        Utils.setLog("scale : " + (int) scale);
         options.inSampleSize = (int) scale;
         options.inJustDecodeBounds = false;
 //        calculate density yourself will have closer resolution
@@ -75,7 +76,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         bitmap = BitmapFactory.decodeResource(getResources(), drawableID, options);
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
-        Utils.setLog("Image After Scaling Width:" + w + ",Height:" + h);
+//        Utils.setLog("Image After Scaling Width:" + w + ",Height:" + h);
         return bitmap;
     }
 

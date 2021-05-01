@@ -87,7 +87,7 @@
             android:id="@+id/ll_basic_point"
             android:layout_width="0dp"
             android:layout_height="290dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/bg_user_box"
             android:elevation="5dp"
             android:orientation="vertical"
@@ -155,13 +155,44 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:scrollbarStyle="outsideOverlay">
 
                 <LinearLayout
                     android:id="@+id/ll_point_log"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:letterSpacing="0.15"
+                            android:text="每日任務"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:letterSpacing="0.15"
+                            android:text="- 01"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
             </ScrollView>
 
 
@@ -199,6 +230,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_toStartOf="@id/tgbtn_message_broadcast"
                 android:text="關閉"
+                android:letterSpacing="0.1"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -214,7 +246,7 @@
                 android:thumb="@drawable/bg_thumb_switch"
                 app:showText="false"
                 app:switchMinWidth="80dp"
-                app:track="@drawable/bg_track_meaasge_broadcast"
+                app:track="@drawable/bg_track_meassge_broadcast"
                 app:useMaterialThemeColors="false" />
 
             <TextView
@@ -224,8 +256,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="5dp"
                 android:text="開啟"
+                android:letterSpacing="0.1"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -270,7 +303,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="5dp"
                 android:text="大"
                 android:textColor="@color/black"
                 android:textSize="14sp" />

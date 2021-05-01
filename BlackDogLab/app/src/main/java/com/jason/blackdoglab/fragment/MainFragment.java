@@ -75,6 +75,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        new Thread(() ->  ((MainPage) getActivity()).getViewPager().setOffscreenPageLimit(3));
     }
 
     @Override
@@ -83,9 +84,9 @@ public class MainFragment extends BaseFragment {
         mImgBtLeft = view.findViewById(R.id.imgbt_left);
         mImgBtRight = view.findViewById(R.id.imgbt_right);
         //or set this in onResume
-        new Thread(() ->
-                setListenerToRootView(view)
-        ).start();
+//        new Thread(() ->
+//                setListenerToRootView(view)
+//        ).start();
     }
 
     @Override
@@ -118,6 +119,7 @@ public class MainFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
+    //TODO may throw exception
     private void setListenerToRootView(View rootView) {
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

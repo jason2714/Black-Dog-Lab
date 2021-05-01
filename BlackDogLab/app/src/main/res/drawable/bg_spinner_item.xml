@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
+    <item android:state_pressed="true"
+        android:color="@color/white">
         <shape>
             <stroke android:width="0.5dp" android:color="?attr/colorPrimary" />
-            <solid android:color="?attr/main_tab_color" />
+            <solid android:color="@color/grey3" />
         </shape>
     </item>
     <item android:state_pressed="false">

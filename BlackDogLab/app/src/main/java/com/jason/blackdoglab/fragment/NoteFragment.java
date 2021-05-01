@@ -137,7 +137,7 @@ public class NoteFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return R.drawable.bg_note;
+        return Utils.getAttrID(getContext(),R.attr.bg_note,Utils.RESOURCE_ID);
     }
 
     @Override
@@ -207,7 +207,7 @@ public class NoteFragment extends BaseFragment {
 
     private void loadNoteArticle(String[] noteArticles) {
         if (noteArticles[0].equals("")){
-            Utils.setLog("File Is Empty");
+            Utils.setLog("Note File Is Empty");
             return;
         }
         boolean isFirst = true;
