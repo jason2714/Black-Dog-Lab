@@ -1,6 +1,7 @@
 package com.jason.blackdoglab;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -13,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
@@ -21,12 +23,19 @@ import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.jason.blackdoglab.fragment.CalendarFragment;
+import com.jason.blackdoglab.fragment.MainFragment;
+import com.jason.blackdoglab.fragment.NoteFragment;
+import com.jason.blackdoglab.fragment.UserFragment;
 import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.zip.Inflater;
 
 public class MainPage extends BaseActivity {
 
@@ -50,13 +59,14 @@ public class MainPage extends BaseActivity {
 //    }
 
     private long exitTime = 0;
-    private ViewPager2 mViewPager;
+    private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private ImageButton mImgBtTabTriangle;
     private int themeColor;
     private boolean isTabTriangleShow;
     private Player player;
     private HashSet<DailyMoods> dailyMoodsSet;
+    private List<Fragment> fragments;
 
 
     @Override
@@ -76,45 +86,26 @@ public class MainPage extends BaseActivity {
         mImgBtTabTriangle = findViewById(R.id.imgbt_tab_triangle);
         mImgBtTabTriangle.animate().alpha(0);
         isTabTriangleShow = false;
+
+        fragments = new ArrayList<>();
+        fragments.add(new MainFragment());
+        fragments.add(new CalendarFragment(dailyMoodsSet));
+        fragments.add(new NoteFragment());
+        fragments.add(new UserFragment(player));
+
+       initTabDrawable();
     }
 
     @Override
     protected void initListener() {
         mImgBtTabTriangle.setOnClickListener(this);
-        mViewPager.setAdapter(new PageAdapter(this, player, dailyMoodsSet));
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
-                mTabLayout, mViewPager, (tab, position) -> {
-            tab.setId(position);
-            switch (position) {
-                case 0:
-//                    tab.setText("Main");
-                    tab.setIcon(R.drawable.icon_main);
-                    break;
-                case 1:
-//                    tab.setText("Calender");
-                    tab.setIcon(R.drawable.icon_calender);
-                    break;
-                case 2:
-//                    tab.setText("Note");
-                    tab.setIcon(R.drawable.icon_note);
-                    break;
-                case 3:
-//                    tab.setText("User");
-                    tab.setIcon(R.drawable.icon_select_character1);
-                    //keep icon colorful
-                    tab.getIcon().setTintMode(PorterDuff.Mode.DST);
-                    break;
-                default:
-                    tab.setIcon(R.drawable.icon_right_triangle);
-                    break;
-            }
-        });
-        tabLayoutMediator.attach();
+        mViewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), fragments));
+        mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (!isTabTriangleShow) {
-                    mTabLayout.animate().translationY(Utils.convertDpToPixel(MainPage.this,55)).setStartDelay(500).setDuration(500);
+                    mTabLayout.animate().translationY(Utils.convertDpToPixel(MainPage.this, 55)).setStartDelay(500).setDuration(500);
                     mImgBtTabTriangle.animate().alpha(1).setStartDelay(1000);
                     mTabLayout.setBackgroundResource(R.drawable.bg_tab_down);
                 }
@@ -240,8 +231,18 @@ public class MainPage extends BaseActivity {
         }
     }
 
-    public ViewPager2 getViewPager() {
+    public ViewPager getViewPager() {
         return mViewPager;
+    }
+
+    private void initTabDrawable() {
+        mTabLayout.getTabAt(0).setIcon(R.drawable.icon_main);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.icon_calender);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.icon_note);
+        View view = LayoutInflater.from(this).inflate(R.layout.view_tab_user_portrait, null);
+        ImageView imgTabPortrait = view.findViewById(R.id.img_tab_user_portrait);
+        setImageDrawableFit(imgTabPortrait,player.getCharacterDrawable());
+        mTabLayout.getTabAt(3).setCustomView(imgTabPortrait);
     }
 
 }

@@ -6,6 +6,7 @@
     <dimen name="user_point_image_size">70dp</dimen>
     <dimen name="user_point_dot_size">5dp</dimen>
     <dimen name="user_dot_margin_vertical">10dp</dimen>
+    <dimen name="user_log_margin">10dp</dimen>
 <!--    <dimen name="user_point_text_size">20sp</dimen>-->
     <dimen name="main_page_triangle">40dp</dimen>
     <dimen name="note_spinner_height">40dp</dimen>
@@ -13,4 +14,5 @@
     <dimen name="note_spinner_dropdown_width">160dp</dimen>
     <dimen name="calendar_width">300dp</dimen>
     <dimen name="calendar_date_width">40dp</dimen>
+
 </resources>

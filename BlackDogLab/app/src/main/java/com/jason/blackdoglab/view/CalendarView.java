@@ -66,32 +66,33 @@ public class CalendarView extends LinearLayout implements View.OnClickListener {
     }
 
     public void updateCalendar() {
-//        new Thread(() ->{
         ArrayList<Date> cells = new ArrayList<>();
         HashSet<DailyMoods> dailyMoodsSetDisplay = (HashSet) dailyMoodsSet.clone();
         Calendar calendarInit = (Calendar) calendarDisplay.clone();
-        // determine the cell for current month's beginning
-        calendarInit.set(Calendar.DAY_OF_MONTH, 1);
-        // -1->start at Sunday,-2->start at Monday
-        int monthBeginningCell = calendarInit.get(Calendar.DAY_OF_WEEK) - 1;
-        // move calendar backwards to the beginning of the week
-        calendarInit.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
+        new Thread(() -> {
+            // determine the cell for current month's beginning
+            calendarInit.set(Calendar.DAY_OF_MONTH, 1);
+            // -1->start at Sunday,-2->start at Monday
+            int monthBeginningCell = calendarInit.get(Calendar.DAY_OF_WEEK) - 1;
+            // move calendar backwards to the beginning of the week
+            calendarInit.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
 
-        // fill cells
-        int DAYS_COUNT = 42;
-        while (cells.size() < DAYS_COUNT) {
-            cells.add(calendarInit.getTime());
-            calendarInit.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        dailyMoodsSetDisplay.retainAll(cells);
-        Utils.setLog("daily mood new");
-        for (DailyMoods dailyMoods : dailyMoodsSetDisplay) {
-            Utils.setLog(dailyMoods.toString());
-        }
-        // update grid
+            // fill cells
+            int DAYS_COUNT = 42;
+            while (cells.size() < DAYS_COUNT) {
+                cells.add(calendarInit.getTime());
+                calendarInit.add(Calendar.DAY_OF_MONTH, 1);
+            }
+            dailyMoodsSetDisplay.retainAll(cells);
+            Utils.setLog("daily mood new");
+            for (DailyMoods dailyMoods : dailyMoodsSetDisplay) {
+                Utils.setLog(dailyMoods.toString());
+            }
+            // update grid
+
+        }).start();
         gridView.setAdapter(new CalendarAdapter(getContext(), cells, calendarDisplay, dailyMoodsSetDisplay));
 
-//        }).start();
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String[] dateToday = sdf.format(calendarDisplay.getTime()).split("-");

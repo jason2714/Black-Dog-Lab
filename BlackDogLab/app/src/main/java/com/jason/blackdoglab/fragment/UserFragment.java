@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -213,10 +216,8 @@ public class UserFragment extends BaseFragment {
     }
 
     private void updatePoint(int newPointPos) {
-        Utils.setLog(newPointPos + "-" + pointPos);
         if (newPointPos == -1 || newPointPos == pointPos)
             return;
-        Utils.setLog("------------------------------------------------");
         //dot
         ImageView dot = new ImageView(getContext());
         int dotSize = getResources().getDimensionPixelOffset(R.dimen.user_point_dot_size);
@@ -238,16 +239,17 @@ public class UserFragment extends BaseFragment {
             mLlPoints[newPointPos].addView(pointText, 2, textParams);
             setImageDrawableFit(dot, dotDrawables[newPointPos]);
         });
-        Utils.setLog("old pos = " + pointPos + ",new pos = " + newPointPos);
         //set file point data
         FileController fileController = new FileController(getContext(), fcName[newPointPos]);
         if (fileController.fileExist()) {
-            try {
-                loadFileLog(fileController.readFileSplit());
-            } catch (IOException e) {
-                e.printStackTrace();
-                Utils.setLog(e.getMessage());
-            }
+            new Thread(() -> {
+                try {
+                    loadFileLog(fileController.readFileSplit(),newPointPos);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Utils.setLog(e.getMessage());
+                }
+            }).start();
         } else {
             try {
                 fileController.write("");
@@ -263,14 +265,56 @@ public class UserFragment extends BaseFragment {
         pointPos = newPointPos;
     }
 
-    private void loadFileLog(String[] fileLogs) {
+    private void loadFileLog(String[] fileLogs,int newPointPos) {
         if (fileLogs[0].equals("")) {
             Utils.setLog("User File Is Empty");
             return;
         } else {
+            mHandler.post(() -> mLlPointLog.removeAllViews());
             for (String log : fileLogs) {
+                String[] logArray = log.split(FileController.getWordSplitRegex());
+                String logName = logArray[0];
+                int logCount = Integer.parseInt(logArray[1]);
+                String logCountStr;
+                logCountStr = ((logCount >= 0) ? "+" : "-") + " " + ((Math.abs(logCount) < 10) ? "0" : "") + Math.abs(logCount);
+                addLog(logName, logCountStr,newPointPos);
             }
         }
+    }
+
+    private void addLog(String logName, String logCount,int newPointPos) {
+//        Utils.setLog(logName + "\t" + logCount);
+        //container layout
+        RelativeLayout ctLayout = new RelativeLayout(getContext());
+        LinearLayout.LayoutParams ctParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+                , ViewGroup.LayoutParams.WRAP_CONTENT);
+        int ctMargin = getResources().getDimensionPixelOffset(R.dimen.user_log_margin);
+        ctParams.setMargins(0, 0, 0, ctMargin);
+
+        //log name
+        TextView tvLogName = new TextView(getContext());
+        RelativeLayout.LayoutParams logNameParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        logNameParams.addRule(RelativeLayout.ALIGN_PARENT_START);
+        tvLogName.setLetterSpacing(0.15f);
+        tvLogName.setTextColor(getResources().getColor(R.color.black));
+        tvLogName.setTextSize(14);
+        tvLogName.setText(logName);
+
+        //log count
+        TextView tvLogCount = new TextView(getContext());
+        RelativeLayout.LayoutParams logCountParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        logCountParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+        tvLogCount.setLetterSpacing(0.15f);
+        tvLogCount.setTextColor(getResources().getColor(pointTextColorIDs[newPointPos]));
+        tvLogCount.setTextSize(14);
+        tvLogCount.setText(logCount);
+        mHandler.post(() -> {
+            mLlPointLog.addView(ctLayout, ctParams);
+            ctLayout.addView(tvLogName, logNameParams);
+            ctLayout.addView(tvLogCount, logCountParams);
+        });
     }
 
 }
