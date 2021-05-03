@@ -68,7 +68,7 @@
     <LinearLayout
         android:id="@+id/calendar_header"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/calendar_date_height"
         android:background="@drawable/bg_calendar_title"
         android:gravity="center_vertical"
         android:orientation="horizontal">

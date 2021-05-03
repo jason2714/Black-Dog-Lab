@@ -1,5 +1,6 @@
 package com.jason.blackdoglab.utils;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.jason.blackdoglab.MainPage;
@@ -70,5 +73,26 @@ public class Utils {
     public static Size getScreenSizePixel(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return new Size(metrics.widthPixels, metrics.heightPixels);
+    }
+
+    public static void setWindowBackground(Context context,float alpha) {
+        if (context == null) return;
+        if (context instanceof Activity) {
+            Window window = ((Activity) context).getWindow();
+            WindowManager.LayoutParams layoutParams = window.getAttributes();
+            layoutParams.alpha = alpha;
+            window.setAttributes(layoutParams);
+        }
+    }
+
+    public static void showBackgroundAnimator(Context context,Float fromAlpha, float toAlpha) {
+        if (toAlpha > 1f) return;
+        ValueAnimator animator = ValueAnimator.ofFloat(fromAlpha, toAlpha);
+        animator.addUpdateListener(animation -> {
+            float alpha = (float) animation.getAnimatedValue();
+            setWindowBackground(context,alpha);
+        });
+        animator.setDuration(500);
+        animator.start();
     }
 }

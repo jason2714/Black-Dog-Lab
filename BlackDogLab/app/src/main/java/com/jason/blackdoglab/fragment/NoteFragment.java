@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jason.blackdoglab.FileController;
+import com.jason.blackdoglab.MainPage;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
@@ -137,7 +139,7 @@ public class NoteFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return Utils.getAttrID(getContext(),R.attr.bg_note,Utils.RESOURCE_ID);
+        return Utils.getAttrID(getContext(), R.attr.bg_note, Utils.RESOURCE_ID);
     }
 
     @Override
@@ -206,7 +208,7 @@ public class NoteFragment extends BaseFragment {
     }
 
     private void loadNoteArticle(String[] noteArticles) {
-        if (noteArticles[0].equals("")){
+        if (noteArticles[0].equals("")) {
             Utils.setLog("Note File Is Empty");
             return;
         }

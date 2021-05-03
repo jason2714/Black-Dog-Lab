@@ -82,7 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void initBasicInfo() {
     }
 
-    private Bitmap decodeBitmap(int drawableID, int ctWidth, int ctHeight) {
+    protected Bitmap decodeBitmap(int drawableID, int ctWidth, int ctHeight) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         // Get Bitmap width and height without loading into memory
@@ -115,4 +115,5 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             imageView.setImageBitmap(decodeBitmap(drawableID, ctWidth, ctHeight));
         });
     }
+
 }

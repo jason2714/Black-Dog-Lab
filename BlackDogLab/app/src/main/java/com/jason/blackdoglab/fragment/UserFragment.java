@@ -56,7 +56,7 @@ public class UserFragment extends BaseFragment {
     private int[] dotDrawables = {R.drawable.icon_point_accompany, R.drawable.icon_point_energy, R.drawable.icon_point_exp};
     private int[] imgPointDrawables = {R.drawable.icon_accompany, R.drawable.icon_energy, R.drawable.icon_exp};
     private LinearLayout[] mLlPoints;
-    private int pointPos = -1;
+    private int pointPos;
     private String[] pointTextArray;
     private int[] pointTextColorIDs = {R.color.brown1, R.color.blue1, R.color.green1};
     private String[] fcName = {"Accompany", "Energy", "EXP"};
@@ -169,7 +169,10 @@ public class UserFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //initial view
-        new Thread(() -> updatePoint(0)).start();
+        new Thread(() -> {
+            pointPos = -1;
+            updatePoint(0);
+        }).start();
     }
 
     @Override
@@ -260,6 +263,7 @@ public class UserFragment extends BaseFragment {
             }
         }
         //remove old dot&text
+        Utils.setLog("pointPos = " + pointPos);
         if (pointPos != -1)
             mLlPoints[pointPos].removeViews(1, 2);
         pointPos = newPointPos;

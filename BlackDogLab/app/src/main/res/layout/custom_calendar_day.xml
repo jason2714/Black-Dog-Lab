@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="@dimen/calendar_date_height"
     android:gravity="center"
     android:padding="8dp"
     android:orientation="vertical"

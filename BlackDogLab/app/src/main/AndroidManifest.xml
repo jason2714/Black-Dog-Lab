@@ -8,13 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BlackDogLab.Default">
-        <activity android:name=".loginpage.DailyLoginActivity"/>
+        android:theme="@style/Theme.BlackDogLab.Default"
+        android:largeHeap="true">
+        <activity android:name=".DogActivity"/>
+        <activity android:name=".loginpage.DailyLoginActivity" />
         <activity android:name=".loginpage.FirstLoginActivity" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".DialogActivity" />
-        <activity android:name=".MainPage"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainPage" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="screenSize|orientation|screenLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

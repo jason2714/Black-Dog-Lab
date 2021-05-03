@@ -25,12 +25,10 @@
 
     <style name="Theme.BlackDogLab.Default">
         <item name="colorPrimary">@color/grey1</item>
-        <item name="triangle_color">@color/grey1</item>
     </style>
 
     <style name="Theme.BlackDogLab.Brown">
         <item name="colorPrimary">@color/brown1</item>
-        <item name="triangle_color">@color/brown1</item>
         <item name="main_right_triangle">@drawable/main_right_triangle_brown</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_brown</item>
         <item name="main_tab_color">@color/brown5</item>
@@ -49,7 +47,6 @@
 
     <style name="Theme.BlackDogLab.Green">
         <item name="colorPrimary">@color/green1</item>
-        <item name="triangle_color">@color/green1</item>
         <item name="main_right_triangle">@drawable/main_right_triangle_green</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_green</item>
         <item name="main_tab_color">@color/green5</item>
@@ -68,7 +65,6 @@
 
     <style name="Theme.BlackDogLab.Blue">
         <item name="colorPrimary">@color/blue1</item>
-        <item name="triangle_color">@color/blue1</item>
         <item name="main_right_triangle">@drawable/main_right_triangle_blue</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_blue</item>
         <item name="main_tab_color">@color/blue5</item>

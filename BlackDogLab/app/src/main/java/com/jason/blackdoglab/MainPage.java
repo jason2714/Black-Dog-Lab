@@ -1,28 +1,19 @@
 package com.jason.blackdoglab;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Outline;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewOutlineProvider;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.jason.blackdoglab.fragment.CalendarFragment;
 import com.jason.blackdoglab.fragment.MainFragment;
 import com.jason.blackdoglab.fragment.NoteFragment;
@@ -34,8 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.zip.Inflater;
 
 public class MainPage extends BaseActivity {
 
@@ -67,6 +56,7 @@ public class MainPage extends BaseActivity {
     private Player player;
     private HashSet<DailyMoods> dailyMoodsSet;
     private List<Fragment> fragments;
+    private ImageView[] tabIconImages;
 
 
     @Override
@@ -93,17 +83,22 @@ public class MainPage extends BaseActivity {
         fragments.add(new NoteFragment());
         fragments.add(new UserFragment(player));
 
-       initTabDrawable();
+        mViewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), fragments));
+        mTabLayout.setupWithViewPager(mViewPager);
+        //must below setupWithViewPager or program will crush
+        initTabDrawable();
     }
 
     @Override
     protected void initListener() {
         mImgBtTabTriangle.setOnClickListener(this);
-        mViewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), fragments));
-        mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Utils.hideNavigationBar(MainPage.this);
+                if (tab.getId() != 3)
+                    ((ImageView) tab.getCustomView()).setColorFilter
+                            (Utils.getAttrID(MainPage.this, R.attr.colorPrimary, Utils.DATA), PorterDuff.Mode.SRC_IN);
                 if (!isTabTriangleShow) {
                     mTabLayout.animate().translationY(Utils.convertDpToPixel(MainPage.this, 55)).setStartDelay(500).setDuration(500);
                     mImgBtTabTriangle.animate().alpha(1).setStartDelay(1000);
@@ -124,6 +119,8 @@ public class MainPage extends BaseActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                if (tab.getId() != 3)
+                    ((ImageView) tab.getCustomView()).clearColorFilter();
                 Utils.setLog(tab.getId() + " unselect");
             }
 
@@ -141,8 +138,12 @@ public class MainPage extends BaseActivity {
         //是因為out of memory 調整圖片大小也可解決
         ActivityUtils.getInstance().cleanActivity(this);
         ActivityUtils.getInstance().printActivity();
+        int initPage = 3;
+        if (initPage != 3)
+            tabIconImages[initPage].setColorFilter(Utils.getAttrID
+                    (MainPage.this, R.attr.colorPrimary, Utils.DATA), PorterDuff.Mode.SRC_IN);
+        mTabLayout.getTabAt(initPage).select();
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -236,13 +237,23 @@ public class MainPage extends BaseActivity {
     }
 
     private void initTabDrawable() {
-        mTabLayout.getTabAt(0).setIcon(R.drawable.icon_main);
-        mTabLayout.getTabAt(1).setIcon(R.drawable.icon_calender);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.icon_note);
-        View view = LayoutInflater.from(this).inflate(R.layout.view_tab_user_portrait, null);
-        ImageView imgTabPortrait = view.findViewById(R.id.img_tab_user_portrait);
-        setImageDrawableFit(imgTabPortrait,player.getCharacterDrawable());
-        mTabLayout.getTabAt(3).setCustomView(imgTabPortrait);
+        View view = LayoutInflater.from(this).inflate(R.layout.view_tab_icon, null);
+
+        tabIconImages = new ImageView[]{
+                view.findViewById(R.id.icon_tab_main), view.findViewById(R.id.icon_tab_calendar),
+                view.findViewById(R.id.icon_tab_note), view.findViewById(R.id.icon_tab_portrait)
+        };
+        int[] tabIconDrawables = new int[]{
+                R.drawable.icon_main, R.drawable.icon_calender,
+                R.drawable.icon_note, player.getCharacterDrawable()
+        };
+        for (int i = 0; i < tabIconImages.length; i++) {
+            int imagePadding = (int) Utils.convertDpToPixel(this, 22);
+            tabIconImages[i].setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
+            setImageDrawableFit(tabIconImages[i], tabIconDrawables[i]);
+            mTabLayout.getTabAt(i).setCustomView(tabIconImages[i]);
+            mTabLayout.getTabAt(i).setId(i);
+        }
     }
 
 }
