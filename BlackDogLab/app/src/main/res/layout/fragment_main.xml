@@ -25,7 +25,7 @@
             android:layout_height="match_parent" />
 
         <ImageButton
-            android:id="@+id/imgbt_right"
+            android:id="@+id/btn_lab_right"
             android:layout_width="@dimen/main_page_triangle"
             android:layout_height="@dimen/main_page_triangle"
             android:layout_marginHorizontal="15dp"
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imgbt_left"
+            android:id="@+id/btn_lab_left"
             android:layout_width="@dimen/main_page_triangle"
             android:layout_height="@dimen/main_page_triangle"
             android:layout_marginHorizontal="15dp"

@@ -1,5 +1,6 @@
 package com.jason.blackdoglab.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.jason.blackdoglab.DogActivity;
 import com.jason.blackdoglab.MainPage;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
@@ -39,7 +41,7 @@ public class MainFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private ImageView mBgMainLab;
-    private ImageButton mImgBtLeft, mImgBtRight;
+    private ImageButton mBtnLeft, mBtnRight;
 
     public MainFragment() {
         // Required empty public constructor
@@ -81,8 +83,8 @@ public class MainFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         mBgMainLab = view.findViewById(R.id.bg_main_lab);
-        mImgBtLeft = view.findViewById(R.id.imgbt_left);
-        mImgBtRight = view.findViewById(R.id.imgbt_right);
+        mBtnLeft = view.findViewById(R.id.btn_lab_left);
+        mBtnRight = view.findViewById(R.id.btn_lab_right);
         //or set this in onResume
         new Thread(() ->
                 setListenerToRootView(view)
@@ -92,6 +94,8 @@ public class MainFragment extends BaseFragment {
     @Override
     protected void initListener() {
         super.initListener();
+        mBtnLeft.setOnClickListener(this);
+        mBtnRight.setOnClickListener(this);
     }
 
     @Override
@@ -101,7 +105,7 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return Utils.getAttrID(getContext(),R.attr.bg_main_lab,Utils.RESOURCE_ID);
+        return Utils.getAttrID(getContext(), R.attr.bg_main_lab, Utils.RESOURCE_ID);
     }
 
     @Override
@@ -134,6 +138,15 @@ public class MainFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.btn_lab_left:
+                break;
+            case R.id.btn_lab_right:
+                Intent intent = new Intent(getActivity(), DogActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

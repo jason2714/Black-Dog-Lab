@@ -43,6 +43,7 @@
         <item name="bg_main_park">@drawable/bg_main_park_brown</item>
         <item name="bg_main_street">@drawable/bg_main_street_brown</item>
         <item name="bg_note">@drawable/bg_note_brown</item>
+        <item name="notification">@drawable/icon_notification_brown</item>
     </style>
 
     <style name="Theme.BlackDogLab.Green">
@@ -61,6 +62,7 @@
         <item name="bg_main_park">@drawable/bg_main_park_green</item>
         <item name="bg_main_street">@drawable/bg_main_street_green</item>
         <item name="bg_note">@drawable/bg_note_green</item>
+        <item name="notification">@drawable/icon_notification_green</item>
     </style>
 
     <style name="Theme.BlackDogLab.Blue">
@@ -79,5 +81,6 @@
         <item name="bg_main_park">@drawable/bg_main_park_blue</item>
         <item name="bg_main_street">@drawable/bg_main_street_blue</item>
         <item name="bg_note">@drawable/bg_note_blue</item>
+        <item name="notification">@drawable/icon_notification_blue</item>
     </style>
 </resources>

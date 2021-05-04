@@ -37,5 +37,5 @@
     <attr name="bg_main_park" format="reference"/>
     <attr name="bg_note" format="reference"/>
     <attr name="bg_calendar" format="reference"/>
-
+    <attr name="notification" format="reference"/>
 </resources>

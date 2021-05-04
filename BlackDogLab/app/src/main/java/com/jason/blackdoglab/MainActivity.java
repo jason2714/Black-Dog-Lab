@@ -21,6 +21,8 @@ import com.jason.blackdoglab.utils.Utils;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -108,11 +110,24 @@ public class MainActivity extends BaseActivity {
                 fc_loginDate.write(currentDate);
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
-                //TODO
-                String lastDate = fc_loginDate.readFile();
-                if (currentDate.equals(lastDate) && fc_dailyMood.fileExist()) {
-                    Log.d("test", "same date");
-                    intent = new Intent(MainActivity.this, MainPage.class);
+                if (fc_dailyMood.fileExist()) {
+                    boolean flag = false;
+                    String[] splitFileData = fc_dailyMood.readFileSplit();
+                    for (String lineData : splitFileData) {
+                        String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
+                        if(currentDate.equals(lineDataArray[0])){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        intent = new Intent(MainActivity.this, MainPage.class);
+                        Utils.setLog("have current date");
+                    }
+                    else{
+                        Utils.setLog("don't have current date");
+                        intent = new Intent(MainActivity.this, DailyLoginActivity.class);
+                    }
                 } else {
                     Log.d("test", "new date");
                     fc_loginDate.write(currentDate);
@@ -124,7 +139,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-        intent = new Intent(MainActivity.this, DogActivity.class);
+//        intent = new Intent(MainActivity.this, DogActivity.class);
         startActivity(intent);
     }
 }

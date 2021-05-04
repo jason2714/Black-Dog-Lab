@@ -3,6 +3,7 @@ package com.jason.blackdoglab;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class MainPage extends BaseActivity {
 
@@ -216,11 +218,6 @@ public class MainPage extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imgbt_left:
-
-                break;
-            case R.id.imgbt_right:
-                break;
             case R.id.imgbt_tab_triangle:
                 mTabLayout.animate().translationY(0);
                 mImgBtTabTriangle.animate().alpha(0);

@@ -51,7 +51,7 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         super(context, R.layout.custom_calendar_day, days);
         this.context = context;
         this.calendarDisplay = calendarDisplay;
-        this.dailyMoodsSetDisplay = dailyMoodsSetDisplay;
+        this.dailyMoodsSetDisplay = (HashSet) dailyMoodsSetDisplay.clone();
         inflater = LayoutInflater.from(context);
     }
 

@@ -5,13 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DogActivity">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_dog_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <ImageView
+        android:id="@+id/bg_dog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <com.jason.blackdoglab.view.FrameSurfaceView
         android:id="@+id/red_dog"
         android:layout_width="270dp"
         android:layout_height="270dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_dog_right"
+        android:layout_width="@dimen/main_page_triangle"
+        android:layout_height="@dimen/main_page_triangle"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/bg_main_right_triangle"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_dog_left"
+        android:layout_width="@dimen/main_page_triangle"
+        android:layout_height="@dimen/main_page_triangle"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/bg_main_left_triangle"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_three_bowls"
+        android:layout_width="340dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
