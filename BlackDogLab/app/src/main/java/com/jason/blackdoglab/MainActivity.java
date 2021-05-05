@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-//        intent = new Intent(MainActivity.this, DogActivity.class);
+        intent = new Intent(MainActivity.this, DogActivity.class);
         startActivity(intent);
     }
 }

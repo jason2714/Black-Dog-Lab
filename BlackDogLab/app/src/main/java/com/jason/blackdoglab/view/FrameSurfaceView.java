@@ -39,7 +39,7 @@ public class FrameSurfaceView extends BaseSurfaceView {
     private boolean isOneShot;
     private boolean keepLastFrame;
 
-    public void setDuration(int duration) {
+    public void setTotalDuration(int duration) {
         new Thread(() ->{
             int i =0;
             while(bitmaps.size() == 0){
@@ -58,8 +58,23 @@ public class FrameSurfaceView extends BaseSurfaceView {
         }).start();
     }
 
+    public void setDuration(int frameDuration){
+        setFrameDuration(frameDuration);
+    }
+
     public void setBitmaps(List<Integer> bitmaps) {
         if (bitmaps == null || bitmaps.size() == 0) {
+            Utils.setLog("bitmaps is empty");
+            return;
+        }
+        this.bitmaps = bitmaps;
+        getBitmapDimension(bitmaps.get(0));
+    }
+
+    public void setSingleBitmap(int bitmap) {
+        List<Integer> bitmaps = new ArrayList<>();
+        bitmaps.add(bitmap);
+        if (bitmaps.size() == 0) {
             Utils.setLog("bitmaps is empty");
             return;
         }

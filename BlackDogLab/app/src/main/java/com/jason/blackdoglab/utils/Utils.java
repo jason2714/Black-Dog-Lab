@@ -13,6 +13,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.jason.blackdoglab.MainPage;
 
 public class Utils {
@@ -85,7 +87,7 @@ public class Utils {
         }
     }
 
-    public static void showBackgroundAnimator(Context context,Float fromAlpha, float toAlpha) {
+    public static void showBackgroundAnimator(Context context, Float fromAlpha, float toAlpha) {
         if (toAlpha > 1f) return;
         ValueAnimator animator = ValueAnimator.ofFloat(fromAlpha, toAlpha);
         animator.addUpdateListener(animation -> {
@@ -93,6 +95,17 @@ public class Utils {
             setWindowBackground(context,alpha);
         });
         animator.setDuration(500);
+        animator.start();
+    }
+
+    public static void showBackgroundAnimator(Context context, Float fromAlpha, float toAlpha,int duration) {
+        if (toAlpha > 1f) return;
+        ValueAnimator animator = ValueAnimator.ofFloat(fromAlpha, toAlpha);
+        animator.addUpdateListener(animation -> {
+            float alpha = (float) animation.getAnimatedValue();
+            setWindowBackground(context,alpha);
+        });
+        animator.setDuration(duration);
         animator.start();
     }
 }

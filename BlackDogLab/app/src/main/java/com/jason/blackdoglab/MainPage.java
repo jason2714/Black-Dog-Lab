@@ -140,7 +140,7 @@ public class MainPage extends BaseActivity {
         //是因為out of memory 調整圖片大小也可解決
         ActivityUtils.getInstance().cleanActivity(this);
         ActivityUtils.getInstance().printActivity();
-        int initPage = 3;
+        int initPage = 0;
         if (initPage != 3)
             tabIconImages[initPage].setColorFilter(Utils.getAttrID
                     (MainPage.this, R.attr.colorPrimary, Utils.DATA), PorterDuff.Mode.SRC_IN);
