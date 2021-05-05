@@ -21,4 +21,8 @@
     <dimen name="dog_ntf_width">62dp</dimen>
     <dimen name="dog_ntf_height">50dp</dimen>
     <dimen name="dog_btn_width">130dp</dimen>
+
+    <dimen name="dog_food_item_width">160dp</dimen>
+    <dimen name="dog_food_item_height">185dp</dimen>
+    <dimen name="dog_food_item_margin">20dp</dimen>
 </resources>

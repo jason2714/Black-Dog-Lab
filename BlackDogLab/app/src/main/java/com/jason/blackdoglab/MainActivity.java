@@ -3,8 +3,6 @@ package com.jason.blackdoglab;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +14,12 @@ import androidx.annotation.NonNull;
 
 import com.jason.blackdoglab.loginpage.DailyLoginActivity;
 import com.jason.blackdoglab.loginpage.FirstLoginActivity;
+import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
 
 import pl.droidsonroids.gif.GifImageView;
 

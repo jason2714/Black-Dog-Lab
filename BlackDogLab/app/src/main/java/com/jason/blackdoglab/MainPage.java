@@ -3,30 +3,30 @@ package com.jason.blackdoglab;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.android.material.tabs.TabLayout;
+import com.jason.blackdoglab.adapter.PageAdapter;
+import com.jason.blackdoglab.customclass.DailyMoods;
+import com.jason.blackdoglab.customclass.Player;
 import com.jason.blackdoglab.fragment.CalendarFragment;
 import com.jason.blackdoglab.fragment.MainFragment;
 import com.jason.blackdoglab.fragment.NoteFragment;
 import com.jason.blackdoglab.fragment.UserFragment;
 import com.jason.blackdoglab.utils.ActivityUtils;
+import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class MainPage extends BaseActivity {
 

@@ -1,4 +1,4 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.adapter;
 
 
 import androidx.annotation.NonNull;
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-class PageAdapter extends FragmentPagerAdapter {
+public class PageAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
 

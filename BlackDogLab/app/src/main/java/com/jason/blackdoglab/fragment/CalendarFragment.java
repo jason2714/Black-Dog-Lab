@@ -11,15 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.jason.blackdoglab.DailyMoods;
+import com.jason.blackdoglab.customclass.DailyMoods;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 import com.jason.blackdoglab.view.CalendarView;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 
 /**

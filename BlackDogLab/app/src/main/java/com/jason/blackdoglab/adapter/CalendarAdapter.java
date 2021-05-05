@@ -1,26 +1,18 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.adapter;
 
-import android.animation.ValueAnimator;
-import android.app.Activity;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.jason.blackdoglab.R;
+import com.jason.blackdoglab.customclass.DailyMoods;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.text.SimpleDateFormat;

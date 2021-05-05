@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -19,17 +18,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.jason.blackdoglab.FileController;
-import com.jason.blackdoglab.Player;
+import com.jason.blackdoglab.utils.FileController;
+import com.jason.blackdoglab.customclass.Player;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 
 /**
  * A simple {@link Fragment} subclass.

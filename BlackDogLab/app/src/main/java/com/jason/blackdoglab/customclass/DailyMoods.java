@@ -1,9 +1,6 @@
-package com.jason.blackdoglab;
-
-import com.jason.blackdoglab.utils.Utils;
+package com.jason.blackdoglab.customclass;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 

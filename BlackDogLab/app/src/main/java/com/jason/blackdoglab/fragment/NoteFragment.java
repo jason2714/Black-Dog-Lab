@@ -7,10 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,8 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jason.blackdoglab.FileController;
-import com.jason.blackdoglab.MainPage;
+import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 

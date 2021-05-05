@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jason.blackdoglab.CalendarAdapter;
-import com.jason.blackdoglab.DailyMoods;
+import com.jason.blackdoglab.adapter.CalendarAdapter;
+import com.jason.blackdoglab.customclass.DailyMoods;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;
 
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 public class CalendarView extends LinearLayout implements View.OnClickListener {
     // calendar components

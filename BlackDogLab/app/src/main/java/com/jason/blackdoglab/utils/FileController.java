@@ -1,4 +1,4 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.utils;
 
 import android.content.Context;
 import android.util.Log;

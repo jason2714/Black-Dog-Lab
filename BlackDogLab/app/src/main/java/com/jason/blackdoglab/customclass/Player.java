@@ -1,4 +1,6 @@
-package com.jason.blackdoglab;
+package com.jason.blackdoglab.customclass;
+
+import com.jason.blackdoglab.R;
 
 import java.util.Calendar;
 import java.util.Date;

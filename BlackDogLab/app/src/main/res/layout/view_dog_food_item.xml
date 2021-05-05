@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_food"
+        android:layout_width="@dimen/dog_food_item_width"
+        android:layout_height="@dimen/dog_food_item_height"
+        app:cardCornerRadius="20dp"
+        android:layout_marginHorizontal="@dimen/dog_food_item_margin"
+        app:rippleColor="?attr/colorPrimary"
+        android:clickable="true"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_food_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="香蕉"
+                android:textSize="20sp"
+                android:letterSpacing="0.2"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/img_food"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon_food_banana"/>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

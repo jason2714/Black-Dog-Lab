@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jason.blackdoglab.BaseActivity;
-import com.jason.blackdoglab.FileController;
+import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.MainPage;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.utils.Utils;

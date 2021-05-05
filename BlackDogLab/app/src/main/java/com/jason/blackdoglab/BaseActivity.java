@@ -1,10 +1,7 @@
 package com.jason.blackdoglab;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jason.blackdoglab.utils.ActivityUtils;
+import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.utils.Utils;
 
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
