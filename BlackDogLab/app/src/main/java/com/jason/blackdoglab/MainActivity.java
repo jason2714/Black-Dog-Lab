@@ -3,6 +3,7 @@ package com.jason.blackdoglab;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,17 @@ public class MainActivity extends BaseActivity {
     protected void initListener() {
         mBtnSkip.setOnClickListener(this);
         mBtnStartGame.setOnClickListener(this);
+        Uri animationUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_begin_animation);
+        mVvBeginAnimation.setVideoURI(animationUri);
+        mVvBeginAnimation.setZOrderOnTop(true);
+        mVvBeginAnimation.setVisibility(View.VISIBLE);
+        mVvBeginAnimation.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Log.d("test", "OnErrorListener: onError: " + what + ", " + extra);
+                return false;
+            }
+
+        });
         mVvBeginAnimation.setOnPreparedListener(mp -> mVvBeginAnimation.start());
         mVvBeginAnimation.setOnCompletionListener(mp -> toStartGamePage());
     }
@@ -53,8 +65,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Uri animationUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_begin_animation);
-        mVvBeginAnimation.setVideoURI(animationUri);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
@@ -103,7 +113,7 @@ public class MainActivity extends BaseActivity {
         try {
             String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
             if (!fc_loginDate.fileExist() || !fc_basicInfo.fileExist()) {
-                Log.d("test", currentDate);
+                Utils.setLog("file not exist : " + currentDate);
                 fc_loginDate.write(currentDate);
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
@@ -136,7 +146,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-        intent = new Intent(MainActivity.this, DogActivity.class);
+//        intent = new Intent(MainActivity.this, DogActivity.class);
         startActivity(intent);
     }
 }

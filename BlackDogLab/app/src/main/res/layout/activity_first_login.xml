@@ -19,26 +19,26 @@
 
 
         <LinearLayout
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="52dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="請問該如何稱呼您"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/et_name"
                 style="@style/BasicInfoEditText"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="13dp"
                 android:background="@drawable/bg_basic_info"
                 android:focusableInTouchMode="true"
                 android:inputType="textPersonName" />
@@ -48,12 +48,12 @@
                 android:layout_height="wrap_content"
                 android:text="生日"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp">
+                android:layout_marginVertical="4dp">
 
                 <EditText
                     android:id="@+id/et_year"
@@ -79,7 +79,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,24 +138,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="26dp"
                 android:text="請選擇最喜歡的玩家樣貌"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="340dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="30dp"
+            android:layout_width="300dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="25dp"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1">
 
                 <ImageView
@@ -230,12 +230,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_register"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="175dp"
+            android:layout_height="@dimen/btn_height"
             android:backgroundTint="@color/grey1"
             android:text="成為實習研究員"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:cornerRadius="10dp" />
+            android:textSize="16sp"
+            app:cornerRadius="10dp"
+            android:letterSpacing="0.15"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

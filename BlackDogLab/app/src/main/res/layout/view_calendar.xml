@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="43dp"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:background="@drawable/bg_calendar_month_selector">
 
         <ImageView
             android:id="@+id/btn_calendar_left"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="20dp"
             android:layout_alignParentStart="true"
@@ -37,7 +37,7 @@
                 android:text="2018年"
                 android:textAppearance="@android:style/TextAppearance.Holo.Medium"
                 android:textColor="@color/grey2"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_marginEnd="10dp"
                 android:letterSpacing="0.2"/>
             <!-- date title -->
@@ -48,15 +48,15 @@
                 android:text="03月"
                 android:textAppearance="@android:style/TextAppearance.Large"
                 android:textColor="@color/grey2"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:letterSpacing="0.2"/>
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/btn_calendar_right"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="20dp"
             android:layout_alignParentEnd="true"
@@ -146,8 +146,8 @@
         android:layout_height="wrap_content"
         android:background="?attr/calendar_color"
         android:numColumns="7"
-        android:paddingStart="1dp"
-        android:paddingBottom="1dp"
+        android:paddingStart="2dp"
+        android:paddingBottom="2dp"
         android:scrollbarStyle="outsideOverlay"
         android:verticalSpacing="2dp"
         android:horizontalSpacing="2dp"/>

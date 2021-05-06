@@ -135,7 +135,7 @@ public class FirstLoginActivity extends BaseActivity {
                 mImgCharacters[characterSelected].setBackgroundResource(0);
                 mImgCharacters[characterSelected].setPadding(0, 0, 0, 0);
             }
-            mImgCharacters[newCharacterSelected].setPadding(10, 10, 10, 10);
+            mImgCharacters[newCharacterSelected].setPadding(5, 5, 5, 5);
             mImgCharacters[newCharacterSelected].setBackground(getDrawable(R.drawable.bg_select_circle));
             characterSelected = newCharacterSelected;
         }

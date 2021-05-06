@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
@@ -40,16 +41,16 @@ public class FrameSurfaceView extends BaseSurfaceView {
     private boolean keepLastFrame;
 
     public void setTotalDuration(int duration) {
-        new Thread(() ->{
-            int i =0;
-            while(bitmaps.size() == 0){
+        new Thread(() -> {
+            int i = 0;
+            while (bitmaps.size() == 0) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 i++;
-                if(i >=50)
+                if (i >= 50)
                     break;
             }
             int frameDuration = duration / bitmaps.size();
@@ -58,7 +59,7 @@ public class FrameSurfaceView extends BaseSurfaceView {
         }).start();
     }
 
-    public void setDuration(int frameDuration){
+    public void setDuration(int frameDuration) {
         setFrameDuration(frameDuration);
     }
 
@@ -106,6 +107,8 @@ public class FrameSurfaceView extends BaseSurfaceView {
     @Override
     protected void onFrameDrawFinish() {
         // Recycle a frame directly after it has been drawn
+        Utils.setLog("bitmap size = " + bitmaps.size());
+        Utils.setLog("bitmap index = " + bitmapIndex);
         recycleOneFrame();
     }
 
@@ -120,15 +123,15 @@ public class FrameSurfaceView extends BaseSurfaceView {
     @Override
     protected void onFrameDraw(Canvas canvas) {
         // You need to clear the canvas before drawing a frame, otherwise all frames will be overlapped and displayed at the same time.
-        clearCanvas(canvas);
-        if (!isStart()) {
-            return;
-        }
-        if (!isFinish()) {
-            drawOneFrame(canvas);
-        } else {
+        if (!isFinish())
+            clearCanvas(canvas);
+
+//        if (!isStart()) {
+//            return;
+//        }
+        drawOneFrame(canvas);
+        if (isFinish())
             onFrameAnimationEnd(canvas);
-        }
     }
 
     // Draw a frame. It's Bitmap.
@@ -140,10 +143,8 @@ public class FrameSurfaceView extends BaseSurfaceView {
     }
 
     private void onFrameAnimationEnd(Canvas canvas) {
-        if (keepLastFrame) {
-            bitmapIndex--;
-            drawOneFrame(canvas);
-        }
+        if (!keepLastFrame)
+            clearCanvas(canvas);
         reset();
     }
 
@@ -157,20 +158,20 @@ public class FrameSurfaceView extends BaseSurfaceView {
 
     // Does Frame Animation End
     private boolean isFinish() {
-        return bitmapIndex >= bitmaps.size();
+        return bitmapIndex >= bitmaps.size() - 1;
     }
 
     // Does Frame Animation Start
-    private boolean isStart() {
-        return bitmapIndex != INVALID_BITMAP_INDEX;
-    }
+//    private boolean isStart() {
+//        return bitmapIndex != INVALID_BITMAP_INDEX;
+//    }
 
     // Start playing frame animation
     public void start() {
         //must start after thread create
         this.post(() -> {
-            startAnim();
             bitmapIndex = 0;
+            startAnim();
         });
     }
 
@@ -206,4 +207,23 @@ public class FrameSurfaceView extends BaseSurfaceView {
     public boolean isRunning() {
         return animState;
     }
+
+    public void setVisible(boolean isVisible) {
+        if(bitmaps.size() == 0){
+            Utils.setLog("don't have image,already invisible");
+            return;
+        }
+
+        if (isVisible) {
+            paint.setAlpha(255);
+        } else {
+            paint.setAlpha(0);
+        }
+        this.post(() -> {
+            bitmapIndex = bitmaps.size() - 1;
+            startAnim();
+        });
+    }
+
+
 }

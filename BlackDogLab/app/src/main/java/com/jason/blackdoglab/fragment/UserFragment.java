@@ -165,11 +165,24 @@ public class UserFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        for (int i = 0; i < fcName.length; i++) {
+//            FileController fileController = new FileController(getContext(), fcName[i]);
+//            try {
+//                fileController.write("每日任務$" + i + "$\n" +
+//                        "餵食黑狗$" + -i + "$\n" +
+//                        "收藏知識$" + (i + 1) + "$\n" +
+//                        "陪伴黑狗$" + -(i + 1) + "$\n");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
         //initial view
         new Thread(() -> {
             pointPos = -1;
             updatePoint(0);
         }).start();
+
     }
 
     @Override
@@ -228,7 +241,7 @@ public class UserFragment extends BaseFragment {
         TextView pointText = new TextView(getContext());
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        pointText.setTextSize(16);
+        pointText.setTextSize(14);
         pointText.setLetterSpacing(0.15f);
         pointText.setTypeface(pointText.getTypeface(), Typeface.BOLD);
         pointText.setTextColor(getResources().getColor(pointTextColorIDs[newPointPos]));
@@ -244,7 +257,7 @@ public class UserFragment extends BaseFragment {
         if (fileController.fileExist()) {
             new Thread(() -> {
                 try {
-                    loadFileLog(fileController.readFileSplit(),newPointPos);
+                    loadFileLog(fileController.readFileSplit(), newPointPos);
                 } catch (IOException e) {
                     e.printStackTrace();
                     Utils.setLog(e.getMessage());
@@ -266,7 +279,7 @@ public class UserFragment extends BaseFragment {
         pointPos = newPointPos;
     }
 
-    private void loadFileLog(String[] fileLogs,int newPointPos) {
+    private void loadFileLog(String[] fileLogs, int newPointPos) {
         if (fileLogs[0].equals("")) {
             Utils.setLog("User File Is Empty");
             return;
@@ -278,12 +291,12 @@ public class UserFragment extends BaseFragment {
                 int logCount = Integer.parseInt(logArray[1]);
                 String logCountStr;
                 logCountStr = ((logCount >= 0) ? "+" : "-") + " " + ((Math.abs(logCount) < 10) ? "0" : "") + Math.abs(logCount);
-                addLog(logName, logCountStr,newPointPos);
+                addLog(logName, logCountStr, newPointPos);
             }
         }
     }
 
-    private void addLog(String logName, String logCount,int newPointPos) {
+    private void addLog(String logName, String logCount, int newPointPos) {
 //        Utils.setLog(logName + "\t" + logCount);
         //container layout
         RelativeLayout ctLayout = new RelativeLayout(getContext());
@@ -299,9 +312,9 @@ public class UserFragment extends BaseFragment {
         logNameParams.addRule(RelativeLayout.ALIGN_PARENT_START);
         tvLogName.setLetterSpacing(0.15f);
         tvLogName.setTextColor(getResources().getColor(R.color.black));
-        tvLogName.setTextSize(14);
+        tvLogName.setTextSize(12);
         tvLogName.setText(logName);
-
+        tvLogName.setTypeface(tvLogName.getTypeface(), Typeface.NORMAL);
         //log count
         TextView tvLogCount = new TextView(getContext());
         RelativeLayout.LayoutParams logCountParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -309,7 +322,7 @@ public class UserFragment extends BaseFragment {
         logCountParams.addRule(RelativeLayout.ALIGN_PARENT_END);
         tvLogCount.setLetterSpacing(0.15f);
         tvLogCount.setTextColor(getResources().getColor(pointTextColorIDs[newPointPos]));
-        tvLogCount.setTextSize(14);
+        tvLogCount.setTextSize(12);
         tvLogCount.setText(logCount);
         mHandler.post(() -> {
             mLlPointLog.addView(ctLayout, ctParams);

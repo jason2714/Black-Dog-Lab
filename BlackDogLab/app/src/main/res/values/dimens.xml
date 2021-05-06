@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_height">50dp</dimen>
+    <dimen name="btn_height">45dp</dimen>
 
-    <dimen name="user_page_guideline">40dp</dimen>
-    <dimen name="user_page_guideline_portrait">33dp</dimen>
-    <dimen name="user_page_portrait">160dp</dimen>
-    <dimen name="user_point_image_size">70dp</dimen>
-    <dimen name="user_point_dot_size">5dp</dimen>
-    <dimen name="user_dot_margin_vertical">10dp</dimen>
-    <dimen name="user_log_margin">10dp</dimen>
+    <dimen name="user_page_guideline">35dp</dimen>
+    <dimen name="user_page_guideline_portrait">30dp</dimen>
+    <dimen name="user_page_portrait">140dp</dimen>
+    <dimen name="user_point_image_size">60dp</dimen>
+    <dimen name="user_point_dot_size">4dp</dimen>
+    <dimen name="user_dot_margin_vertical">8dp</dimen>
+    <dimen name="user_log_margin">8dp</dimen>
 <!--    <dimen name="user_point_text_size">20sp</dimen>-->
-    <dimen name="main_page_triangle">40dp</dimen>
-    <dimen name="note_spinner_height">40dp</dimen>
-    <dimen name="note_spinner_width">180dp</dimen>
-    <dimen name="note_spinner_dropdown_width">160dp</dimen>
-    <dimen name="calendar_width">300dp</dimen>
-    <dimen name="calendar_date_width">40dp</dimen>
-    <dimen name="calendar_date_height">60dp</dimen>
+    <dimen name="main_page_triangle">35dp</dimen>
+    <dimen name="note_spinner_height">35dp</dimen>
+    <dimen name="note_spinner_width">155dp</dimen>
+    <dimen name="note_spinner_dropdown_width">140dp</dimen>
+    <dimen name="calendar_width">258dp</dimen>
+    <dimen name="calendar_date_width">35dp</dimen>
+    <dimen name="calendar_date_height">52dp</dimen>
 
-    <dimen name="dog_ntf_width">62dp</dimen>
-    <dimen name="dog_ntf_height">50dp</dimen>
-    <dimen name="dog_btn_width">130dp</dimen>
+    <dimen name="dog_ntf_width">55dp</dimen>
+    <dimen name="dog_ntf_height">44dp</dimen>
+    <dimen name="dog_btn_width">112dp</dimen>
 
-    <dimen name="dog_food_item_width">160dp</dimen>
-    <dimen name="dog_food_item_height">185dp</dimen>
+    <dimen name="dog_food_item_width">140dp</dimen>
+    <dimen name="dog_food_item_height">160dp</dimen>
+    <dimen name="dog_food_image_size">85dp</dimen>
     <dimen name="dog_food_item_margin">20dp</dimen>
+    <dimen name="dog_main">236dp</dimen>
 </resources>

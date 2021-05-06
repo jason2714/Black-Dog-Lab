@@ -144,12 +144,12 @@ public class NoteFragment extends BaseFragment {
         //TODO initial view here
         //initial view
         //initial listener
-//        try {
-//            for (int i = 0; i < 4; i++)
-//                fcNote[i].write("陪伴者也需要人陪伴" + i + "$陪伴者也非常需要其他人的陪伴，這樣狀態不好的時候才有人能夠抒發情緒或是協助自己。$\n");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            for (int i = 0; i < 4; i++)
+                fcNote[i].write("陪伴者也需要人陪伴" + i + "$陪伴者也非常需要其他人的陪伴，這樣狀態不好的時候才有人能夠抒發情緒或是協助自己。$\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -166,7 +166,7 @@ public class NoteFragment extends BaseFragment {
         ctLinearLayout.setBackgroundResource(R.drawable.bg_note_box);
         LinearLayout.LayoutParams ctLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT); // or set height to any fixed value you want
-        int containerMP = (int) Utils.convertDpToPixel(getContext(), 20);
+        int containerMP = (int) Utils.convertDpToPixel(getContext(), 15);
         if (isFirstBox)
             ctLayoutParams.setMargins(containerMP, containerMP, containerMP, containerMP);
         else
@@ -176,14 +176,14 @@ public class NoteFragment extends BaseFragment {
         ctLinearLayout.setPadding(containerMP, containerMP, containerMP, containerMP);
 
         //title
-        int titleMarginBottom = (int) Utils.convertDpToPixel(getContext(), 10);
+        int titleMarginBottom = (int) Utils.convertDpToPixel(getContext(), 8);
         TextView titleText = new TextView(getContext());
         titleText.setTextColor(getResources().getColor(Utils.getAttrID(getContext(), R.attr.colorPrimary, Utils.RESOURCE_ID)));
         LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         titleLayoutParams.setMargins(0, 0, 0, titleMarginBottom);
         titleText.setLayoutParams(titleLayoutParams);
-        titleText.setTextSize(20);
+        titleText.setTextSize(18);
         titleText.setLetterSpacing(0.1f);
         titleText.setText(title);
 
@@ -193,7 +193,7 @@ public class NoteFragment extends BaseFragment {
         LinearLayout.LayoutParams contentLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         contentText.setLayoutParams(contentLayoutParams);
-        contentText.setTextSize(16);
+        contentText.setTextSize(14);
         contentText.setLetterSpacing(0.1f);
         contentText.setText(content);
         //set in container

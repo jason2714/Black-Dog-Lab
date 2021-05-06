@@ -7,11 +7,11 @@
                 <shape
                     android:shape="ring"
                     android:useLevel="false"
-                    android:innerRadius="72dp"
-                    android:thickness="10dp">
+                    android:innerRadius="62dp"
+                    android:thickness="8dp">
 <!--                    size是screen大小-->
-                    <size android:height="150dp"
-                        android:width="150dp"/>
+                    <size android:height="140dp"
+                        android:width="140dp"/>
 <!--                    size無用-->
 <!--                    偏移量 0.5為中心-->
 <!--                    android:centerX="0.51"-->
@@ -20,7 +20,7 @@
                         android:startColor="@color/black"
                         android:endColor="@color/transparent"
                         android:type="radial"
-                        android:gradientRadius="82dp"
+                        android:gradientRadius="70dp"
                         />
 <!--                    innerRadius = (drawable.size - padding*2)/2-->
 <!--                    thickness = padding-->

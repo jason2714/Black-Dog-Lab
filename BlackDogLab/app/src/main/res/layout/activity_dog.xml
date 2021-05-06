@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_dog_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DogActivity">
@@ -11,33 +12,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="255dp" />
+        app:layout_constraintGuide_begin="230dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdl_dog_house_yellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="18dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdl_dog_house_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="168dp" />
+        app:layout_constraintGuide_begin="146dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdl_dog_house_red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="318dp" />
+        app:layout_constraintGuide_begin="277dp" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_dog_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <ImageView
         android:id="@+id/bg_dog"
@@ -47,11 +50,30 @@
 
     <com.jason.blackdoglab.view.FrameSurfaceView
         android:id="@+id/red_dog"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:translationX="-50dp"
-        app:layout_constraintBottom_toTopOf="@id/img_three_bowls"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="@dimen/dog_main"
+        android:layout_height="@dimen/dog_main"
+        android:translationX="-33dp"
+        android:translationY="287dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jason.blackdoglab.view.FrameSurfaceView
+        android:id="@+id/yellow_dog"
+        android:layout_width="@dimen/dog_main"
+        android:layout_height="@dimen/dog_main"
+        android:translationX="100dp"
+        android:translationY="287dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jason.blackdoglab.view.FrameSurfaceView
+        android:id="@+id/blue_dog"
+        android:layout_width="@dimen/dog_main"
+        android:layout_height="@dimen/dog_main"
+        android:translationX="300dp"
+        android:translationY="287dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_dog_right"
@@ -77,9 +99,9 @@
 
     <ImageView
         android:id="@+id/img_three_bowls"
-        android:layout_width="340dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="295dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -109,7 +131,7 @@
         android:id="@+id/ll_dog_btn_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="95dp"
+        android:layout_marginBottom="80dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

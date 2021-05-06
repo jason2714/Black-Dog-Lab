@@ -41,8 +41,8 @@
     <style name="TextColor.DialogBox"></style>
     <!--    First Basic Information-->
     <style name="BasicInfoEditText">
-        <item name="android:layout_height">30dp</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="singleLine">true</item>
         <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
@@ -52,10 +52,10 @@
     <style name="BasicInfoEditTextLabel">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:layout_marginStart">5dp</item>
-        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
         <item name="android:gravity">center</item>
         <item name="layout_constraintDimensionRatio">1:1</item>
     </style>

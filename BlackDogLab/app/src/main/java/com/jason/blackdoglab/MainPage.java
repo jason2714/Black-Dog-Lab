@@ -245,7 +245,7 @@ public class MainPage extends BaseActivity {
                 R.drawable.icon_note, player.getCharacterDrawable()
         };
         for (int i = 0; i < tabIconImages.length; i++) {
-            int imagePadding = (int) Utils.convertDpToPixel(this, 22);
+            int imagePadding = (int) Utils.convertDpToPixel(this, 17);
             tabIconImages[i].setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
             setImageDrawableFit(tabIconImages[i], tabIconDrawables[i]);
             mTabLayout.getTabAt(i).setCustomView(tabIconImages[i]);
