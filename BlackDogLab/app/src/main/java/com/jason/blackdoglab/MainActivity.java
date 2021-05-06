@@ -12,6 +12,7 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 
+import com.annimon.stream.function.Consumer;
 import com.jason.blackdoglab.loginpage.DailyLoginActivity;
 import com.jason.blackdoglab.loginpage.FirstLoginActivity;
 import com.jason.blackdoglab.utils.FileController;
@@ -136,7 +137,9 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-        intent = new Intent(MainActivity.this, DogActivity.class);
+//        intent = new Intent(MainActivity.this, DogActivity.class);
+        Utils.setLog(Utils.getScreenSizePixel(this).toString());
+        Utils.setLog(Utils.getDensity(this) + "");
         startActivity(intent);
     }
 }
