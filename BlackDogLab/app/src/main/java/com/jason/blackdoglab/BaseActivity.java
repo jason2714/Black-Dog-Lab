@@ -26,9 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private final int theme_default = R.style.Theme_BlackDogLab_Default;
     protected FileController fc_basicInfo, fc_dailyMood, fc_loginDate;
 
-    protected int setThemeColor() {
-        return theme_default;
-    }
+    protected abstract int setThemeColor();
 
     //    protected abstract void
     private int ctWidth, ctHeight;

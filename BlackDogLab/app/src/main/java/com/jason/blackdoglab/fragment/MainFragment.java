@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.jason.blackdoglab.DogActivity;
 import com.jason.blackdoglab.MainPage;
 import com.jason.blackdoglab.R;
+import com.jason.blackdoglab.StreetActivity;
 import com.jason.blackdoglab.utils.Utils;
 
 /**
@@ -138,11 +139,14 @@ public class MainFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.btn_lab_left:
+                intent = new Intent(getActivity(), StreetActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_lab_right:
-                Intent intent = new Intent(getActivity(), DogActivity.class);
+                intent = new Intent(getActivity(), DogActivity.class);
                 startActivity(intent);
                 break;
             default:

@@ -64,8 +64,7 @@ public class CardAdapter extends PagerAdapter {
             dog.setVisible(false);
             setPopupWindow(container, foodList.get(position));
             container.setVisibility(View.INVISIBLE);
-            Utils.setLog(container.toString());
-            Utils.setLog(container.getClass().getSimpleName());
+
         });
         container.addView(view, 0);
         return view;
@@ -116,15 +115,42 @@ public class CardAdapter extends PagerAdapter {
         MaterialButton mBtnSubmit = view.findViewById(R.id.btn_food_submit);
         ImageView mBtnCancel = view.findViewById(R.id.btn_cancel);
         setImageDrawableFit(mImgFood, food.getDrawableID());
-        setImageDrawableFit(mBtnCancel,R.drawable.icon_cancel);
+        setImageDrawableFit(mBtnCancel, R.drawable.icon_cancel);
         mTvFoodDes.setText(food.getDescription());
-        mBtnCancel.setOnClickListener(v ->{
+        mBtnCancel.setOnClickListener(v -> {
             container.setVisibility(View.VISIBLE);
             popupWindow.dismiss();
         });
         mBtnSubmit.setOnClickListener(v -> {
-            ctLayout.removeAllViews();
+            ctLayout.removeView(container);
+            ctLayout.setOrientation(LinearLayout.VERTICAL);
             popupWindow.dismiss();
+            //dog bowl
+            ImageView dogBowl = new ImageView(context);
+            LinearLayout.LayoutParams dogBowlParams = new LinearLayout.LayoutParams(
+                    context.getResources().getDimensionPixelOffset(R.dimen.dog_bowl_width),
+                    context.getResources().getDimensionPixelOffset(R.dimen.dog_bowl_height));
+            setImageDrawableFit(dogBowl, R.drawable.icon_dog_bowl);
+            //food
+            ImageView imgFood = new ImageView(context);
+            LinearLayout.LayoutParams foodParams = new LinearLayout.LayoutParams(
+                    context.getResources().getDimensionPixelOffset(R.dimen.dog_food_eat_size),
+                    context.getResources().getDimensionPixelOffset(R.dimen.dog_food_eat_size));
+            if (food.getDrawableID() == R.drawable.icon_food_fishoil_bottle)
+                setImageDrawableFit(imgFood, R.drawable.icon_food_fishoil);
+            else
+                setImageDrawableFit(imgFood, food.getDrawableID());
+//            bring to front
+            imgFood.setZ(1);
+            int foodStartY = ctLayout.getMeasuredHeight() -
+                    context.getResources().getDimensionPixelOffset(R.dimen.dog_bowl_width);
+            imgFood.setTranslationY(Utils.convertDpToPixel(context, -foodStartY));
+            imgFood.animate()
+                    .translationY(Utils.convertDpToPixel(context, 40))
+                    .setDuration(2000)
+                    .setStartDelay(500);
+            ctLayout.addView(imgFood, 0, foodParams);
+            ctLayout.addView(dogBowl, 1, dogBowlParams);
         });
 
 //      match parent to prevent click outside

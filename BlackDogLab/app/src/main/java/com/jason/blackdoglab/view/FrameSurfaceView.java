@@ -107,8 +107,6 @@ public class FrameSurfaceView extends BaseSurfaceView {
     @Override
     protected void onFrameDrawFinish() {
         // Recycle a frame directly after it has been drawn
-        Utils.setLog("bitmap size = " + bitmaps.size());
-        Utils.setLog("bitmap index = " + bitmapIndex);
         recycleOneFrame();
     }
 
@@ -213,7 +211,21 @@ public class FrameSurfaceView extends BaseSurfaceView {
             Utils.setLog("don't have image,already invisible");
             return;
         }
-
+        if (isVisible) {
+            paint.setAlpha(255);
+        } else {
+            paint.setAlpha(0);
+        }
+        this.post(() -> {
+            bitmapIndex = bitmaps.size() - 1;
+            startAnim();
+        });
+    }
+    public void setVisible(boolean isVisible,int duration) {
+        if(bitmaps.size() == 0){
+            Utils.setLog("don't have image,already invisible");
+            return;
+        }
         if (isVisible) {
             paint.setAlpha(255);
         } else {

@@ -67,6 +67,11 @@ public class DailyLoginActivity extends BaseActivity {
     }
 
     @Override
+    protected int setThemeColor() {
+        return R.style.Theme_BlackDogLab_Default;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        try {

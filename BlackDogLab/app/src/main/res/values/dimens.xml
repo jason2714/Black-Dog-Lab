@@ -27,4 +27,7 @@
     <dimen name="dog_food_image_size">85dp</dimen>
     <dimen name="dog_food_item_margin">20dp</dimen>
     <dimen name="dog_main">236dp</dimen>
+    <dimen name="dog_bowl_width">134dp</dimen>
+    <dimen name="dog_bowl_height">81dp</dimen>
+    <dimen name="dog_food_eat_size">40dp</dimen>
 </resources>

@@ -32,7 +32,6 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class DogActivity extends BaseActivity {
 
-    private int themeColor = R.style.Theme_BlackDogLab_Default;
     private HashMap<String, Integer> dogMotion;
     private GifImageView mGifDogBg;
     private ImageView mBgDog;
@@ -58,6 +57,7 @@ public class DogActivity extends BaseActivity {
         dogs.get("red").setOneShot(true);
         dogs.get("red").setKeepLastFrame(true);
         dogs.get("red").setSingleBitmap(R.drawable.red_dog_sleep000);
+        dogs.get("red").setOnTop(true);
         dogs.get("red").start();
 
         mGifDogBg = findViewById(R.id.gif_dog_background);
@@ -94,7 +94,7 @@ public class DogActivity extends BaseActivity {
     protected void initListener() {
         mBtnLeft.setOnClickListener(this);
         mBtnRight.setOnClickListener(this);
-        dogs.get("red").setOnClickListener(this);
+//        dogs.get("red").setOnClickListener(this);
         for (String dogColor : dogColors)
             notifications.get(dogColor).setOnClickListener(this);
     }
@@ -115,14 +115,14 @@ public class DogActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.red_dog:
-                if (!dogs.get("red").isRunning()) {
-                    int motion = (int) (Math.random() * 5);
-                    String[] move = {"eat", "sit", "sleep", "stand", "walk"};
-                    dogs.get("red").setBitmaps(getMotionList("red", move[motion]));
-                    dogs.get("red").start();
-                }
-                break;
+//            case R.id.red_dog:
+//                if (!dogs.get("red").isRunning()) {
+//                    int motion = (int) (Math.random() * 5);
+//                    String[] move = {"eat", "sit", "sleep", "stand", "walk"};
+//                    dogs.get("red").setBitmaps(getMotionList("red", move[motion]));
+//                    dogs.get("red").start();
+//                }
+//                break;
             case R.id.btn_dog_left:
                 Intent intent = new Intent(DogActivity.this, MainPage.class);
                 startActivity(intent);
@@ -134,15 +134,17 @@ public class DogActivity extends BaseActivity {
             case R.id.dog_ntf_yellow:
             case R.id.dog_ntf_red:
             case R.id.dog_ntf_blue:
-                removeNtfIcon();
                 if (v instanceof ImageView) {
+                    removeNtfIcon();
+//                    mLlBtnContainer.removeView(mImgThreeBowls);
+                    mLlBtnContainer.removeAllViews();
                     Utils.setLog(v.getTag() + "");
                     String dogColor = (String) v.getTag();
                     String mNtfDrawable = "bg_dog_" + dogColor;
                     int resID = getResources().getIdentifier(mNtfDrawable, "drawable", getPackageName());
                     setImageDrawableFit(mBgDog, resID);
+                    mLlBtnContainer.setOrientation(LinearLayout.HORIZONTAL);
                     createSelectBtn(dogColor);
-                    mImgThreeBowls.setVisibility(View.INVISIBLE);
                     dogs.get("red").setTranslationX(Utils.convertDpToPixel(this, 51));
                     dogs.get("red").setTranslationY(Utils.convertDpToPixel(this, 254));
                 }
@@ -154,7 +156,7 @@ public class DogActivity extends BaseActivity {
 
     @Override
     protected int setThemeColor() {
-        return themeColor;
+        return getThemeColor();
     }
 
     @Override
@@ -165,7 +167,8 @@ public class DogActivity extends BaseActivity {
         initDogFood();
     }
 
-    private void getThemeColor() {
+    private int getThemeColor() {
+        int themeColor = R.style.Theme_BlackDogLab_Default;
         fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         try {
@@ -199,6 +202,7 @@ public class DogActivity extends BaseActivity {
             e.printStackTrace();
             Utils.setLog(e.getMessage());
         }
+        return themeColor;
     }
 
     private List<Integer> getMotionList(String dogColor, String motion) {

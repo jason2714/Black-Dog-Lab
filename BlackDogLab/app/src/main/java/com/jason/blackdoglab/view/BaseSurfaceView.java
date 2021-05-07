@@ -38,7 +38,7 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
 
     private void setBackgroundTransparent() {
         getHolder().setFormat(PixelFormat.TRANSLUCENT);
-        setZOrderOnTop(true);
+//        setZOrderOnTop(true);
     }
 
     @Override
@@ -118,5 +118,9 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
         }
         animState = true;
         handler.post(new DrawRunnable());
+    }
+
+    public void setOnTop(boolean isOnTop) {
+        setZOrderOnTop(isOnTop);
     }
 }
