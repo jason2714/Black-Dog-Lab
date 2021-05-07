@@ -123,10 +123,6 @@ public class FrameSurfaceView extends BaseSurfaceView {
         // You need to clear the canvas before drawing a frame, otherwise all frames will be overlapped and displayed at the same time.
         if (!isFinish())
             clearCanvas(canvas);
-
-//        if (!isStart()) {
-//            return;
-//        }
         drawOneFrame(canvas);
         if (isFinish())
             onFrameAnimationEnd(canvas);
@@ -173,6 +169,14 @@ public class FrameSurfaceView extends BaseSurfaceView {
         });
     }
 
+    public void startDelay(int delay) {
+        //must start after thread create
+        this.postDelayed(() -> {
+            bitmapIndex = 0;
+            startAnim();
+        }, delay);
+    }
+
     private void clearCanvas(Canvas canvas) {
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         canvas.drawPaint(paint);
@@ -207,7 +211,7 @@ public class FrameSurfaceView extends BaseSurfaceView {
     }
 
     public void setVisible(boolean isVisible) {
-        if(bitmaps.size() == 0){
+        if (bitmaps.size() == 0) {
             Utils.setLog("don't have image,already invisible");
             return;
         }
@@ -216,26 +220,16 @@ public class FrameSurfaceView extends BaseSurfaceView {
         } else {
             paint.setAlpha(0);
         }
-        this.post(() -> {
-            bitmapIndex = bitmaps.size() - 1;
-            startAnim();
-        });
-    }
-    public void setVisible(boolean isVisible,int duration) {
-        if(bitmaps.size() == 0){
-            Utils.setLog("don't have image,already invisible");
-            return;
-        }
-        if (isVisible) {
-            paint.setAlpha(255);
-        } else {
-            paint.setAlpha(0);
-        }
-        this.post(() -> {
-            bitmapIndex = bitmaps.size() - 1;
-            startAnim();
-        });
+        redraw();
     }
 
+    public void redraw() {
+        if (!isRunning()) {
+            this.post(() -> {
+                bitmapIndex = bitmaps.size() - 1;
+                startAnim();
+            });
+        }
+    }
 
 }

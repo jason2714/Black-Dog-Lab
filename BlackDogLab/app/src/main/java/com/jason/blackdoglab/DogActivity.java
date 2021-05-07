@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,12 +54,13 @@ public class DogActivity extends BaseActivity {
             Utils.setLog(mDogID);
             int resID = getResources().getIdentifier(mDogID, "id", getPackageName());
             dogs.put(dogColor, findViewById(resID));
+            dogs.get(dogColor).setOnTop(true);
+            dogs.get(dogColor).setTag(dogColor);
         }
         dogs.get("red").setDuration(10);
         dogs.get("red").setOneShot(true);
         dogs.get("red").setKeepLastFrame(true);
         dogs.get("red").setSingleBitmap(R.drawable.red_dog_sleep000);
-        dogs.get("red").setOnTop(true);
         dogs.get("red").start();
 
         mGifDogBg = findViewById(R.id.gif_dog_background);
@@ -115,14 +118,15 @@ public class DogActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.red_dog:
+            case R.id.red_dog:
 //                if (!dogs.get("red").isRunning()) {
 //                    int motion = (int) (Math.random() * 5);
 //                    String[] move = {"eat", "sit", "sleep", "stand", "walk"};
 //                    dogs.get("red").setBitmaps(getMotionList("red", move[motion]));
 //                    dogs.get("red").start();
 //                }
-//                break;
+                Utils.setLog("onclick");
+                break;
             case R.id.btn_dog_left:
                 Intent intent = new Intent(DogActivity.this, MainPage.class);
                 startActivity(intent);
@@ -145,8 +149,10 @@ public class DogActivity extends BaseActivity {
                     setImageDrawableFit(mBgDog, resID);
                     mLlBtnContainer.setOrientation(LinearLayout.HORIZONTAL);
                     createSelectBtn(dogColor);
-                    dogs.get("red").setTranslationX(Utils.convertDpToPixel(this, 51));
-                    dogs.get("red").setTranslationY(Utils.convertDpToPixel(this, 254));
+                    dogs.get(dogColor).animate()
+                            .translationX(Utils.convertDpToPixel(this, 51))
+                            .translationY(Utils.convertDpToPixel(this, 254))
+                            .alpha(0.5f);
                 }
                 break;
             default:
@@ -262,10 +268,17 @@ public class DogActivity extends BaseActivity {
         mBtnFeed.setLetterSpacing(0.4f);
         mBtnFeed.setOnClickListener(view -> {
             mLlBtnContainer.removeAllViews();
-            dogs.get("red").setTranslationY(Utils.convertDpToPixel(this, 0));
+            dogs.get(dogColor).animate()
+                    .translationX(Utils.convertDpToPixel(this, 20))
+                    .translationY(Utils.convertDpToPixel(this, 16));
+            ViewGroup.LayoutParams params = dogs.get(dogColor).getLayoutParams();
+            params.width = getResources().getDimensionPixelOffset(R.dimen.dog_eat);
+            params.height = getResources().getDimensionPixelOffset(R.dimen.dog_eat);
+            dogs.get(dogColor).setLayoutParams(params);
+            dogs.get(dogColor).redraw();
             String mDrawableID = "bg_dog_feed_" + dogColor;
             int resID = getResources().getIdentifier(mDrawableID, "drawable", getPackageName());
-            setImageDrawableFit(mBgDog,resID);
+            setImageDrawableFit(mBgDog, resID);
             createFoodPager(dogColor);
         });
         //Btn Feed
@@ -344,7 +357,7 @@ public class DogActivity extends BaseActivity {
         mLlBtnContainer.addView(foodPager);
         Utils.setLog("food pager padding = " + pagePadding);
         //set adapter and pageTransformer
-        foodPager.setAdapter(new CardAdapter(this, foodList, dogs.get(dogColor),mLlBtnContainer));
+        foodPager.setAdapter(new CardAdapter(this, foodList, dogs.get(dogColor), mLlBtnContainer));
         foodPager.setPageTransformer(false, new CustomPagerTransformer(this));
         foodPager.setOffscreenPageLimit(foodList.size() - 1);
     }

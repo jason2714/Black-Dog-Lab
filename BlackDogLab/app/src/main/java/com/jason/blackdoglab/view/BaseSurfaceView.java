@@ -107,6 +107,10 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
         this.frameDuration = frameDuration;
     }
 
+    protected int getFrameDuration() {
+        return frameDuration;
+    }
+
     protected abstract void onFrameDrawFinish();
 
     protected abstract void onFrameDraw(Canvas canvas);
@@ -123,4 +127,5 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
     public void setOnTop(boolean isOnTop) {
         setZOrderOnTop(isOnTop);
     }
+
 }

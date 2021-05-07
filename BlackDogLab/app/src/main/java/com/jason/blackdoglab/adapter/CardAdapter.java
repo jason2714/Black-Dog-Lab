@@ -1,8 +1,10 @@
 package com.jason.blackdoglab.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,8 @@ import com.jason.blackdoglab.customclass.Food;
 import com.jason.blackdoglab.utils.Utils;
 import com.jason.blackdoglab.view.FrameSurfaceView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CardAdapter extends PagerAdapter {
@@ -64,7 +68,6 @@ public class CardAdapter extends PagerAdapter {
             dog.setVisible(false);
             setPopupWindow(container, foodList.get(position));
             container.setVisibility(View.INVISIBLE);
-
         });
         container.addView(view, 0);
         return view;
@@ -122,6 +125,13 @@ public class CardAdapter extends PagerAdapter {
             popupWindow.dismiss();
         });
         mBtnSubmit.setOnClickListener(v -> {
+            ViewGroup.LayoutParams params = dog.getLayoutParams();
+            params.width = context.getResources().getDimensionPixelOffset(R.dimen.dog_eat);
+            params.height = context.getResources().getDimensionPixelOffset(R.dimen.dog_eat);
+            dog.setLayoutParams(params);
+            dog.animate()
+                    .translationX(Utils.convertDpToPixel(context, 27))
+                    .translationY(Utils.convertDpToPixel(context, 206));
             ctLayout.removeView(container);
             ctLayout.setOrientation(LinearLayout.VERTICAL);
             popupWindow.dismiss();
@@ -145,12 +155,26 @@ public class CardAdapter extends PagerAdapter {
             int foodStartY = ctLayout.getMeasuredHeight() -
                     context.getResources().getDimensionPixelOffset(R.dimen.dog_bowl_width);
             imgFood.setTranslationY(Utils.convertDpToPixel(context, -foodStartY));
+            int startDelay = 500;
+            int fallDuration = 2000;
+            int eatDuration = 2000;
+
             imgFood.animate()
                     .translationY(Utils.convertDpToPixel(context, 40))
-                    .setDuration(2000)
-                    .setStartDelay(500);
+                    .setDuration(fallDuration)
+                    .setStartDelay(startDelay);
             ctLayout.addView(imgFood, 0, foodParams);
             ctLayout.addView(dogBowl, 1, dogBowlParams);
+            dog.setBitmaps(getMotionList("eat"));
+            dog.setOneShot(true);
+            dog.setKeepLastFrame(true);
+            dog.setTotalDuration(eatDuration);
+            dog.startDelay(startDelay + fallDuration);
+            imgFood.postDelayed(() -> {
+                ctLayout.removeView(imgFood);
+            }, startDelay + fallDuration + eatDuration * 4);
+
+
         });
 
 //      match parent to prevent click outside
@@ -167,5 +191,32 @@ public class CardAdapter extends PagerAdapter {
             Utils.showBackgroundAnimator(context, 0.5f, 1.0f);
         });
         Utils.showBackgroundAnimator(context, 1.0f, 0.5f);
+    }
+
+    private List<Integer> getMotionList(String motion) {
+        HashMap<String, Integer> dogMotion = new HashMap<>();
+        dogMotion.put("eat", 289);
+        dogMotion.put("sit", 116);
+        dogMotion.put("sleep", 116);
+        dogMotion.put("stand", 116);
+        dogMotion.put("walk", 115);
+        if (!dogMotion.containsKey(motion)) {
+            Utils.setLog("don't have motion : " + motion);
+            return null;
+        }
+        List<Integer> bitmaps = new ArrayList<>();
+        for (int i = 0; i < dogMotion.get(motion); i++) {
+            String id;
+            if (i < 10)
+                id = "00" + i;
+            else if (i >= 10 && i < 100)
+                id = "0" + i;
+            else
+                id = String.valueOf(i);
+            String mDrawableName = dog.getTag() + "_dog_" + motion + id;
+            int resID = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
+            bitmaps.add(resID);
+        }
+        return bitmaps;
     }
 }
