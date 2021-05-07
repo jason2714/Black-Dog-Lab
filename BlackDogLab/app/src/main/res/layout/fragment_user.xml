@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="220dp" />
+            app:layout_constraintGuide_begin="190dp" />
         <!--        padding equals to thickness in background-->
         <ImageView
             android:id="@+id/img_portrait"
@@ -65,7 +65,7 @@
             android:letterSpacing="0.1"
             android:text="懶死君"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/ll_basic_point"
             app:layout_constraintStart_toEndOf="@id/gdl_user_portrait_label"
@@ -79,15 +79,15 @@
             android:letterSpacing="0.1"
             android:text="實習研究員"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/gdl_user_portrait_label"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <LinearLayout
             android:id="@+id/ll_basic_point"
             android:layout_width="0dp"
-            android:layout_height="290dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="252dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/bg_user_box"
             android:elevation="5dp"
             android:orientation="vertical"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="8dp">
                 <!--                TODO-->
                 <LinearLayout
                     android:id="@+id/ll_accompany"
@@ -156,10 +156,10 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="25dp"
                 android:scrollbarStyle="outsideOverlay">
 
                 <LinearLayout
@@ -201,11 +201,11 @@
         <RelativeLayout
             android:id="@+id/ll_setting"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/bg_user_box"
             android:elevation="5dp"
-            android:padding="17dp"
+            android:padding="15dp"
             app:layout_constraintEnd_toStartOf="@id/gdl_user_right"
             app:layout_constraintStart_toEndOf="@id/gdl_user_left"
             app:layout_constraintTop_toBottomOf="@id/ll_basic_point">
@@ -219,7 +219,7 @@
                 android:letterSpacing="0.2"
                 android:text="訊息推播"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -232,7 +232,7 @@
                 android:text="關閉"
                 android:letterSpacing="0.1"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/tgbtn_message_broadcast"
@@ -245,7 +245,7 @@
                 android:showText="false"
                 android:thumb="@drawable/bg_thumb_switch"
                 app:showText="false"
-                app:switchMinWidth="80dp"
+                app:switchMinWidth="70dp"
                 app:track="@drawable/bg_track_meassge_broadcast"
                 app:useMaterialThemeColors="false" />
 
@@ -260,7 +260,7 @@
                 android:text="開啟"
                 android:letterSpacing="0.1"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_sound_volume"
@@ -271,7 +271,7 @@
                 android:letterSpacing="0.2"
                 android:text="音樂音量"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -282,12 +282,12 @@
                 android:layout_toStartOf="@id/sb_sound_volume"
                 android:text="小"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/sb_sound_volume"
-                android:layout_width="130dp"
-                android:layout_height="20dp"
+                android:layout_width="113dp"
+                android:layout_height="18dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="5dp"
                 android:layout_toStartOf="@id/tv_big"
@@ -303,10 +303,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="10dp"
                 android:text="大"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 

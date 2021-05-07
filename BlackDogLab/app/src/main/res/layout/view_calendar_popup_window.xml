@@ -2,17 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="20dp">
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="15dp">
 
     <ImageView
         android:id="@+id/img_dot"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="6dp" />
 
     <TextView
         android:id="@+id/tv_mood_title"
@@ -22,7 +22,7 @@
         android:layout_toEndOf="@id/img_dot"
         android:letterSpacing="0.2"
         android:textColor="?attr/colorPrimary"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_marginTop="10dp"
         android:letterSpacing="0.1"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_close"
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/tv_mood_title"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:text="X"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 </RelativeLayout>

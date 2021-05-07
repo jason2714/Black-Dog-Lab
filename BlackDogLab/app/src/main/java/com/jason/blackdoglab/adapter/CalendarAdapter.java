@@ -104,7 +104,7 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
 
     private void setPopupWindow(View v, int mood, String diary) {
         isPopupWindowExist = true;
-        String[] moodsStr = {"0", "1", "2", "3", "4"};
+        String[] moodsStr = {"心情低落", "心情低落", "心情平靜", "心情焦慮", "心情焦慮"};
         int[] moodsDotDrawable = {R.drawable.dot_mood1, R.drawable.dot_mood2,
                 R.drawable.dot_mood3, R.drawable.dot_mood4, R.drawable.dot_mood5};
 

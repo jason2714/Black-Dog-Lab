@@ -5,8 +5,8 @@
         android:top="5dp"
         android:bottom="5dp">
         <shape android:shape="rectangle">
-            <size android:width="32dp" android:height="20dp" />
-            <corners android:radius="30dp" />
+            <size android:width="26dp" android:height="16dp" />
+            <corners android:radius="20dp" />
             <solid android:color="?attr/colorPrimary" />
         </shape>
     </item>

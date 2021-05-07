@@ -4,32 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/black">
 
-    <VideoView
-        android:id="@+id/vv_begin_animation"
+    <LinearLayout
+        android:id="@+id/ll_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <pl.droidsonroids.gif.GifImageView
+        <VideoView
+            android:id="@+id/vv_begin_animation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </FrameLayout>
+
+
+    <com.jason.blackdoglab.view.FrameSurfaceView
         android:id="@+id/gif_login_animation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_skip"
-        android:layout_width="95dp"
-        android:layout_height="50dp"
+        android:layout_width="85dp"
+        android:layout_height="@dimen/btn_height"
         android:layout_margin="15dp"
         android:backgroundTint="@color/grey5"
         android:letterSpacing="0.4"
         android:text="跳過"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,14 +49,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start_game"
-        android:layout_width="135dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/brown1"
         android:letterSpacing="0.2"
         android:text="開始遊戲"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
