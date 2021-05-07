@@ -161,13 +161,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-<<<<<<< HEAD
 //        intent = new Intent(MainActivity.this, DogActivity.class);
-        Utils.setLog(Utils.getScreenSizePixel(this).toString());
-        Utils.setLog(Utils.getDensity(this) + "");
-=======
-        intent = new Intent(MainActivity.this, StreetActivity.class);
->>>>>>> e007e57a068ae65a592dac4706d17f54d88558b2
         startActivity(intent);
     }
 
