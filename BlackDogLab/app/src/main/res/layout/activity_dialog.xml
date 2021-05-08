@@ -2,46 +2,85 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_dialog_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DialogActivity">
+    tools:context=".DialogActivity"
+    android:background="@color/black">
+
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_bg_dialog_cry"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/bg_dialog_cry"/>
+        android:layout_height="match_parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdl_dialog_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65625" />
+        app:layout_constraintGuide_end="@dimen/dialog_box_height" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_dialog_box_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/dialog_box_npc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/gdl_dialog_box">
 
-        <TextView
-            style="@style/TextColor.DialogNameNPC"
-            android:text="NPC"
-            android:textStyle="bold" />
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/ll_dialog_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/test"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_dialog_name"
+            style="@style/TextColor.DialogName"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:visibility="invisible"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:letterSpacing="0.2"
+            android:elevation="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.2"
+            android:lineSpacingExtra="10dp"
+            android:textSize="12sp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_dialog_note"
+            android:layout_width="@dimen/dialog_next_size"
+            android:layout_height="@dimen/dialog_next_size"
+            android:layout_margin="@dimen/dialog_next_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_dialog_next"
+            android:layout_width="@dimen/dialog_next_size"
+            android:layout_height="@dimen/dialog_next_size"
+            android:layout_margin="@dimen/dialog_next_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

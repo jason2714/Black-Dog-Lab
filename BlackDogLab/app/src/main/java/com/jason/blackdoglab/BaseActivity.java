@@ -6,11 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jason.blackdoglab.customclass.TypeText;
 import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.utils.Utils;
@@ -33,12 +36,12 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private float deviceDensity;
     private int deviceDensityDpi;
     protected Handler mHandler;
+    protected TypeText mTypeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.hideNavigationBar(this);
-        mHandler = new Handler(getMainLooper());
         initBasicInfo();
         //setTheme一定要在setTheme前 不然會一堆奇怪得inflater error
         setTheme(this.setThemeColor());
@@ -76,6 +79,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
     protected void initBasicInfo() {
+        mTypeText = new TypeText();
+        mHandler = new Handler(getMainLooper());
     }
 
     protected Bitmap decodeBitmap(int drawableID, int ctWidth, int ctHeight) {
@@ -111,5 +116,4 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             imageView.setImageBitmap(decodeBitmap(drawableID, ctWidth, ctHeight));
         });
     }
-
 }

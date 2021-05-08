@@ -74,11 +74,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        Uri animationUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_begin_animation);
-        mVvBeginAnimation.setVideoURI(animationUri);
-        mVvBeginAnimation.setZOrderOnTop(true);
-        mVvBeginAnimation.setVisibility(View.VISIBLE);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+//        Uri animationUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_begin_animation);
+//        mVvBeginAnimation.setVideoURI(animationUri);
+        gameStart();
     }
 
     @Override
@@ -97,6 +96,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initBasicInfo() {
+        super.initBasicInfo();
         fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
@@ -127,12 +127,17 @@ public class MainActivity extends BaseActivity {
     }
 
     private void gameStart() {
+        Intent intent = new Intent(MainActivity.this, DialogActivity.class);
+        startActivity(intent);
+    }
+
+    private void gameStartDaily() {
         Intent intent;
         try {
             String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+            fc_loginDate.write(currentDate);
             if (!fc_loginDate.fileExist() || !fc_basicInfo.fileExist()) {
                 Utils.setLog("file not exist : " + currentDate);
-                fc_loginDate.write(currentDate);
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
                 if (fc_dailyMood.fileExist()) {
@@ -154,7 +159,6 @@ public class MainActivity extends BaseActivity {
                     }
                 } else {
                     Log.d("test", "new date");
-                    fc_loginDate.write(currentDate);
                     intent = new Intent(MainActivity.this, DailyLoginActivity.class);
                 }
             }

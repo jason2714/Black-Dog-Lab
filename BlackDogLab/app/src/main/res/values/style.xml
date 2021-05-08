@@ -23,17 +23,16 @@
         <!--        text color-->
         <item name="android:textColor">@color/black</item>
         <!--        hint color-->
-        <item name="android:textColorHint">@color/dialog_box_npc</item>
+        <item name="android:textColorHint">@color/grey4</item>
         <!--        editText color-->
         <item name="android:editTextColor">@color/black</item>
     </style>
 
-    <style name="TextColor.DialogNameNPC">
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">40dp</item>
+    <style name="TextColor.DialogName">
+        <item name="android:textColor">@color/grey1</item>
         <item name="android:textSize">16sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/bg_dialog_name_npc</item>
+        <item name="android:background">@drawable/bg_dialog_name</item>
         <item name="layout_constraintLeft_toLeftOf">parent</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
     </style>

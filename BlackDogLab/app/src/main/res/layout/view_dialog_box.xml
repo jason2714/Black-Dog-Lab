@@ -5,5 +5,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/dialog_box_npc" />
+        android:background="@color/dialog_box" />
 </merge>

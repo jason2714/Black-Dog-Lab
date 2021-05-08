@@ -165,6 +165,7 @@ public class MainPage extends BaseActivity {
 
     @Override
     protected void initBasicInfo() {
+        super.initBasicInfo();
         dailyMoodsSet = new HashSet<DailyMoods>();
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));

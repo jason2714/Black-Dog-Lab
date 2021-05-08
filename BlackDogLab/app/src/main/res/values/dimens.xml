@@ -32,4 +32,10 @@
     <dimen name="dog_bowl_width">134dp</dimen>
     <dimen name="dog_bowl_height">81dp</dimen>
     <dimen name="dog_food_eat_size">40dp</dimen>
+
+    <dimen name="dialog_box_height">220dp</dimen>
+    <dimen name="dialog_btn_width">252dp</dimen>
+    <dimen name="dialog_big_btn_height">85dp</dimen>
+    <dimen name="dialog_next_size">24dp</dimen>
+    <dimen name="dialog_next_margin">16dp</dimen>
 </resources>

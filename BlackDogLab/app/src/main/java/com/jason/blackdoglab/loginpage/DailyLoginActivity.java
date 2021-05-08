@@ -159,6 +159,7 @@ public class DailyLoginActivity extends BaseActivity {
     }
 
     protected void initBasicInfo() {
+        super.initBasicInfo();
         fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         try {
