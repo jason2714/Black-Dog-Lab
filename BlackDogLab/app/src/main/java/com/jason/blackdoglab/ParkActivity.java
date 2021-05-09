@@ -75,14 +75,14 @@ public class ParkActivity extends BaseActivity {
 
     private int getThemeColor() {
         int themeColor = R.style.Theme_BlackDogLab_Default;
-        fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
-        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        fcLoginDate = new FileController(this, getResources().getString(R.string.login_date));
+        fcDailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         try {
             //set basic theme color
-            String[] splitFileData = fc_dailyMood.readFileSplit();
+            String[] splitFileData = fcDailyMood.readFileSplit();
             for (String lineData : splitFileData) {
                 String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
-                if (lineDataArray[0].equals(fc_loginDate.readFile())) {
+                if (lineDataArray[0].equals(fcLoginDate.readFile())) {
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
                     switch (Integer.parseInt(lineDataArray[1])) {
                         case 0:

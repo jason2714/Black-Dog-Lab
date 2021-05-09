@@ -6,6 +6,7 @@
     <string name="basic_information">Basic Information</string>
     <string name="daily_mood">Daily Mood</string>
     <string name="login_date">"Login Date"</string>
+    <string name="dog_event">"Dog Event"</string>
     <string name="test">娑婆訶。摩訶悉陀夜。娑婆訶。悉陀喻藝。室皤囉耶。娑婆訶。那囉謹墀。娑婆訶。摩囉那囉。娑婆訶。悉囉僧阿穆佉耶。娑婆訶。娑婆摩訶阿悉陀夜。娑婆訶。者吉囉阿悉陀夜。娑婆訶。波陀摩羯悉陀夜。娑婆訶。那囉謹墀皤伽囉耶。娑婆訶。摩婆利勝羯囉夜。娑婆訶。南無喝囉怛那哆囉夜耶。南無阿唎耶。婆嚧吉帝。爍皤囉夜。娑婆訶。唵悉殿都。漫多囉。跋陀耶。娑婆訶。</string>
     <string-array name="note_types_array">
         <item>基本症狀</item>
@@ -13,9 +14,20 @@
         <item>陪伴心態</item>
         <item>危險應對</item>
     </string-array>
+    <string-array name="note_types_file_array">
+        <item>Basic Symptoms</item>
+        <item>Common Myths</item>
+        <item>Accompany Mentality</item>
+        <item>Danger Dealing</item>
+    </string-array>
     <string-array name="user_points_array">
         <item>陪伴值</item>
         <item>能量值</item>
         <item>經驗值</item>
+    </string-array>
+    <string-array name="user_points_file_array">
+        <item>Accompany</item>
+        <item>Energy</item>
+        <item>Exp</item>
     </string-array>
 </resources>

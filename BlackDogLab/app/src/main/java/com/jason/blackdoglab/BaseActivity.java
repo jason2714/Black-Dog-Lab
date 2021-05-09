@@ -27,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected abstract int getLayoutViewID();
 
     private final int theme_default = R.style.Theme_BlackDogLab_Default;
-    protected FileController fc_basicInfo, fc_dailyMood, fc_loginDate;
+    protected FileController fcBasicInfo, fcDailyMood, fcLoginDate;
 
     protected abstract int setThemeColor();
 
@@ -37,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private int deviceDensityDpi;
     protected Handler mHandler;
     protected TypeText mTypeText;
+    protected long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +65,16 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // 點返回鍵
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            // 移除Activity
-            ActivityUtils.getInstance().removeActivity(this);
-            this.finish();
+        ActivityUtils.getInstance().printActivity();
+        // 監聽返回键，點兩次退出process
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                showToast("真的要離開嗎QQ");
+                exitTime = System.currentTimeMillis();
+            } else {
+                ActivityUtils.getInstance().exitSystem();
+            }
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -49,7 +49,6 @@ public class MainPage extends BaseActivity {
 //        }
 //    }
 
-    private long exitTime = 0;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private ImageButton mImgBtTabTriangle;
@@ -148,35 +147,19 @@ public class MainPage extends BaseActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        ActivityUtils.getInstance().printActivity();
-        // 監聽返回键，點兩次退出process
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                showToast("真的要離開嗎QQ");
-                exitTime = System.currentTimeMillis();
-            } else {
-                ActivityUtils.getInstance().exitSystem();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
     protected void initBasicInfo() {
         super.initBasicInfo();
         dailyMoodsSet = new HashSet<DailyMoods>();
-        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
-        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
-        fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
+        fcBasicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fcDailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        fcLoginDate = new FileController(this, getResources().getString(R.string.login_date));
         try {
             //set basic theme color
-            String[] splitFileData = fc_dailyMood.readFileSplit();
+            String[] splitFileData = fcDailyMood.readFileSplit();
             for (String lineData : splitFileData) {
                 String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
                 dailyMoodsSet.add(new DailyMoods(lineDataArray[0], Integer.parseInt(lineDataArray[1]), lineDataArray[2]));
-                if (lineDataArray[0].equals(fc_loginDate.readFile())) {
+                if (lineDataArray[0].equals(fcLoginDate.readFile())) {
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
                     switch (Integer.parseInt(lineDataArray[1])) {
                         case 0:
@@ -203,7 +186,7 @@ public class MainPage extends BaseActivity {
             Utils.setLog(e.getMessage());
         }
         try {
-            String[] playerBasicInfo = fc_basicInfo.readLineSplit();
+            String[] playerBasicInfo = fcBasicInfo.readLineSplit();
             if (playerBasicInfo.length == 3) {
                 player = new Player(playerBasicInfo[0], playerBasicInfo[1], Integer.parseInt(playerBasicInfo[2]));
                 Utils.setLog("Get Player Info Success");

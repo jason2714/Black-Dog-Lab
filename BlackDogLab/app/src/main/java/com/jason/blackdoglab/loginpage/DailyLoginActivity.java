@@ -1,7 +1,9 @@
 package com.jason.blackdoglab.loginpage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jason.blackdoglab.BaseActivity;
+import com.jason.blackdoglab.DialogActivity;
+import com.jason.blackdoglab.utils.ActivityUtils;
 import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.MainPage;
 import com.jason.blackdoglab.R;
@@ -31,6 +35,7 @@ public class DailyLoginActivity extends BaseActivity {
     private int moodSelected = -1;
     private String playerName;
     private ImageView mBgDailyLogin;
+    private boolean isFirstLogin;
 
     @Override
     protected void initView() {
@@ -46,12 +51,6 @@ public class DailyLoginActivity extends BaseActivity {
         }
         setImageDrawableFit(mBgDailyLogin, R.drawable.bg_first_login);
         //for test
-//        try {
-//            fc_dailyMood.append("2021-05-09$0$hey$\n");
-//            fc_dailyMood.append("2021-06-15$0$far$\n");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -74,17 +73,31 @@ public class DailyLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        isFirstLogin = intent.getBooleanExtra("FIRST_LOGIN", false);
 //        try {
-//            fc_dailyMood.append("2021-04-05$0$happy$\n");
-//            fc_dailyMood.append("2021-04-06$1$happy$\n");
-//            fc_dailyMood.append("2021-04-07$2$happy$\n");
-//            fc_dailyMood.append("2021-04-08$3$happy$\n");
-//            fc_dailyMood.append("2021-04-09$4$happy$\n");
+//            fcDailyMood.append("2021-04-05$0$happy$\n");
+//            fcDailyMood.append("2021-04-06$1$happy$\n");
+//            fcDailyMood.append("2021-04-07$2$happy$\n");
+//            fcDailyMood.append("2021-04-08$3$happy$\n");
+//            fcDailyMood.append("2021-04-09$4$happy$\n");
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
 
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // 點返回鍵
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 移除Activity
+            ActivityUtils.getInstance().removeActivity(this);
+            this.finish();
+        }
+        return false;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -95,8 +108,12 @@ public class DailyLoginActivity extends BaseActivity {
 //                TODO check register success
                 Utils.setLog("start MainPageActivity");
                 if (checkInformation()) {
-                    Intent intent = new Intent(DailyLoginActivity.this, MainPage.class);
-                    startActivity(intent);
+                    if (isFirstLogin)
+                        ActivityUtils.getInstance().cleanActivityBesidesDialog();
+                    else {
+                        Intent intent = new Intent(DailyLoginActivity.this, MainPage.class);
+                        startActivity(intent);
+                    }
                 } else {
                     showToast("記得記錄心情文字歐~");
                 }
@@ -142,14 +159,14 @@ public class DailyLoginActivity extends BaseActivity {
                 .append(FileController.getLineSplitChar());
         try {
 //            for(int i = 0; i< 5; i++){
-//                String data = fc_dailyMood.readLine();
+//                String data = fcDailyMood.readLine();
 //                if(data != null)
 //                    Utils.setLog(data);
 //            }
-            if (fc_dailyMood.fileExist())
-                fc_dailyMood.append(stringBuffer.toString());
+            if (fcDailyMood.fileExist())
+                fcDailyMood.append(stringBuffer.toString());
             else
-                fc_dailyMood.write(stringBuffer.toString());
+                fcDailyMood.write(stringBuffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
             Utils.setLog(e.getMessage());
@@ -160,10 +177,10 @@ public class DailyLoginActivity extends BaseActivity {
 
     protected void initBasicInfo() {
         super.initBasicInfo();
-        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
-        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        fcBasicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fcDailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         try {
-            playerName = fc_basicInfo.readLineSplit()[0];
+            playerName = fcBasicInfo.readLineSplit()[0];
         } catch (IOException e) {
             e.printStackTrace();
             Utils.setLog(e.getMessage());

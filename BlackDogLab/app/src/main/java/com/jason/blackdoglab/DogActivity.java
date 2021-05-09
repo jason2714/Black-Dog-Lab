@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
@@ -57,11 +58,7 @@ public class DogActivity extends BaseActivity {
             dogs.get(dogColor).setOnTop(true);
             dogs.get(dogColor).setTag(dogColor);
         }
-        dogs.get("red").setDuration(10);
-        dogs.get("red").setOneShot(true);
-        dogs.get("red").setKeepLastFrame(true);
-        dogs.get("red").setSingleBitmap(R.drawable.red_dog_sleep000);
-        dogs.get("red").start();
+
 
         mGifDogBg = findViewById(R.id.gif_dog_background);
         mGifDogBg.setImageResource(R.drawable.gif_dog_bg);
@@ -112,11 +109,12 @@ public class DogActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ActivityUtils.getInstance().cleanActivity(this);
         ActivityUtils.getInstance().printActivity();
-
+        initDogEvent();
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.red_dog:
 //                if (!dogs.get("red").isRunning()) {
@@ -128,12 +126,12 @@ public class DogActivity extends BaseActivity {
                 Utils.setLog("onclick");
                 break;
             case R.id.btn_dog_left:
-                Intent intent = new Intent(DogActivity.this, MainPage.class);
+                intent = new Intent(DogActivity.this, MainPage.class);
                 startActivity(intent);
                 break;
             case R.id.btn_dog_right:
-                for (String dogColor : dogColors)
-                    setNtfLocation(dogColor);
+                intent = new Intent(DogActivity.this, ParkActivity.class);
+                startActivity(intent);
                 break;
             case R.id.dog_ntf_yellow:
             case R.id.dog_ntf_red:
@@ -147,8 +145,7 @@ public class DogActivity extends BaseActivity {
                     String mNtfDrawable = "bg_dog_" + dogColor;
                     int resID = getResources().getIdentifier(mNtfDrawable, "drawable", getPackageName());
                     setImageDrawableFit(mBgDog, resID);
-                    mLlBtnContainer.setOrientation(LinearLayout.HORIZONTAL);
-                    createSelectBtn(dogColor);
+                    createSelectBtn(dogColor,0);
                     dogs.get(dogColor).animate()
                             .translationX(Utils.convertDpToPixel(this, 51))
                             .translationY(Utils.convertDpToPixel(this, 254))
@@ -175,14 +172,14 @@ public class DogActivity extends BaseActivity {
 
     private int getThemeColor() {
         int themeColor = R.style.Theme_BlackDogLab_Default;
-        fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
-        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        fcLoginDate = new FileController(this, getResources().getString(R.string.login_date));
+        fcDailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
         try {
             //set basic theme color
-            String[] splitFileData = fc_dailyMood.readFileSplit();
+            String[] splitFileData = fcDailyMood.readFileSplit();
             for (String lineData : splitFileData) {
                 String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
-                if (lineDataArray[0].equals(fc_loginDate.readFile())) {
+                if (lineDataArray[0].equals(fcLoginDate.readFile())) {
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
                     switch (Integer.parseInt(lineDataArray[1])) {
                         case 0:
@@ -256,32 +253,19 @@ public class DogActivity extends BaseActivity {
             notifications.get(dogColor).setImageResource(0);
     }
 
-    private void createSelectBtn(String dogColor) {
+    public void createSelectBtn(String dogColor, int btnIndex) {
+        mLlBtnContainer.setOrientation(LinearLayout.HORIZONTAL);
         //Btn Feed
         MaterialButton mBtnFeed = new MaterialButton(this);
         mBtnFeed.setWidth(getResources().getDimensionPixelOffset(R.dimen.dog_btn_width));
         mBtnFeed.setHeight(getResources().getDimensionPixelOffset(R.dimen.btn_height));
-        mBtnFeed.setIconTintResource(R.color.blue2);
         mBtnFeed.setText("餵食");
         mBtnFeed.setTextSize(14);
         mBtnFeed.setCornerRadius((int) Utils.convertDpToPixel(this, 10));
         mBtnFeed.setLetterSpacing(0.4f);
-        mBtnFeed.setOnClickListener(view -> {
-            mLlBtnContainer.removeAllViews();
-            dogs.get(dogColor).animate()
-                    .translationX(Utils.convertDpToPixel(this, 20))
-                    .translationY(Utils.convertDpToPixel(this, 16));
-            ViewGroup.LayoutParams params = dogs.get(dogColor).getLayoutParams();
-            params.width = getResources().getDimensionPixelOffset(R.dimen.dog_eat);
-            params.height = getResources().getDimensionPixelOffset(R.dimen.dog_eat);
-            dogs.get(dogColor).setLayoutParams(params);
-            dogs.get(dogColor).redraw();
-            String mDrawableID = "bg_dog_feed_" + dogColor;
-            int resID = getResources().getIdentifier(mDrawableID, "drawable", getPackageName());
-            setImageDrawableFit(mBgDog, resID);
-            createFoodPager(dogColor);
-        });
-        //Btn Feed
+        mBtnFeed.setBackgroundTintList(ContextCompat.getColorStateList(this,
+                Utils.getAttrID(this, R.attr.colorSecondary, Utils.RESOURCE_ID)));
+        //Btn Accompany
         MaterialButton mBtnAccompany = new MaterialButton(this);
         LinearLayout.LayoutParams accompanyParams = new LinearLayout.LayoutParams(
                 getResources().getDimensionPixelOffset(R.dimen.dog_btn_width),
@@ -290,14 +274,41 @@ public class DogActivity extends BaseActivity {
         int accompanyMargin = (int) Utils.convertDpToPixel(this, 40);
         accompanyParams.setMargins(accompanyMargin, 0, 0, 0);
         mBtnAccompany.setLayoutParams(accompanyParams);
-        mBtnAccompany.setIconTintResource(R.color.blue2);
         mBtnAccompany.setText("陪伴");
         mBtnAccompany.setTextSize(14);
         mBtnAccompany.setCornerRadius((int) Utils.convertDpToPixel(this, 10));
         mBtnAccompany.setLetterSpacing(0.4f);
-        mBtnAccompany.setOnClickListener(view -> {
-            mLlBtnContainer.removeAllViews();
-        });
+        mBtnAccompany.setBackgroundTintList(ContextCompat.getColorStateList(this,
+                Utils.getAttrID(this, R.attr.colorSecondary, Utils.RESOURCE_ID)));
+
+        if (btnIndex == 0) {
+            mBtnFeed.setAlpha(1);
+            mBtnAccompany.setAlpha(0.5f);
+            mBtnAccompany.setOnClickListener(null);
+            mBtnFeed.setOnClickListener(view -> {
+                mLlBtnContainer.removeAllViews();
+                dogs.get(dogColor).setOneShot(true);
+                dogs.get(dogColor).animate()
+                        .translationX(Utils.convertDpToPixel(this, 20))
+                        .translationY(Utils.convertDpToPixel(this, 16));
+                ViewGroup.LayoutParams params = dogs.get(dogColor).getLayoutParams();
+                params.width = getResources().getDimensionPixelOffset(R.dimen.dog_eat);
+                params.height = getResources().getDimensionPixelOffset(R.dimen.dog_eat);
+                dogs.get(dogColor).setLayoutParams(params);
+                dogs.get(dogColor).redraw();
+                String mDrawableID = "bg_dog_feed_" + dogColor;
+                int resID = getResources().getIdentifier(mDrawableID, "drawable", getPackageName());
+                setImageDrawableFit(mBgDog, resID);
+                createFoodPager(dogColor);
+            });
+        } else if (btnIndex == 1) {
+            mBtnFeed.setAlpha(0.5f);
+            mBtnAccompany.setAlpha(1);
+            mBtnFeed.setOnClickListener(null);
+            mBtnAccompany.setOnClickListener(btn -> {
+                mLlBtnContainer.removeAllViews();
+            });
+        }
         mLlBtnContainer.addView(mBtnFeed, 0);
         mLlBtnContainer.addView(mBtnAccompany, 1);
     }
@@ -360,6 +371,25 @@ public class DogActivity extends BaseActivity {
         foodPager.setAdapter(new CardAdapter(this, foodList, dogs.get(dogColor), mLlBtnContainer));
         foodPager.setPageTransformer(false, new CustomPagerTransformer(this));
         foodPager.setOffscreenPageLimit(foodList.size() - 1);
+    }
+
+    private void initDogEvent() {
+        FileController fcDogEvent = new FileController(DogActivity.this, getResources().getString(R.string.dog_event));
+        if (fcDogEvent.fileExist()) {
+            try {
+                String[] dogEvent = fcDogEvent.readFile().split(FileController.getWordSplitRegex());
+                String dogColor = dogEvent[0];
+                String dogMotion = dogEvent[1];
+                dogs.get(dogColor).setDuration(10);
+                dogs.get(dogColor).setOneShot(false);
+                dogs.get(dogColor).setKeepLastFrame(true);
+                dogs.get(dogColor).setBitmaps(getMotionList(dogColor, dogMotion));
+                dogs.get(dogColor).start();
+                setNtfLocation(dogColor);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

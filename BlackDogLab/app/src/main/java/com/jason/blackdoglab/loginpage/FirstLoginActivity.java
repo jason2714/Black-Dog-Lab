@@ -76,8 +76,6 @@ public class FirstLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityUtils.getInstance().cleanActivity(this);
-        ActivityUtils.getInstance().printActivity();
     }
 
     @Override
@@ -88,6 +86,7 @@ public class FirstLoginActivity extends BaseActivity {
 //                TODO check register success
                 if (checkInformation()) {
                     Intent intent = new Intent(FirstLoginActivity.this, DailyLoginActivity.class);
+                    intent.putExtra("FIRST_LOGIN",true);
                     startActivity(intent);
                 } else {
                     showToast("資料填寫不齊全");
@@ -124,9 +123,15 @@ public class FirstLoginActivity extends BaseActivity {
                         .setTitle("請選生日")
                         .setView(datePicker)
                         .setPositiveButton("確認", (dialog, which) -> {
+                            String month = String.valueOf(datePicker.getMonth() + 1);
+                            String date = String.valueOf(datePicker.getDayOfMonth());
                             mEtYear.setText(String.valueOf(datePicker.getYear()));
-                            mEtMonth.setText(String.valueOf(datePicker.getMonth() + 1));
-                            mEtDate.setText(String.valueOf(datePicker.getDayOfMonth()));
+                            if (datePicker.getMonth() < 9)
+                                month = "0" + month;
+                            mEtMonth.setText(month);
+                            if (datePicker.getDayOfMonth() < 10)
+                                date = "0" + date;
+                            mEtDate.setText(date);
                         })
                         .setNegativeButton("取消", null)
                         .create();
@@ -146,21 +151,6 @@ public class FirstLoginActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // 監聽返回键，點兩次退出process
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                showToast("真的要離開嗎QQ");
-                exitTime = System.currentTimeMillis();
-            } else {
-                ActivityUtils.getInstance().exitSystem();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
     private boolean checkInformation() {
         Utils.setLog("start DailyActivity");
         if (mEtName.getText().toString().isEmpty() ||
@@ -170,6 +160,7 @@ public class FirstLoginActivity extends BaseActivity {
                 characterSelected == -1)
             return false;
         StringBuffer stringBuffer = new StringBuffer();
+
         String BirthDate = mEtYear.getText().toString() + '-' +
                 mEtMonth.getText().toString() + '-' +
                 mEtDate.getText().toString();
@@ -181,7 +172,7 @@ public class FirstLoginActivity extends BaseActivity {
                 .append(FileController.getLineSplitChar());
 
         try {
-            fc_basicInfo.write(stringBuffer.toString());
+            fcBasicInfo.write(stringBuffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
             Utils.setLog(e.getMessage());
@@ -192,6 +183,6 @@ public class FirstLoginActivity extends BaseActivity {
 
     protected void initBasicInfo() {
         super.initBasicInfo();
-        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fcBasicInfo = new FileController(this, getResources().getString(R.string.basic_information));
     }
 }

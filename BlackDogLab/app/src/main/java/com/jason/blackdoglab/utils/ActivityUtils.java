@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Process;
 import android.util.Log;
 
+import com.jason.blackdoglab.DialogActivity;
+import com.jason.blackdoglab.customclass.Dialog;
+import com.jason.blackdoglab.loginpage.DailyLoginActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +47,15 @@ public class ActivityUtils{
         }
     }
 
+    public void cleanActivityBesidesDialog() {
+//        不能在內直接remove null activity,因為for in 不能再回圈內更改
+        for (Activity activity : activityList) {
+            if (activity != null && !(activity instanceof DialogActivity)){
+                activity.finish();
+            }
+        }
+    }
+
     public void printActivity(){
         for (Activity activity : activityList) {
             if (activity != null)
@@ -56,6 +69,13 @@ public class ActivityUtils{
         //
         android.os.Process.killProcess(Process.myPid());
         System.exit(0);
+    }
+
+    public DialogActivity getDialogActivity(){
+        for(Activity activity : activityList)
+            if(activity instanceof DialogActivity)
+                return (DialogActivity)activity;
+        return null;
     }
 
 }

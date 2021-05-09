@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.android.material.button.MaterialButton;
+import com.jason.blackdoglab.DogActivity;
 import com.jason.blackdoglab.R;
 import com.jason.blackdoglab.customclass.Food;
 import com.jason.blackdoglab.utils.Utils;
@@ -121,6 +122,7 @@ public class CardAdapter extends PagerAdapter {
         setImageDrawableFit(mBtnCancel, R.drawable.icon_cancel);
         mTvFoodDes.setText(food.getDescription());
         mBtnCancel.setOnClickListener(v -> {
+            dog.setVisible(true);
             container.setVisibility(View.VISIBLE);
             popupWindow.dismiss();
         });
@@ -165,16 +167,18 @@ public class CardAdapter extends PagerAdapter {
                     .setStartDelay(startDelay);
             ctLayout.addView(imgFood, 0, foodParams);
             ctLayout.addView(dogBowl, 1, dogBowlParams);
+            ctLayout.postDelayed(() -> dog.setVisible(true), startDelay + fallDuration);
             dog.setBitmaps(getMotionList("eat"));
             dog.setOneShot(true);
             dog.setKeepLastFrame(true);
             dog.setTotalDuration(eatDuration);
-            dog.startDelay(startDelay + fallDuration);
+            dog.startDelay(1000 + startDelay + fallDuration);
             imgFood.postDelayed(() -> {
-                ctLayout.removeView(imgFood);
-            }, startDelay + fallDuration + eatDuration * 4);
-
-
+                ctLayout.removeAllViews();
+                if (context instanceof DogActivity) {
+                    ((DogActivity) context).createSelectBtn((String) dog.getTag(),1);
+                }
+            }, startDelay + fallDuration + eatDuration * 5);
         });
 
 //      match parent to prevent click outside
@@ -186,7 +190,6 @@ public class CardAdapter extends PagerAdapter {
         popupWindow.setOutsideTouchable(false);
         popupWindow.setTouchable(true);
         popupWindow.setOnDismissListener(() -> {
-            dog.setVisible(true);
             Utils.setLog("dismiss");
             Utils.showBackgroundAnimator(context, 0.5f, 1.0f);
         });

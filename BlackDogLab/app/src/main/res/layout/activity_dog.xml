@@ -49,16 +49,16 @@
         android:scaleType="fitXY" />
 
     <com.jason.blackdoglab.view.FrameSurfaceView
-        android:id="@+id/red_dog"
+        android:id="@+id/yellow_dog"
         android:layout_width="@dimen/dog_main"
         android:layout_height="@dimen/dog_main"
-        android:translationX="-33dp"
+        android:translationX="-40dp"
         android:translationY="287dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.jason.blackdoglab.view.FrameSurfaceView
-        android:id="@+id/yellow_dog"
+        android:id="@+id/blue_dog"
         android:layout_width="@dimen/dog_main"
         android:layout_height="@dimen/dog_main"
         android:translationX="100dp"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.jason.blackdoglab.view.FrameSurfaceView
-        android:id="@+id/blue_dog"
+        android:id="@+id/red_dog"
         android:layout_width="@dimen/dog_main"
         android:layout_height="@dimen/dog_main"
         android:translationX="300dp"

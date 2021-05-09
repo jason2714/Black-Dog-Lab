@@ -75,6 +75,11 @@ public class NoteFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
+        String[] noteArray = getResources().getStringArray(R.array.note_types_file_array);
+        fcNote = new FileController[noteArray.length];
+        for (int i = 0; i < noteArray.length; i++)
+            fcNote[i] = new FileController(getContext(), noteArray[i]);
+
         mBgMainNote = view.findViewById(R.id.bg_main_note);
         mLlNote = view.findViewById(R.id.ll_note);
         mSpnNote = view.findViewById(R.id.spn_note);
@@ -87,10 +92,7 @@ public class NoteFragment extends BaseFragment {
         mSpnNote.setDropDownVerticalOffset(getResources().getDimensionPixelSize(R.dimen.note_spinner_height));
         mSpnNote.setDropDownHorizontalOffset(horizonOffset);
         mSpnNote.setDropDownWidth(getResources().getDimensionPixelSize(R.dimen.note_spinner_dropdown_width));
-        fcNote = new FileController[]{new FileController(getContext(), "Basic Symptoms"),
-                new FileController(getContext(), "Common Myths"),
-                new FileController(getContext(), "Accompany Mentality"),
-                new FileController(getContext(), "Danger Dealing")};
+
     }
 
     @Override
@@ -99,6 +101,7 @@ public class NoteFragment extends BaseFragment {
         mSpnNote.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mLlNote.removeAllViews();
                 new Thread(() -> {
                     if (!fcNote[position].fileExist()) {
                         Utils.setLog("File Note " + position + " Not Exist");
@@ -111,7 +114,6 @@ public class NoteFragment extends BaseFragment {
                         }
                     } else {
                         try {
-                            mHandler.post(() -> mLlNote.removeAllViews());
                             loadNoteArticle(fcNote[position].readFileSplit());
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -144,12 +146,12 @@ public class NoteFragment extends BaseFragment {
         //TODO initial view here
         //initial view
         //initial listener
-        try {
-            for (int i = 0; i < 4; i++)
-                fcNote[i].write("陪伴者也需要人陪伴" + i + "$陪伴者也非常需要其他人的陪伴，這樣狀態不好的時候才有人能夠抒發情緒或是協助自己。$\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            for (int i = 0; i < 4; i++)
+//                fcNote[i].write("陪伴者也需要人陪伴$陪伴者也非常需要其他人的陪伴，這樣狀態不好的時候才有人能夠抒發情緒或是協助自己。$\n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

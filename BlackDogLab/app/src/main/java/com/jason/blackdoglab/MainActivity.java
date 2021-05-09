@@ -74,10 +74,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-//        Uri animationUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_begin_animation);
-//        mVvBeginAnimation.setVideoURI(animationUri);
-        gameStart();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        Uri animationUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_begin_animation);
+        mVvBeginAnimation.setVideoURI(animationUri);
+//        testGameStart();
+//        gameStartDaily();
     }
 
     @Override
@@ -87,7 +88,8 @@ public class MainActivity extends BaseActivity {
                 toStartGamePage();
                 break;
             case R.id.btn_start_game:
-                gameStart();
+//                gameStartDaily();
+                testGameStart();
                 break;
             default:
                 break;
@@ -97,9 +99,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initBasicInfo() {
         super.initBasicInfo();
-        fc_loginDate = new FileController(this, getResources().getString(R.string.login_date));
-        fc_basicInfo = new FileController(this, getResources().getString(R.string.basic_information));
-        fc_dailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
+        fcLoginDate = new FileController(this, getResources().getString(R.string.login_date));
+        fcBasicInfo = new FileController(this, getResources().getString(R.string.basic_information));
+        fcDailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
     }
 
     @Override
@@ -126,7 +128,13 @@ public class MainActivity extends BaseActivity {
         }, 100);
     }
 
-    private void gameStart() {
+    private void testGameStart() {
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        try {
+            fcLoginDate.write(currentDate);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Intent intent = new Intent(MainActivity.this, DialogActivity.class);
         startActivity(intent);
     }
@@ -135,14 +143,14 @@ public class MainActivity extends BaseActivity {
         Intent intent;
         try {
             String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-            fc_loginDate.write(currentDate);
-            if (!fc_loginDate.fileExist() || !fc_basicInfo.fileExist()) {
+            fcLoginDate.write(currentDate);
+            if (!fcLoginDate.fileExist() || !fcBasicInfo.fileExist()) {
                 Utils.setLog("file not exist : " + currentDate);
                 intent = new Intent(MainActivity.this, FirstLoginActivity.class);
             } else {
-                if (fc_dailyMood.fileExist()) {
+                if (fcDailyMood.fileExist()) {
                     boolean flag = false;
-                    String[] splitFileData = fc_dailyMood.readFileSplit();
+                    String[] splitFileData = fcDailyMood.readFileSplit();
                     for (String lineData : splitFileData) {
                         String[] lineDataArray = lineData.split(FileController.getWordSplitRegex());
                         if (currentDate.equals(lineDataArray[0])) {

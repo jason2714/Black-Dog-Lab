@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    &lt;!&ndash; 控制app背景色 format:颜色值、资源引用 &ndash;&gt;-->
-<!--    <attr name="custom_attr_app_bg" format="color|reference" />-->
+    <!--    &lt;!&ndash; 控制app背景色 format:颜色值、资源引用 &ndash;&gt;-->
+    <!--    <attr name="custom_attr_app_bg" format="color|reference" />-->
 
-<!--    &lt;!&ndash; 控制app标题栏背景色 format:颜色值、资源引用 &ndash;&gt;-->
-<!--    <attr name="custom_attr_app_title_layout_bg" format="color|reference" />-->
-<!--    &lt;!&ndash; 用户头像显示占位Drawable format:颜色值、资源引用 &ndash;&gt;-->
-<!--    <attr name="custom_attr_user_photo_place_holder" format="color|reference" />-->
-<!--    &lt;!&ndash; 用户昵称字体颜色 format:颜色值、资源引用 &ndash;&gt;-->
-<!--    <attr name="custom_attr_nickname_text_color" format="color|reference" />-->
-<!--    &lt;!&ndash; 用户备注字体颜色 format:颜色值、资源引用 &ndash;&gt;-->
-<!--    <attr name="custom_attr_remark_text_color" format="color|reference" />-->
-<!--    &lt;!&ndash; 用户头像显示的透明度 format:尺寸值、资源引用 &ndash;&gt;-->
-<!--    <attr name="custom_attr_user_photo_alpha" format="dimension|reference" />-->
+    <!--    &lt;!&ndash; 控制app标题栏背景色 format:颜色值、资源引用 &ndash;&gt;-->
+    <!--    <attr name="custom_attr_app_title_layout_bg" format="color|reference" />-->
+    <!--    &lt;!&ndash; 用户头像显示占位Drawable format:颜色值、资源引用 &ndash;&gt;-->
+    <!--    <attr name="custom_attr_user_photo_place_holder" format="color|reference" />-->
+    <!--    &lt;!&ndash; 用户昵称字体颜色 format:颜色值、资源引用 &ndash;&gt;-->
+    <!--    <attr name="custom_attr_nickname_text_color" format="color|reference" />-->
+    <!--    &lt;!&ndash; 用户备注字体颜色 format:颜色值、资源引用 &ndash;&gt;-->
+    <!--    <attr name="custom_attr_remark_text_color" format="color|reference" />-->
+    <!--    &lt;!&ndash; 用户头像显示的透明度 format:尺寸值、资源引用 &ndash;&gt;-->
+    <!--    <attr name="custom_attr_user_photo_alpha" format="dimension|reference" />-->
 
-<!--    <attr name="titlebar_bg" format="color|reference"/>-->
-<!--    <attr name="titlebar_text_color" format="color|reference"/>-->
-<!--    <attr name="body_bg" format="color|reference"/>-->
-<!--    <attr name="body_text_color" format="color|reference"/>-->
-<!--    <attr name="title" format="string"/>-->
+    <!--    <attr name="titlebar_bg" format="color|reference"/>-->
+    <!--    <attr name="titlebar_text_color" format="color|reference"/>-->
+    <!--    <attr name="body_bg" format="color|reference"/>-->
+    <!--    <attr name="body_text_color" format="color|reference"/>-->
+    <!--    <attr name="title" format="string"/>-->
 
-    <attr name="colorThird" format="color"/>
-    <attr name="triangle_color" format="color"/>
-    <attr name="main_right_triangle" format="reference"/>
-    <attr name="main_left_triangle" format="reference"/>
-    <attr name="main_tab_triangle" format="reference"/>
-    <attr name="main_tab_color" format="color"/>
-    <attr name="main_tab_border_color" format="color"/>
-    <attr name="main_character" format="reference"/>
-    <attr name="calendar_color" format="color"/>
-    <attr name="calendar_text_color" format="color"/>
-    <attr name="user_block_color" format="reference"/>
-    <attr name="bg_user" format="reference"/>
-    <attr name="bg_main_lab" format="reference"/>
-    <attr name="bg_main_street" format="reference"/>
-    <attr name="bg_main_park" format="reference"/>
-    <attr name="bg_note" format="reference"/>
-    <attr name="bg_calendar" format="reference"/>
-    <attr name="notification" format="reference"/>
+    <attr name="colorThird" format="color" />
+    <attr name="triangle_color" format="color" />
+    <attr name="main_right_triangle" format="reference" />
+    <attr name="main_left_triangle" format="reference" />
+    <attr name="main_tab_triangle" format="reference" />
+    <attr name="main_tab_color" format="color" />
+    <attr name="main_tab_border_color" format="color" />
+    <attr name="main_character" format="reference" />
+    <attr name="calendar_color" format="color" />
+    <attr name="calendar_text_color" format="color" />
+    <attr name="user_block_color" format="reference" />
+    <attr name="bg_user" format="reference" />
+    <attr name="bg_main_lab" format="reference" />
+    <attr name="bg_main_street" format="reference" />
+    <attr name="bg_main_park" format="reference" />
+    <attr name="bg_note" format="reference" />
+    <attr name="bg_calendar" format="reference" />
+    <attr name="notification" format="reference" />
+
+
+    <attr name="dialog_npc_name_bg_color" format="color" />
+    <attr name="dialog_npc_name_color" format="color" />
+    <attr name="dialog_npc_bg_color" format="color" />
+    <attr name="dialog_npc_text_color" format="color" />
+    <attr name="dialog_npc_next" format="reference" />
+
+    <attr name="dialog_player_name_bg_color" format="color" />
+    <attr name="dialog_player_name_color" format="color" />
+    <attr name="dialog_player_bg_color" format="color" />
+    <attr name="dialog_player_text_color" format="color" />
+    <attr name="dialog_player_next" format="reference" />
+
+    <attr name="dialog_btn_text_color" format="color" />
+    <attr name="dialog_btn_text_click_color" format="color" />
+    <attr name="dialog_btn_color" format="color" />
+    <attr name="dialog_btn_click_color" format="color" />
+
 </resources>

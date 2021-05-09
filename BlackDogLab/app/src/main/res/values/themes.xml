@@ -24,11 +24,35 @@
     </style>
 
     <style name="Theme.BlackDogLab.Default">
-        <item name="colorPrimary">@color/grey1</item>
+        <!--        for test-->
+        <item name="bg_user">@drawable/bg_user_blue</item>
+        <item name="bg_calendar">@drawable/bg_calendar_blue</item>
+        <item name="bg_main_lab">@drawable/bg_main_lab_blue</item>
+        <item name="bg_main_park">@drawable/bg_main_park_blue</item>
+        <item name="bg_main_street">@drawable/bg_main_street_blue</item>
+        <item name="bg_note">@drawable/bg_note_blue</item>
+<!--        for test-->
+        <item name="dialog_npc_bg_color">@color/grey1</item>
+        <item name="dialog_npc_name_bg_color">@color/grey4</item>
+        <item name="dialog_npc_name_color">@color/grey1</item>
+        <item name="dialog_npc_text_color">@color/grey5</item>
+        <item name="dialog_npc_next">@drawable/icon_dialog_next_npc</item>
+
+        <item name="dialog_player_bg_color">@color/grey5</item>
+        <item name="dialog_player_name_bg_color">@color/grey3</item>
+        <item name="dialog_player_name_color">@color/grey5</item>
+        <item name="dialog_player_text_color">@color/grey1</item>
+        <item name="dialog_player_next">@drawable/icon_dialog_next_player</item>
+
+        <item name="dialog_btn_color">@color/grey4</item>
+        <item name="dialog_btn_click_color">@color/grey1</item>
+        <item name="dialog_btn_text_color">@color/grey1</item>
+        <item name="dialog_btn_text_click_color">@color/grey5</item>
     </style>
 
     <style name="Theme.BlackDogLab.Brown">
         <item name="colorPrimary">@color/brown1</item>
+        <item name="colorSecondary">@color/brown2</item>
         <item name="colorThird">@color/brown3</item>
         <item name="main_right_triangle">@drawable/main_right_triangle_brown</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_brown</item>
@@ -45,10 +69,28 @@
         <item name="bg_main_street">@drawable/bg_main_street_brown</item>
         <item name="bg_note">@drawable/bg_note_brown</item>
         <item name="notification">@drawable/icon_notification_brown</item>
+
+        <item name="dialog_npc_bg_color">@color/brown1</item>
+        <item name="dialog_npc_name_bg_color">@color/brown4</item>
+        <item name="dialog_npc_name_color">@color/grey1</item>
+        <item name="dialog_npc_text_color">@color/brown5</item>
+        <item name="dialog_npc_next">@drawable/icon_dialog_next_npc_brown</item>
+
+        <item name="dialog_player_bg_color">@color/brown5</item>
+        <item name="dialog_player_name_bg_color">@color/brown3</item>
+        <item name="dialog_player_name_color">@color/grey1</item>
+        <item name="dialog_player_text_color">@color/grey1</item>
+        <item name="dialog_player_next">@drawable/icon_dialog_next_player_brown</item>
+
+        <item name="dialog_btn_color">@color/brown3</item>
+        <item name="dialog_btn_click_color">@color/brown1</item>
+        <item name="dialog_btn_text_color">@color/grey1</item>
+        <item name="dialog_btn_text_click_color">@color/brown5</item>
     </style>
 
     <style name="Theme.BlackDogLab.Green">
         <item name="colorPrimary">@color/green1</item>
+        <item name="colorSecondary">@color/green2</item>
         <item name="colorThird">@color/green3</item>
         <item name="main_right_triangle">@drawable/main_right_triangle_green</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_green</item>
@@ -65,10 +107,28 @@
         <item name="bg_main_street">@drawable/bg_main_street_green</item>
         <item name="bg_note">@drawable/bg_note_green</item>
         <item name="notification">@drawable/icon_notification_green</item>
+
+        <item name="dialog_npc_bg_color">@color/green1</item>
+        <item name="dialog_npc_name_bg_color">@color/green4</item>
+        <item name="dialog_npc_name_color">@color/grey1</item>
+        <item name="dialog_npc_text_color">@color/green5</item>
+        <item name="dialog_npc_next">@drawable/icon_dialog_next_npc_green</item>
+
+        <item name="dialog_player_bg_color">@color/green5</item>
+        <item name="dialog_player_name_bg_color">@color/green3</item>
+        <item name="dialog_player_name_color">@color/grey1</item>
+        <item name="dialog_player_text_color">@color/grey1</item>
+        <item name="dialog_player_next">@drawable/icon_dialog_next_player_green</item>
+
+        <item name="dialog_btn_color">@color/green3</item>
+        <item name="dialog_btn_click_color">@color/green1</item>
+        <item name="dialog_btn_text_color">@color/grey1</item>
+        <item name="dialog_btn_text_click_color">@color/green5</item>
     </style>
 
     <style name="Theme.BlackDogLab.Blue">
         <item name="colorPrimary">@color/blue1</item>
+        <item name="colorSecondary">@color/blue2</item>
         <item name="colorThird">@color/blue3</item>
         <item name="main_right_triangle">@drawable/main_right_triangle_blue</item>
         <item name="main_left_triangle">@drawable/main_left_triangle_blue</item>
@@ -85,5 +145,22 @@
         <item name="bg_main_street">@drawable/bg_main_street_blue</item>
         <item name="bg_note">@drawable/bg_note_blue</item>
         <item name="notification">@drawable/icon_notification_blue</item>
+
+        <item name="dialog_npc_bg_color">@color/blue1</item>
+        <item name="dialog_npc_name_bg_color">@color/blue4</item>
+        <item name="dialog_npc_name_color">@color/grey1</item>
+        <item name="dialog_npc_text_color">@color/blue5</item>
+        <item name="dialog_npc_next">@drawable/icon_dialog_next_npc_blue</item>
+
+        <item name="dialog_player_bg_color">@color/blue5</item>
+        <item name="dialog_player_name_bg_color">@color/blue3</item>
+        <item name="dialog_player_name_color">@color/grey1</item>
+        <item name="dialog_player_text_color">@color/grey1</item>
+        <item name="dialog_player_next">@drawable/icon_dialog_next_player_blue</item>
+
+        <item name="dialog_btn_color">@color/blue3</item>
+        <item name="dialog_btn_click_color">@color/blue1</item>
+        <item name="dialog_btn_text_color">@color/grey1</item>
+        <item name="dialog_btn_text_click_color">@color/blue5</item>
     </style>
 </resources>

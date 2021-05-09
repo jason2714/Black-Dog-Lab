@@ -5,9 +5,21 @@
     android:id="@+id/cl_dialog_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DialogActivity"
-    android:background="@color/black">
+    android:background="@color/black"
+    android:translationZ="1dp"
+    tools:context=".DialogActivity">
 
+
+    <ImageView
+        android:id="@+id/img_dialog_character"
+        android:layout_width="325dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:translationZ="2dp"
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_bg_dialog_cry"
@@ -25,6 +37,7 @@
         android:id="@+id/cl_dialog_box_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:translationZ="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -46,20 +59,18 @@
             style="@style/TextColor.DialogName"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:visibility="invisible"
-            android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp"
-            android:letterSpacing="0.2"
-            android:elevation="5dp"/>
+            android:layout_marginBottom="10dp"
+            android:letterSpacing="0.2" />
 
         <TextView
             android:id="@+id/tv_dialog_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:letterSpacing="0.2"
             android:lineSpacingExtra="10dp"
             android:textSize="12sp"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,8 +81,8 @@
             android:layout_width="@dimen/dialog_next_size"
             android:layout_height="@dimen/dialog_next_size"
             android:layout_margin="@dimen/dialog_next_margin"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/img_dialog_next"

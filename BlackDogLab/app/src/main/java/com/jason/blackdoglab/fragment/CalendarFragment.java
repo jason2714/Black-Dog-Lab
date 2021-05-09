@@ -13,9 +13,11 @@ import android.widget.ImageView;
 
 import com.jason.blackdoglab.customclass.DailyMoods;
 import com.jason.blackdoglab.R;
+import com.jason.blackdoglab.utils.FileController;
 import com.jason.blackdoglab.utils.Utils;
 import com.jason.blackdoglab.view.CalendarView;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashSet;
 
@@ -89,7 +91,7 @@ public class CalendarFragment extends BaseFragment {
 
     @Override
     protected int getBgDrawableID() {
-        return Utils.getAttrID(getContext(),R.attr.bg_calendar,Utils.RESOURCE_ID);
+        return Utils.getAttrID(getContext(), R.attr.bg_calendar, Utils.RESOURCE_ID);
     }
 
     @Override
@@ -97,14 +99,21 @@ public class CalendarFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         //TODO initial view here
         //initial view
-
+//        try {
+//            FileController fcDailyMood = new FileController(getContext(), getResources().getString(R.string.daily_mood));
+//            for (int i = 0; i < 5; i++) {
+//                fcDailyMood.append("2021-05-0" + String.valueOf(i + 2) + "$" + String.valueOf(i) + "$hey$\n");
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         //initial listener
         cvCalendar.setDailyMoods(dailyMoodsSet);
         cvCalendar.updateCalendar();
-        Utils.setLog("daily mood old");
-        for (DailyMoods dailyMoods : dailyMoodsSet) {
-            Utils.setLog(dailyMoods.toString());
-        }
+//        Utils.setLog("daily mood old");
+//        for (DailyMoods dailyMoods : dailyMoodsSet) {
+//            Utils.setLog(dailyMoods.toString());
+//        }
     }
 
     @Override

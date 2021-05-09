@@ -56,7 +56,7 @@ public class UserFragment extends BaseFragment {
     private int pointPos;
     private String[] pointTextArray;
     private int[] pointTextColorIDs = {R.color.brown1, R.color.blue1, R.color.green1};
-    private String[] fcName = {"Accompany", "Energy", "EXP"};
+    private String[] fcPoints;
     private LinearLayout mLlPointLog;
 
     public UserFragment() {
@@ -96,6 +96,7 @@ public class UserFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
+        fcPoints = getResources().getStringArray(R.array.user_points_file_array);
         mImgPortrait = view.findViewById(R.id.img_portrait);
         mTvUserName = view.findViewById(R.id.tv_user_name);
         mTvUserIdentity = view.findViewById(R.id.tv_user_identity);
@@ -253,7 +254,8 @@ public class UserFragment extends BaseFragment {
             setImageDrawableFit(dot, dotDrawables[newPointPos]);
         });
         //set file point data
-        FileController fileController = new FileController(getContext(), fcName[newPointPos]);
+        mHandler.post(() -> mLlPointLog.removeAllViews());
+        FileController fileController = new FileController(getContext(), fcPoints[newPointPos]);
         if (fileController.fileExist()) {
             new Thread(() -> {
                 try {
