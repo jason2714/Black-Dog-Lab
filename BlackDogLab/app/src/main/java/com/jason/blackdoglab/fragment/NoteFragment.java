@@ -197,6 +197,7 @@ public class NoteFragment extends BaseFragment {
         contentText.setLayoutParams(contentLayoutParams);
         contentText.setTextSize(14);
         contentText.setLetterSpacing(0.1f);
+        contentText.setLineSpacing(Utils.convertDpToPixel(getContext(),5),1);
         contentText.setText(content);
         //set in container
         ctLinearLayout.addView(titleText);

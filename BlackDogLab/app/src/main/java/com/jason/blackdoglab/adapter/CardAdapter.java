@@ -155,8 +155,8 @@ public class CardAdapter extends PagerAdapter {
 //            bring to front
             imgFood.setZ(1);
             int foodStartY = ctLayout.getMeasuredHeight() -
-                    context.getResources().getDimensionPixelOffset(R.dimen.dog_bowl_width);
-            imgFood.setTranslationY(Utils.convertDpToPixel(context, -foodStartY));
+                    context.getResources().getDimensionPixelOffset(R.dimen.dog_bowl_height);
+            imgFood.setTranslationY(-foodStartY);
             int startDelay = 500;
             int fallDuration = 2000;
             int eatDuration = 2000;

@@ -47,12 +47,20 @@ public class ActivityUtils{
         }
     }
 
-    public void cleanActivityBesidesDialog() {
+    public void cleanActivityBesidesDialog(Activity currentActivity) {
 //        不能在內直接remove null activity,因為for in 不能再回圈內更改
         for (Activity activity : activityList) {
-            if (activity != null && !(activity instanceof DialogActivity)){
-                activity.finish();
+            if (activity != null ){
+                if(activity != currentActivity && !(activity instanceof DialogActivity))
+                    activity.finish();
             }
+        }
+    }
+    public void backToDialog() {
+//        不能在內直接remove null activity,因為for in 不能再回圈內更改
+        for (Activity activity : activityList) {
+            if (activity != null && !(activity instanceof DialogActivity))
+                    activity.finish();
         }
     }
 

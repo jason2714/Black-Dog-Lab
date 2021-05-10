@@ -46,7 +46,7 @@ public class ParkActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityUtils.getInstance().cleanActivity(this);
+        ActivityUtils.getInstance().cleanActivityBesidesDialog(this);
         ActivityUtils.getInstance().printActivity();
     }
 
@@ -85,15 +85,15 @@ public class ParkActivity extends BaseActivity {
                 if (lineDataArray[0].equals(fcLoginDate.readFile())) {
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
                     switch (Integer.parseInt(lineDataArray[1])) {
-                        case 0:
-                        case 1:
+                        case 3:
+                        case 4:
                             themeColor = R.style.Theme_BlackDogLab_Blue;
                             break;
                         case 2:
                             themeColor = R.style.Theme_BlackDogLab_Green;
                             break;
-                        case 3:
-                        case 4:
+                        case 0:
+                        case 1:
                             themeColor = R.style.Theme_BlackDogLab_Brown;
                             break;
                         default:

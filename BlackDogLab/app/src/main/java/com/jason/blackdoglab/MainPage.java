@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -137,7 +138,7 @@ public class MainPage extends BaseActivity {
         super.onCreate(savedInstanceState);
         //inflater fail 的原因是activity開太多 刪掉一些就好了
         //是因為out of memory 調整圖片大小也可解決
-        ActivityUtils.getInstance().cleanActivity(this);
+//        ActivityUtils.getInstance().cleanActivityBesidesDialog(this);
         ActivityUtils.getInstance().printActivity();
         int initPage = 0;
         if (initPage != 3)
@@ -162,15 +163,15 @@ public class MainPage extends BaseActivity {
                 if (lineDataArray[0].equals(fcLoginDate.readFile())) {
                     Utils.setLog("Mood Type = " + lineDataArray[1]);
                     switch (Integer.parseInt(lineDataArray[1])) {
-                        case 0:
-                        case 1:
+                        case 3:
+                        case 4:
                             themeColor = R.style.Theme_BlackDogLab_Blue;
                             break;
                         case 2:
                             themeColor = R.style.Theme_BlackDogLab_Green;
                             break;
-                        case 3:
-                        case 4:
+                        case 0:
+                        case 1:
                             themeColor = R.style.Theme_BlackDogLab_Brown;
                             break;
                         default:
@@ -203,7 +204,7 @@ public class MainPage extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgbt_tab_triangle:
-                mTabLayout.animate().translationY(0);
+                mTabLayout.animate().translationY(0).setInterpolator(new LinearInterpolator());
                 mImgBtTabTriangle.animate().alpha(0);
                 mTabLayout.setBackgroundResource(R.drawable.bg_tab);
                 isTabTriangleShow = false;
