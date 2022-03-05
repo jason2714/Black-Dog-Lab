@@ -1,8 +1,7 @@
 # Black-Dog-Lab
 
 ## Start
-<img src="demo/startPage.gif" alt="Start Page" width="30%"/>
-<img src="demo/startPage.gif" alt="Start Page" width="30%"/>
+<img src="demo/startPage.gif" alt="Start Page" width="30%"/><img src="demo/startPage.gif" alt="Start Page" width="30%"/>
 
 ## Introduction
 <img src="demo/Introduction.gif" alt="Introduction" width="30%"/>
@@ -14,10 +13,4 @@
 <img src="demo/dogFeed.gif" alt="Dog" width="30%"/>
 
 ## Dog
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/dog.png?raw=true)
-
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/foodSelect.png?raw=true)
-
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/foodInfo.png?raw=true)
-
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/eatFood.png?raw=true)
+<img src="demo/dog.png" alt="Dog" width="30%"/><img src="demo/foodSelect.png" alt="Dog Food Select" width="30%"/><img src="demo/foodInfo.png" alt="Dog Food Info" width="30%"/><img src="demo/eatFood.png" alt="Dog Eat" width="30%"/>
