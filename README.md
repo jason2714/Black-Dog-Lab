@@ -1,33 +1,42 @@
 # Black-Dog-Lab
 
-## Start
-<center class="half">
-    <img src="demo/startPage.gif" alt="Start Page" width="30%"><img src="demo/startPage.gif" alt="Start Page" width="30%"/>
-</center>
-
-## Introduction
-<img src="demo/Introduction.gif" alt="Introduction" width="30%"/>
-
 <table>
-  <tr>
-    <td>Start</td>
-    <td>Introduction</td>
-    <td>All Pages</td>
-    <td>Dog</td>
-  </tr>
-  <tr>
-    <td><img src="demo/Introduction.gif" alt="Introduction" width="30%"/></td>
-    <td><img src="demo/allPages.gif" alt="All Pages" width="30%"/></td>
-    <td><img src="demo/allPages.gif" alt="All Pages" width="30%"/></td>
-    <td><img src="demo/dogFeed.gif" alt="Dog" width="30%"/></td>
-  </tr>
+    <caption>Demo GIF</caption>
+    <thead>
+        <tr>
+            <th>Start</th>
+            <th>Introduction</th>
+            <th>All Pages</th>
+            <th>Dog Page</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <img src="demo/startPage.gif" alt="Start Page"/>登入動畫
+        </td>
+        <td>
+            <img src="demo/Introduction.gif" alt="Introduction"/>登入介紹
+        </td>
+        <td>
+            <img src="demo/allPages.gif" alt="All Pages"/>遊戲主頁
+        </td>
+        <td>
+            <img src="demo/dogFeed.gif" alt="Dog"/>與狗互動
+        </td>
+    </tr>
+    </tbody>
 </table>
-
-## All Pages
-
-
-## Dog
-
-
-## Dog
-<img src="demo/dog.png" alt="Dog" width="30%"/><img src="demo/foodSelect.png" alt="Dog Food Select" width="30%"/><img src="demo/foodInfo.png" alt="Dog Food Info" width="30%"/><img src="demo/eatFood.png" alt="Dog Eat" width="30%"/>
+<style>
+caption{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0px 0px 20px 0px
+}
+table, th{
+    text-align: center
+}
+tr, td, th, table{
+    border: 1px solid black;
+}
+</style>
