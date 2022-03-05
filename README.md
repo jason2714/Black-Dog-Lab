@@ -1,18 +1,17 @@
 # Black-Dog-Lab
 
 ## Start
-![start page](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/startPage.gif?raw=true)
+<img src="demo/startPage.gif" alt="Start Page" width="30%"/>
+<img src="demo/startPage.gif" alt="Start Page" width="30%"/>
 
 ## Introduction
-<!-- ![Introduction](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/Introduction.gif?raw=true) -->
-<img src="demo/Introduction.gif" alt="Introduction" width="50%"/>
+<img src="demo/Introduction.gif" alt="Introduction" width="30%"/>
 
 ## All Pages
-<!-- ![All Pages](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/allPages.gif?raw=true) -->
-<img src="https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/allPages.gif?raw=true" alt="All Pages" width="50%"/>
+<img src="demo/allPages.gif" alt="All Pages" width="30%"/>
 
 ## Dog
-![Dog](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/dogFeed.gif?raw=true)
+<img src="demo/dogFeed.gif" alt="Dog" width="30%"/>
 
 ## Dog
 ![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/dog.png?raw=true)
