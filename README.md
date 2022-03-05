@@ -1,11 +1,11 @@
 # Black-Dog-Lab
 
-<table style='text-align:center'>
-    <caption style='text-align:center'>Demo GIF</caption>
+<table>
+    <caption>Demo GIF</caption>
     <thead>
         <tr>
             <th>Start</th>
-            <th>Introduction</th>
+            <th>Intro</th>
             <th>All Pages</th>
             <th>Dog Page</th>
         </tr>
