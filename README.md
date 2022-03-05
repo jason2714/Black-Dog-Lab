@@ -1,6 +1,6 @@
 # Black-Dog-Lab
 
-<table>
+<table style='text-align: center'>
     <caption>Demo GIF</caption>
     <thead>
         <tr>
@@ -27,3 +27,16 @@
     </tr>
     </tbody>
 </table>
+<style>
+caption{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0px 0px 20px 0px
+}
+table, th{
+    
+}
+tr, td, th, table{
+    border: 1px solid black;
+}
+</style>
