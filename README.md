@@ -7,9 +7,17 @@
 
 ## Introduction
 <img src="demo/Introduction.gif" alt="Introduction" width="30%"/>
-|Name |Quantity|
-|-----|--------|
-|<img src="demo/Introduction.gif" alt="Introduction" width="30%"/>|<img src="demo/allPages.gif" alt="All Pages" width="30%"/>|
+
+<table>
+  <tr>
+    <td>Introduction</td>
+    <td>All Pages</td>
+  </tr>
+  <tr>
+    <td><img src="demo/Introduction.gif" alt="Introduction" width="30%"/></td>
+    <td><img src="demo/allPages.gif" alt="All Pages" width="30%"/></td>
+  </tr>
+</table>
 
 ## All Pages
 <img src="demo/allPages.gif" alt="All Pages" width="30%"/>
