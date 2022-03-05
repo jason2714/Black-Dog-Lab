@@ -1,22 +1,16 @@
 # Black-Dog-Lab
 
 ## Start
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/startPage.gif?raw=true)
+![start page](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/startPage.gif?raw=true)
 
-## Fist Login
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/firstLogin.webm?raw=true)
+## Introduction
+![Introduction](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/Introduction.gif?raw=true)
 
-## pages
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/pages.webm?raw=true)
+## All Pages
+![All Pages](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/allPages.gif?raw=true)
 
-## Main Page
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/mainPage.png?raw=true)
-
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/calendar.png?raw=true)
-
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/note.png?raw=true)
-
-![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/userInfo.png?raw=true)
+## Dog
+![Dog](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/dogFeed.gif?raw=true)
 
 ## Dog
 ![alt text](https://github.com/jason2714/Black-Dog-Lab/blob/main/demo/dog.png?raw=true)
