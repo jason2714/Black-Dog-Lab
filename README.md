@@ -2,11 +2,14 @@
 
 ## Start
 <center class="half">
-    <img src="demo/startPage.gif" alt="Start Page" width="30%"/><img src="demo/startPage.gif" alt="Start Page" width="30%"/>
+    <img src="demo/startPage.gif" alt="Start Page" width="30%"><img src="demo/startPage.gif" alt="Start Page" width="30%"/>
 </center>
 
 ## Introduction
 <img src="demo/Introduction.gif" alt="Introduction" width="30%"/>
+|Name |Quantity|
+|-----|--------|
+|<img src="demo/Introduction.gif" alt="Introduction" width="30%"/>|<img src="demo/allPages.gif" alt="All Pages" width="30%"/>|
 
 ## All Pages
 <img src="demo/allPages.gif" alt="All Pages" width="30%"/>
