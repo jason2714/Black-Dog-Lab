@@ -7,6 +7,9 @@ import androidx.core.content.ContextCompat;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.Keyframe;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -127,7 +131,7 @@ public class DialogActivity extends BaseActivity {
         String[] pointArray = getResources().getStringArray(R.array.user_points_file_array);
         fcNotes = new FileController[noteArray.length];
         fcPoints = new FileController[pointArray.length];
-        for (int i = 0; i < noteArray.length; i++){
+        for (int i = 0; i < noteArray.length; i++) {
             fcNotes[i] = new FileController(this, noteArray[i]);
             Utils.setLog(noteArray[i]);
         }
@@ -158,11 +162,13 @@ public class DialogActivity extends BaseActivity {
 
     private void firstSelectBox() {
         //title
+        int titleMarginBottom = (int) Utils.convertDpToPixel(this, 10);
         TextView mTvTitle = new TextView(this);
         LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
+        titleParams.bottomMargin = titleMarginBottom;
         mTvTitle.setLayoutParams(titleParams);
         mTvTitle.setTextColor(getResources().getColor(R.color.grey1));
         mTvTitle.setTextSize(12);
@@ -171,98 +177,18 @@ public class DialogActivity extends BaseActivity {
         mTvTitle.setLetterSpacing(0.2f);
         mTvTitle.setGravity(Gravity.CENTER);
 
-        //------------------------------------relative---------------------------------------------
-        //accompany
-        RelativeLayout rlAccompany = new RelativeLayout(this);
-        LinearLayout.LayoutParams rlAccompanyParams = new LinearLayout.LayoutParams(
-                getResources().getDimensionPixelOffset(R.dimen.dialog_btn_width),
-                getResources().getDimensionPixelOffset(R.dimen.btn_height)
-        );
-        int accompanyMarginVertical = (int) Utils.convertDpToPixel(this, 10);
-        rlAccompanyParams.setMargins(0, accompanyMarginVertical, 0, 0);
-        rlAccompany.setLayoutParams(rlAccompanyParams);
-        //image
-
-        ImageView mImgExp = new ImageView(this);
-        RelativeLayout.LayoutParams imgExpParams = new RelativeLayout.LayoutParams(
-                (int) Utils.convertDpToPixel(this, 80),
-                (int) Utils.convertDpToPixel(this, 30)
-        );
-        imgExpParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-        imgExpParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        mImgExp.setLayoutParams(imgExpParams);
-        mImgExp.setScaleType(ImageView.ScaleType.FIT_XY);
-        mImgExp.setTranslationX(Utils.convertDpToPixel(this, -100));
-        setImageDrawableFit(mImgExp, R.drawable.icon_exp_plus1);
-        //btn
-        MaterialButton mBtnAccompany = createSelectBtn();
-        MaterialButton mBtnIgnore = createSelectBtn();
-        RelativeLayout.LayoutParams btnAccompanyParams = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-        );
-        btnAccompanyParams.addRule(RelativeLayout.ALIGN_PARENT_START);
-        mBtnAccompany.setLayoutParams(btnAccompanyParams);
-        mBtnAccompany.setText("陪伴他");
-        mBtnAccompany.setTranslationZ(1);
-        mBtnAccompany.setOnClickListener(btn -> {
-            addPoint("研究員履歷", 1, 2);
-            MaterialButton btnClick = btnOnclick(btn);
-            mBtnAccompany.setOnClickListener(null);
-            mBtnIgnore.setOnClickListener(null);
-            setImageDrawableFit(mBgDialog, R.drawable.bg_dialog_sad);
-            ValueAnimator anim = ValueAnimator.ofInt(btnClick.getMeasuredWidth(),
-                    (int) Utils.convertDpToPixel(this, 145),
-                    (int) Utils.convertDpToPixel(this, 145)
-                    , btnClick.getMeasuredWidth());
-            anim.addUpdateListener(valueAnimator -> {
-                int val = (Integer) valueAnimator.getAnimatedValue();
-                btnAccompanyParams.width = val;
-                btnClick.setLayoutParams(btnAccompanyParams);
-            });
-            anim.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    mLlDialogBox.postDelayed(() -> {
-                        mLlDialogBox.removeAllViews();
-                        secondSelectBox();
-                    }, 1000);
-                }
-            });
-            mImgExp.animate().translationX(0).setDuration(1000);
-            anim.setDuration(3000);
-            anim.start();
-            mHandler.postDelayed(() -> {
-                mImgExp.animate().translationX(-100)
-                        .alpha(0)
-                        .setDuration(1000);
-            }, 1500);
-
-        });
-        rlAccompany.addView(mBtnAccompany);
-        rlAccompany.addView(mImgExp);
-        //------------------------------------relative---------------------------------------------
-        //ignore
-        LinearLayout.LayoutParams ignoreParams = new LinearLayout.LayoutParams(
-                getResources().getDimensionPixelOffset(R.dimen.dialog_btn_width),
-                getResources().getDimensionPixelOffset(R.dimen.btn_height)
-        );
-        mBtnIgnore.setLayoutParams(ignoreParams);
-        mBtnIgnore.setText("不管他");
-        mBtnIgnore.setOnClickListener(btn -> {
-            btnOnclick(btn);
-            mBtnAccompany.setOnClickListener(null);
-            mBtnIgnore.setOnClickListener(null);
-            mLlDialogBox.removeAllViews();
-            arriveLab();
-        });
-
-
+        createExpSelection("陪伴他", "不管他",
+                () -> {
+                    setImageDrawableFit(mBgDialog, R.drawable.bg_dialog_sad);
+                }, () -> {
+                    mLlDialogBox.removeAllViews();
+                    secondSelectBox();
+                }, () -> {
+                    mLlDialogBox.removeAllViews();
+                    arriveLab();
+                },
+                "研究員履歷", 1, true);
         mLlDialogBox.addView(mTvTitle, 0);
-        mLlDialogBox.addView(rlAccompany, 1);
-        mLlDialogBox.addView(mBtnIgnore, 2);
-        ctDialogBox.setBackgroundColor(Color.WHITE);
     }
 
     private void secondSelectBox() {
@@ -859,6 +785,121 @@ public class DialogActivity extends BaseActivity {
                 animText.start();
             }, 200);
         });
+    }
+
+    private void createExpSelection(String expBtnText, String wrongBtnText,
+                                    Runnable expBtnClick, Runnable expBtnAnimEnd, Runnable wrongBtnClick,
+                                    String pointTitle, int pointValue, boolean isExpFirst) {
+        //exp btn
+        RelativeLayout rlExp = new RelativeLayout(this);
+        LinearLayout.LayoutParams rlExpParams = new LinearLayout.LayoutParams(
+                getResources().getDimensionPixelOffset(R.dimen.dialog_btn_width),
+                getResources().getDimensionPixelOffset(R.dimen.btn_height)
+        );
+        rlExp.setLayoutParams(rlExpParams);
+        //image
+
+        ImageView mImgExp = new ImageView(this);
+        RelativeLayout.LayoutParams imgExpParams = new RelativeLayout.LayoutParams(
+                (int) Utils.convertDpToPixel(this, 80),
+                (int) Utils.convertDpToPixel(this, 30)
+        );
+        imgExpParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+        imgExpParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        mImgExp.setLayoutParams(imgExpParams);
+        mImgExp.setScaleType(ImageView.ScaleType.FIT_XY);
+        mImgExp.setTranslationX(Utils.convertDpToPixel(this, -100));
+        setImageDrawableFit(mImgExp, R.drawable.icon_exp_plus1);
+
+        //btn exp
+        MaterialButton mBtnExp = createSelectBtn();
+        MaterialButton mBtnWrong = createSelectBtn();
+        RelativeLayout.LayoutParams btnExpParams = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        );
+        btnExpParams.addRule(RelativeLayout.ALIGN_PARENT_START);
+        mBtnExp.setLayoutParams(btnExpParams);
+        mBtnExp.setText(expBtnText);
+        mBtnExp.setTranslationZ(1);
+        mBtnExp.setOnClickListener(btn -> {
+            MaterialButton btnClick = btnOnclick(btn);
+            btnClick.post(expBtnClick);
+            addPoint(pointTitle, pointValue, 2);
+            mBtnExp.setOnClickListener(null);
+            mBtnWrong.setOnClickListener(null);
+
+            ValueAnimator anim = ValueAnimator.ofInt(btnClick.getMeasuredWidth(),
+                    (int) Utils.convertDpToPixel(this, 145),
+                    (int) Utils.convertDpToPixel(this, 145)
+                    , btnClick.getMeasuredWidth());
+            anim.addUpdateListener(valueAnimator -> {
+                int val = (Integer) valueAnimator.getAnimatedValue();
+                btnExpParams.width = val;
+                btnClick.setLayoutParams(btnExpParams);
+            });
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    btnClick.postDelayed(expBtnAnimEnd, 1000);
+                }
+            });
+            anim.setDuration(3000);
+            anim.start();
+
+            Keyframe translationFrame1 = Keyframe.ofFloat(0.0f, mImgExp.getTranslationX());
+            Keyframe translationFrame2 = Keyframe.ofFloat(0.8f, 0);
+            Keyframe translationFrame3 = Keyframe.ofFloat(1.0f, 0);
+            PropertyValuesHolder translationX = PropertyValuesHolder.ofKeyframe
+                    ("translationX", translationFrame1, translationFrame2, translationFrame3);
+            ObjectAnimator btnTransAnimator = ObjectAnimator.ofPropertyValuesHolder(mImgExp, translationX);
+            btnTransAnimator.setRepeatCount(1);
+            btnTransAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            btnTransAnimator.setInterpolator(new LinearInterpolator());
+            btnTransAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation, boolean isReverse) {
+                    Utils.setLog("start");
+                    Utils.setLog("isReverse : " + isReverse);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation, boolean isReverse) {
+                    showToast("end");
+                    Utils.setLog("end");
+                    Utils.setLog("isReverse : " + isReverse);
+                }
+            });
+            btnTransAnimator.setDuration(1500);
+            btnTransAnimator.start();
+        });
+        rlExp.addView(mBtnExp);
+        rlExp.addView(mImgExp);
+        //------------------------------------relative---------------------------------------------
+        //ignore
+        LinearLayout.LayoutParams btnWrongParams = new LinearLayout.LayoutParams(
+                getResources().getDimensionPixelOffset(R.dimen.dialog_btn_width),
+                getResources().getDimensionPixelOffset(R.dimen.btn_height)
+        );
+        mBtnWrong.setLayoutParams(btnWrongParams);
+        mBtnWrong.setText(wrongBtnText);
+        mBtnWrong.setOnClickListener(btn -> {
+            MaterialButton btnClick = btnOnclick(btn);
+            mBtnExp.setOnClickListener(null);
+            mBtnWrong.setOnClickListener(null);
+            btnClick.post(wrongBtnClick);
+        });
+
+        if (isExpFirst) {
+            mLlDialogBox.addView(rlExp, 0);
+            mLlDialogBox.addView(mBtnWrong, 1);
+        } else {
+            mLlDialogBox.addView(mBtnWrong, 0);
+            mLlDialogBox.addView(rlExp, 1);
+        }
+
+        ctDialogBox.setBackgroundColor(Color.WHITE);
     }
 
     private void addNote(String noteTitle, String noteText, int noteIndex) {
