@@ -5,9 +5,9 @@
     <thead>
         <tr>
             <th width:25%>Start Page</th>
-            <th width:25%>Intro</th>
-            <th width:25%>All Pages</th>
-            <th width:25%>Dog Page</th>
+            <th width:25%>Introduction</th>
+            <th width:25%>Main Pages</th>
+            <th width:25%>Dog Pages</th>
         </tr>
     </thead>
     <tbody>
@@ -27,4 +27,3 @@
     </tr>
     </tbody>
 </table>
-<style>
