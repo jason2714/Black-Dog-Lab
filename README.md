@@ -13,16 +13,16 @@
     <tbody>
     <tr>
         <td>
-            <img src="demo/startPage.gif" alt="Start Page" width=100%/>
+            <img src="demo/startPage.gif" alt="Start Page"/>
         </td>
         <td>
-            <img src="demo/Introduction.gif" alt="Introduction" width=100%/>
+            <img src="demo/Introduction.gif" alt="Introduction"/>
         </td>
         <td>
-            <img src="demo/allPages.gif" alt="All Pages" width=100%/>
+            <img src="demo/allPages.gif" alt="All Pages"/>
         </td>
         <td>
-            <img src="demo/dogFeed.gif" alt="Dog" width=100%/>
+            <img src="demo/dogFeed.gif" alt="Dog"/>
         </td>
     </tr>
     </tbody>
