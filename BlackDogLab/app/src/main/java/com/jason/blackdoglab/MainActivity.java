@@ -88,7 +88,6 @@ public class MainActivity extends BaseActivity {
                 toStartGamePage();
                 break;
             case R.id.btn_start_game:
-//                gameStartDaily();
                 testGameStart();
                 break;
             default:
@@ -175,7 +174,7 @@ public class MainActivity extends BaseActivity {
             Log.d("test", e.getCause() + "");
             e.printStackTrace();
         }
-//        intent = new Intent(MainActivity.this, DogActivity.class);
+        intent = new Intent(MainActivity.this, DogActivity.class);
         startActivity(intent);
     }
 

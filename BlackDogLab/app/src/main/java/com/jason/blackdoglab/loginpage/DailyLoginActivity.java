@@ -109,7 +109,7 @@ public class DailyLoginActivity extends BaseActivity {
                 Utils.setLog("start MainPageActivity");
                 if (checkInformation()) {
                     if (isFirstLogin)
-                        ActivityUtils.getInstance().cleanActivityBesidesDialog();
+                        ActivityUtils.getInstance().backToDialog();
                     else {
                         Intent intent = new Intent(DailyLoginActivity.this, MainPage.class);
                         startActivity(intent);

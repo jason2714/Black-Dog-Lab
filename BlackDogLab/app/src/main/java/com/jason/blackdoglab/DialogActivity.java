@@ -123,6 +123,8 @@ public class DialogActivity extends BaseActivity {
     @Override
     protected void initBasicInfo() {
         super.initBasicInfo();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         dialogList = new ArrayList<>();
         fcBasicInfo = new FileController(this, getResources().getString(R.string.basic_information));
         fcDailyMood = new FileController(this, getResources().getString(R.string.daily_mood));
@@ -442,10 +444,10 @@ public class DialogActivity extends BaseActivity {
         dialogList.add(new Dialog(2, "黑狗研究所歡迎所有想要\n" +
                 "或是需要了解憂鬱症的人加入"));
         dialogList.add(new Dialog(2, "但是和憂鬱的情緒長時間相處\n" +
-                "是很耗費精力的?"));
+                "是很耗費精力的"));
         dialogList.add(new Dialog(2, "你要確定無論如何都能夠\n" +
                 "「為自己留一點空間」\n" +
-                "才可以加入喔!?"));
+                "才可以加入喔!"));
         resetDialogName();
         setImageDrawableFit(mImgDialogChar, R.drawable.char_tsai3);
         ctDialogBox.setOnClickListener(v -> {
@@ -509,15 +511,15 @@ public class DialogActivity extends BaseActivity {
                     if (lineDataArray[0].equals(fcLoginDate.readFile())) {
                         Utils.setLog("Mood Type = " + lineDataArray[1]);
                         switch (Integer.parseInt(lineDataArray[1])) {
-                            case 0:
-                            case 1:
+                            case 3:
+                            case 4:
                                 themeColor = R.style.Theme_BlackDogLab_Blue;
                                 break;
                             case 2:
                                 themeColor = R.style.Theme_BlackDogLab_Green;
                                 break;
-                            case 3:
-                            case 4:
+                            case 0:
+                            case 1:
                                 themeColor = R.style.Theme_BlackDogLab_Brown;
                                 break;
                             default:
@@ -910,14 +912,19 @@ public class DialogActivity extends BaseActivity {
                 .append(FileController.getLineSplitChar());
         Utils.setLog(stringBuffer.toString());
         if (fcNotes[noteIndex].fileExist()) {
-            HashMap<String, String> noteSet = new HashMap<>();
             try {
-                for (String noteLine : fcNotes[noteIndex].readFileSplit()) {
-                    String[] noteArray = noteLine.split(FileController.getWordSplitRegex());
-                    noteSet.put(noteArray[0], noteArray[1]);
+                if (fcNotes[noteIndex].readFile().isEmpty()){
+                    Utils.setLog("File Is Empty");
+                    fcNotes[noteIndex].write(stringBuffer.toString());
+                }else{
+                    HashMap<String, String> noteSet = new HashMap<>();
+                    for (String noteLine : fcNotes[noteIndex].readFileSplit()) {
+                        String[] noteArray = noteLine.split(FileController.getWordSplitRegex());
+                        noteSet.put(noteArray[0], noteArray[1]);
+                    }
+                    if (!noteSet.containsKey(noteTitle))
+                        fcNotes[noteIndex].append(stringBuffer.toString());
                 }
-                if (!noteSet.containsKey(noteTitle))
-                    fcNotes[noteIndex].append(stringBuffer.toString());
             } catch (IOException e) {
                 e.printStackTrace();
                 Utils.setLog(e.getMessage());
@@ -936,32 +943,43 @@ public class DialogActivity extends BaseActivity {
     private void addPoint(String pointTitle, int pointValue, int pointType) {
         StringBuffer stringBuffer = new StringBuffer();
         if (fcPoints[pointType].fileExist()) {
-            HashMap<String, Integer> pointSet = new HashMap<>();
             try {
-                for (String pointLine : fcPoints[pointType].readFileSplit()) {
-                    String[] pointArray = pointLine.split(FileController.getWordSplitRegex());
-                    pointSet.put(pointArray[0], Integer.valueOf(pointArray[1]));
-                }
-                if (pointSet.containsKey(pointTitle)) {
-                    pointValue += pointSet.get(pointTitle);
-                    if (pointValue == 0)
-                        pointSet.remove(pointTitle);
-                    else
-                        pointSet.put(pointTitle, pointValue);
-                    for (Map.Entry<String, Integer> entry : pointSet.entrySet()) {
-                        stringBuffer.append(entry.getKey())
-                                .append(FileController.getWordSplitChar())
-                                .append(entry.getValue())
-                                .append(FileController.getLineSplitChar());
-                    }
-                    fcPoints[pointType].write(stringBuffer.toString());
-                } else {
+                if (fcPoints[pointType].readFile().isEmpty()) {
+                    Utils.setLog("File is empty");
                     stringBuffer.append(pointTitle)
                             .append(FileController.getWordSplitChar())
                             .append(pointValue)
                             .append(FileController.getLineSplitChar());
-                    fcPoints[pointType].append(stringBuffer.toString());
+                    fcPoints[pointType].write(stringBuffer.toString());
+                } else {
+                    HashMap<String, Integer> pointSet = new HashMap<>();
+
+                    for (String pointLine : fcPoints[pointType].readFileSplit()) {
+                        String[] pointArray = pointLine.split(FileController.getWordSplitRegex());
+                        pointSet.put(pointArray[0], Integer.valueOf(pointArray[1]));
+                    }
+                    if (pointSet.containsKey(pointTitle)) {
+                        pointValue += pointSet.get(pointTitle);
+                        if (pointValue == 0)
+                            pointSet.remove(pointTitle);
+                        else
+                            pointSet.put(pointTitle, pointValue);
+                        for (Map.Entry<String, Integer> entry : pointSet.entrySet()) {
+                            stringBuffer.append(entry.getKey())
+                                    .append(FileController.getWordSplitChar())
+                                    .append(entry.getValue())
+                                    .append(FileController.getLineSplitChar());
+                        }
+                        fcPoints[pointType].write(stringBuffer.toString());
+                    } else {
+                        stringBuffer.append(pointTitle)
+                                .append(FileController.getWordSplitChar())
+                                .append(pointValue)
+                                .append(FileController.getLineSplitChar());
+                        fcPoints[pointType].append(stringBuffer.toString());
+                    }
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
                 Utils.setLog(e.getMessage());
