@@ -4,10 +4,10 @@
     <caption>Demo GIF</caption>
     <thead>
         <tr>
-            <th>Start</th>
-            <th>Intro</th>
-            <th>All Pages</th>
-            <th>Dog Page</th>
+            <th width:25%>Start Page</th>
+            <th width:25%>Intro</th>
+            <th width:25%>All Pages</th>
+            <th width:25%>Dog Page</th>
         </tr>
     </thead>
     <tbody>
