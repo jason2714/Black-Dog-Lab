@@ -13,16 +13,16 @@
     <tbody>
     <tr>
         <td>
-            <img src="demo/startPage.gif" alt="Start Page" width:25%/>登入動畫
+            <img src="demo/startPage.gif" alt="Start Page" width:25%/>
         </td>
         <td>
-            <img src="demo/Introduction.gif" alt="Introduction" width:25%/>登入介紹
+            <img src="demo/Introduction.gif" alt="Introduction" width:25%/>
         </td>
         <td>
-            <img src="demo/allPages.gif" alt="All Pages" width:25%/>遊戲主頁
+            <img src="demo/allPages.gif" alt="All Pages" width:25%/>
         </td>
         <td>
-            <img src="demo/dogFeed.gif" alt="Dog" width:25%/>與狗互動
+            <img src="demo/dogFeed.gif" alt="Dog" width:25%/>
         </td>
     </tr>
     </tbody>
