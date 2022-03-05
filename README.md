@@ -1,7 +1,9 @@
 # Black-Dog-Lab
 
 ## Start
-<img src="demo/startPage.gif" alt="Start Page" width="30%"/><img src="demo/startPage.gif" alt="Start Page" width="30%"/>
+<center class="half">
+    <img src="demo/startPage.gif" alt="Start Page" width="30%"/><img src="demo/startPage.gif" alt="Start Page" width="30%"/>
+</center>
 
 ## Introduction
 <img src="demo/Introduction.gif" alt="Introduction" width="30%"/>
